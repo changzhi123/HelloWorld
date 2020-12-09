@@ -1,0 +1,94 @@
+/*
+scss基础使用
+##
+scss申明变量用
+$border-color:#aaa; //声明变量
+$border_color:#ccc;
+border:$border-width solid $border-color; //使用变量
+
+##
+scss引入其他css和scss文件
+import './App.scss';
+
+##
+scss嵌套属性
+li {
+    border:1px solid #aaa;
+    border-left:0;
+    border-right:0;
+}
+
+##
+scss默认变量，引入另一个同名变量会覆盖当前文件的变量，所以如果不想更改可以使用默认变量
+$border-color:#ccc !default; //声明变量
+
+##
+@mixin指令声明一个函数
+@mixin get-border-radius($border-radius:5px,$color:red){
+    -moz-border-radius: $border-radius;
+    -webkit-border-radius: $border-radius;
+    border-radius: $border-radius;
+    color:$color;
+}
+使用函数的关键字为@include
+container {
+    border:1px solid #aaa;
+    @include get-border-radius;         //不传参则为默认值5px
+    @include get-border-radius(10px,blue);   //传参
+}
+多个参数时，传参指定参数的名字，可以不用考虑传入的顺序
+.container {
+    border:1px solid #aaa;
+    @include get-border-radius;         //不传参则为默认值5px
+    @include get-border-radius($color:blue,$border-radius:10px);   //传参
+}
+
+##
+scss定义被继承的样式 %关键字，定义被继承的样式没有调用不会执行，
+%border-style {
+  border:1px solid #aaa;
+  border-radius: 5px;
+}
+通过关键字@extend即可完成继承
+.container {
+	@extend %border-style;
+}
+继承2
+a {
+  display: block;
+}
+.disabled {
+  color: gray;
+  @extend a;
+}
+
+##
+scss子代选择器 &=父元素
+.box{
+  >li{
+    &:hover{}
+  }
+  &:after{}
+
+}
+*/ 
+.buttom-box{
+    width: 100%;
+    min-height: 100px;border: 1px solid #ccc;
+    margin-top: 20px;
+    padding: 5px 5px 0 5px;
+    box-sizing: border-box; flex-wrap: wrap; 
+    justify-content: space-between;
+    display: flex;
+  .box_tab{
+        width: 200px;
+        height: 100px;
+        margin: 0 0 5px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .button-item{
+
+        }
+    }
+}

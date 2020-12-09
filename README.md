@@ -1,13 +1,24 @@
-# Hello World
+# my_vue3.0
 
+## Project setup
+```
+npm install
+```
 
-## javasrcipt
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
 
-## vue
+### Compiles and minifies for production
+```
+npm run build
+```
 
-## node
+### Lints and fixes files
+```
+npm run lint
+```
 
-## weixin
-
-## java
-
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
