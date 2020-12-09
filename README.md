@@ -1,13 +1,13 @@
-# Hello World
+# my_node
 
+## Project setup
+```
+npm install
+```
 
-## javasrcipt
+### Compiles and hot-reloads for development
+```
+npm start
+```
 
-## vue
-
-## node
-
-## weixin
-
-## java
 
