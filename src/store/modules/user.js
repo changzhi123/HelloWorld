@@ -81,12 +81,14 @@ const actions = {
                 if (item.children) {
                     item.children.map(child => {
                         // if (!child.children) {
-                            child.component = lazyLoading(child.component, child.path)//二级菜单
+                            child.component = 
+                            lazyLoading(child.component, child.path)//二级菜单
                         // }
                         if (child.children) {
                             // child.component = Layout2
                             child.children.map(tertiary => {
-                                tertiary.component = lazyLoading(tertiary.component, tertiary.path)//三级菜单
+                                tertiary.component =
+                                 lazyLoading(tertiary.component, tertiary.path)//三级菜单
                             })
                         }
                         
@@ -94,7 +96,7 @@ const actions = {
                 }
 
             })
-            //   console.log(accessedRouters,'递归后获取菜单')
+              console.log(accessedRouters,'递归后获取菜单')
             commit('SET_ROUTERS', accessedRouters)
         })
     },
