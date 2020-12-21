@@ -11,6 +11,8 @@ function resolve(dir) { //定义函数，svg配置svg-sprite-loader用
 
 const name = defaultSettings.title || 'vue Element Admin' //页标题
 
+console.log(`当前构建环境：${process.env.NODE_ENV} -  ${process.env.ENV}  - ${process.env.VUE_APP_URL}`)
+
 //所有配置项说明可在 https://cli.vuejs.org/config/
 module.exports = {
     publicPath: '/',// 根域上下文目录
