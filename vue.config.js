@@ -106,9 +106,12 @@ module.exports = {
                             inline: /runtime\..*\.js$/
                         }])
                         .end()
+                         // js文件拆包
                     config
                         .optimization.splitChunks({
                             chunks: 'all',
+                            minSize: 200000,
+                            maxInitialRequests: Infinity,
                             cacheGroups: {
                                 libs: {
                                     name: 'chunk-libs',
