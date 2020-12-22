@@ -1,7 +1,6 @@
 module.exports = {
 
   title: 'vue/cli_3.0',
-
   
   /**
    * @type {boolean} true | false

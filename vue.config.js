@@ -13,6 +13,7 @@ const name = defaultSettings.title || 'vue Element Admin' //页标题
 
 console.log(`当前构建环境：${process.env.NODE_ENV} -  ${process.env.ENV}  - ${process.env.VUE_APP_URL}`)
 
+
 //所有配置项说明可在 https://cli.vuejs.org/config/
 module.exports = {
     publicPath: '/',// 根域上下文目录
@@ -53,11 +54,23 @@ module.exports = {
         name: name,
         resolve: {
             alias: {
-                '@': resolve('src')
+                '@': resolve('src'),
+                'vue$': 'vue/dist/vue.esm.js'
             }
-        }
+        },
+        module: {
+            rules: [
+                {
+                    // 多进程多实例构建，资源并行解析
+                    test: /\.js$/,
+                    use: ['thread-loader']
+                }
+            ]
+        },
 
     },
+
+
     chainWebpack(config) {
         config.plugins.delete('preload') // TODO: need test
         config.plugins.delete('prefetch') // TODO: need test
@@ -98,6 +111,7 @@ module.exports = {
         config
             .when(process.env.NODE_ENV !== 'development',
                 config => {
+                    // 将经常变的runtime.js文件内容放到html中，提高请求性能
                     config
                         .plugin('ScriptExtHtmlWebpackPlugin')
                         .after('html')
@@ -106,7 +120,8 @@ module.exports = {
                             inline: /runtime\..*\.js$/
                         }])
                         .end()
-                         // js文件拆包
+                   
+                    // js文件拆包
                     config
                         .optimization.splitChunks({
                             chunks: 'all',
@@ -123,12 +138,12 @@ module.exports = {
                                     name: 'chunk-iviewUI',//iviewUI
                                     priority: 20,
                                     test: /[\\/]node_modules[\\/]_?iview(.*)/
-                                  },
-                                  echarts: {
+                                },
+                                echarts: {
                                     name: 'chunk-echarts',//echarts
                                     priority: 20,
                                     test: /[\\/]node_modules[\\/]_?echarts(.*)/
-                                  },
+                                },
                                 elementUI: {
                                     name: 'chunk-elementUI', //  将elementUI拆分成一个包
                                     priority: 20, //  重量需要大于libs和app，否则会被打包成libs或app
