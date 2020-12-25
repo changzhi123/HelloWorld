@@ -47,7 +47,7 @@ const service = axios.create({
         }
         return Promise.reject(new Error(res.msg || 'Error'))
       }else{
-        return res
+        return res  
       }
     },
     error => {
