@@ -52,10 +52,10 @@ export default {
         aspectRatio: "16:9", // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
         fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
         techOrder: ['flash', 'html5'],      // 兼容顺序
-      //  flash: {
-      //     hls: { withCredentials: false },
-      //     // swf: "./static/media/video-js.swf", // 引入静态文件swf
-      //   },
+       flash: {
+          hls: { withCredentials: false },
+          // swf: "./static/media/video-js.swf", // 引入静态文件swf
+        },
         html5: { hls: { withCredentials: false } },
 
         sources: [
@@ -67,7 +67,7 @@ export default {
         // sources: [{
         //             type: "application/x-mpegURL",
         //             src: "rtmp://119.147.171.97:1935/live/blive1-1" //你的m3u8地址（必填）
-        //         }],
+        // }],
         poster: "http://localhost/547be638615da10.png", //"poster.jpg", //你的封面地址
         width: document.documentElement.clientWidth, //播放器宽度
         notSupportedMessage: "此视频暂无法播放，请稍后再试", //允许覆盖Video.js无法播放媒体源时显示的默认信息。
