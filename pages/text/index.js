@@ -1,23 +1,23 @@
-// pages/list/index.js
+// pages/text/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    img:[
-      'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1078861629,3747050294&fm=26&gp=0.jpg',
-      'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1078861629,3747050294&fm=26&gp=0.jpg',
-      'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1078861629,3747050294&fm=26&gp=0.jpg'
-    ],
-    circular:true
+   list:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //  console.log(options,'options')
+    console.log(options.list,'options','值类型',typeof options.list)
+    let arr= options.list.split(',')
+    console.log(arr,'转化为数组')
+    this.setData({
+      list:arr//options.list
+    })
   },
 
   /**

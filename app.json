@@ -1,8 +1,11 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/home/index",
     "pages/logs/logs",
-    "pages/list/index"
+    "pages/list/index",
+    "pages/text/index",
+    "pages/templates/swiper-template/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -11,5 +14,21 @@
     "navigationBarTextStyle": "black"
   },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/home/index",
+        "text": "我的"
+      },
+      {
+        "pagePath": "pages/list/index",
+        "text": "测试"
+      }
+    ]
+  }
 }

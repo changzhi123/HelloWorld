@@ -1,23 +1,26 @@
-// pages/list/index.js
+// pages/home/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    img:[
-      'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1078861629,3747050294&fm=26&gp=0.jpg',
-      'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1078861629,3747050294&fm=26&gp=0.jpg',
-      'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1078861629,3747050294&fm=26&gp=0.jpg'
-    ],
-    circular:true
+    str:'这是小程序',
+    city:['四川', '上海','北京']
   },
+  btn(){
+    console.log(123);//打印数据
+    this.setData({
+      str:'我已经修改你了，哈哈'
+    })//修改data中的数据的方法
 
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //  console.log(options,'options')
+    //请求接口可以写在这个生命周期里面
+  console.log(1,'onLoad')
   },
 
   /**
@@ -52,7 +55,7 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-
+   
   },
 
   /**

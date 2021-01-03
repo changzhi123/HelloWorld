@@ -1,23 +1,18 @@
-// pages/list/index.js
+// pages/templates/swiper-template/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    img:[
-      'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1078861629,3747050294&fm=26&gp=0.jpg',
-      'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1078861629,3747050294&fm=26&gp=0.jpg',
-      'https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1078861629,3747050294&fm=26&gp=0.jpg'
-    ],
-    circular:true
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    //  console.log(options,'options')
+
   },
 
   /**

@@ -1,2 +1,16 @@
 <!--pages/list/index.wxml-->
 <text>pages/list/index.wxml</text>
+<swiper>
+ <swiper-item>123</swiper-item>
+ <swiper-item>456</swiper-item>
+ <swiper-item>789</swiper-item>
+</swiper>
+
+<swiper>
+ <swiper-item wx:for="{{img}}" wx:key='index'>
+   <image src="{{item}}"></image>
+ </swiper-item>
+</swiper>
+
+<import src="../templates/swiper-template/index.wxml"></import>
+<template is='swiper' data='{{img,circular}}'></template>

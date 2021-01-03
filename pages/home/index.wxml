@@ -1,0 +1,43 @@
+<!--pages/home/index.wxml-->
+<view class="home">是块级元素</view>
+<view>456</view>
+<view>
+  <text>可以长按选中</text>
+</view>
+<view class="image">
+  <image src="https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1078861629,3747050294&fm=26&gp=0.jpg"></image>
+</view>
+<view>
+  <input type="text" />
+  <!-- 标签必须闭合 -->
+</view>
+<!-- <block></block> -->
+<text>pages/home/index.wxml</text>
+<view class="main">
+  <view>1</view>
+  <view>1</view>
+  <view>1</view>
+  <view>1</view>
+</view>
+<!-- 数据  data:{
+  str:"value值"
+} -->
+<view>{{str}}</view>
+<view>{{city}}</view>
+<!-- 数据驱动 循环  wx:for=''  wx:key='' item index-->
+<view wx:for="{{city}}" wx:key='index'>
+  {{item}}
+  {{index}}
+</view>
+<!-- 条件判断 条件渲染 wx:if='' wx:else-->
+<view wx:if="{{city.length>0}}">
+  <text wx:for="{{city}}" wx:key='index'>{{item}}</text>
+</view>
+<view wx:else>
+  暂无数据..
+</view>
+<!-- 事件绑定 和冒泡 
+ bind: 不会阻止冒泡 <view bindtap='函数名称'><view>
+ catch： 会阻止冒泡
+-->
+<button bindtap='btn'>修改数据</button>

@@ -1,0 +1,23 @@
+/* pages/home/index.wxss */
+.home{
+  height: 100px;
+  width: 750rpx;
+  color: #f90;
+  background: #ccc;
+}
+/* 布局使用弹性和，
+ 单位使用rpx 750rpx对应750px ，可以自动适配 */
+.main{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.main > view{
+flex: 1;
+text-align:center;
+}
+.image > image{
+  width: 750rpx;
+  height: 400rpx;
+  border:1px salmon solid;
+}
