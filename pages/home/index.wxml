@@ -29,7 +29,7 @@
   {{item}}
   {{index}}
 </view>
-<!-- 条件判断 条件渲染 wx:if='' wx:else-->
+<!-- 条件判断 条件渲染 wx:if='' wx:elif='' wx:else-->
 <view wx:if="{{city.length>0}}">
   <text wx:for="{{city}}" wx:key='index'>{{item}}</text>
 </view>

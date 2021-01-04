@@ -1,1 +1,24 @@
 /* pages/list/index.wxss */
+.boxes{
+  border: 1px solid #ccc;
+}
+/* 动画渐变 */
+.box {
+  width: 100rpx;
+  height: 100rpx;
+  margin: 60rpx;
+  background: red;
+}
+.box-transition {
+  transition: all 0.5s;
+}
+.box-moved {
+  margin-left: 390rpx;
+}
+@keyframes box-ani {
+  from {margin-left: 60rpx}
+  to {margin-left: 590rpx}
+}
+.box-animation {
+  animation: box-ani 1s alternate infinite;
+}

@@ -1,7 +1,7 @@
 <!--pages/templates/swiper-template/index.wxml-->
 <template name ='swiper'>
   <text>pages/templates/swiper-template/index.wxml</text>
-<swiper circular='{{circular}}' >
+<swiper circular='{{circular}}' class="boxes">
   <swiper-item wx:for="{{img}}" wx:key='index'>
     <image src="{{item}}"></image>
   </swiper-item>

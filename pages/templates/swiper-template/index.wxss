@@ -1,1 +1,2 @@
 /* pages/templates/swiper-template/index.wxss */
+@import'../../list/index.wxss'

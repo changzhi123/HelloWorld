@@ -1,16 +1,24 @@
 <!--pages/list/index.wxml-->
-<text>pages/list/index.wxml</text>
-<swiper>
+<text class="target-class">pages/list/index.wxml</text>
+<swiper class="boxes">
  <swiper-item>123</swiper-item>
  <swiper-item>456</swiper-item>
  <swiper-item>789</swiper-item>
 </swiper>
-
-<swiper>
+<swiper  class="boxes">
  <swiper-item wx:for="{{img}}" wx:key='index'>
    <image src="{{item}}"></image>
  </swiper-item>
 </swiper>
-
+<view>这是组件</view>
 <import src="../templates/swiper-template/index.wxml"></import>
 <template is='swiper' data='{{img,circular}}'></template>
+<button id="the-id" bindtap="getElement">获取界面上的节点信息</button>
+<view>动画渐变</view>
+<view class="box {{extraClasses}}"
+  bindtransitionend="transitionEnd"
+  bindanimationstart="animationStart"
+  bindanimationiteration="animationIteration"
+></view>
+<button  bindtap="triggerTransition">触发 CSS 渐变</button>
+<button  bindtap="triggerAnimation">触发 CSS 动画</button>

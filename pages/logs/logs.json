@@ -1,5 +1,10 @@
 {
-  "navigationBarTitleText": "查看启动日志",
   "usingComponents": {},
-  "navigationBarBackgroundColor": "#ccc"
+  "navigationBarBackgroundColor": "#ccc",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "微信接口功能演示",
+  "backgroundColor": "#58bc58",
+  "backgroundTextStyle": "light",
+  "enablePullDownRefresh":true,
+  "onReachBottomDistance":50
 }
