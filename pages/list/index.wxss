@@ -1,6 +1,8 @@
 /* pages/list/index.wxss */
 .boxes{
   border: 1px solid #ccc;
+  
+  /* height: 400rpx; */
 }
 /* 动画渐变 */
 .box {
@@ -21,4 +23,9 @@
 }
 .box-animation {
   animation: box-ani 1s alternate infinite;
+  
+}
+.img{
+  width: 750rpx;
+  /* height: 400rpx; */
 }

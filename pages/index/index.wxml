@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <text bindtap="toLogs">
-  跳转
+  跳转路由传值
 </text>
 <view class="container">
   <view class="userinfo">

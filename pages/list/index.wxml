@@ -7,7 +7,7 @@
 </swiper>
 <swiper  class="boxes">
  <swiper-item wx:for="{{img}}" wx:key='index'>
-   <image src="{{item}}"></image>
+   <image class="img" src="{{item}}"></image>
  </swiper-item>
 </swiper>
 <view>这是组件</view>
