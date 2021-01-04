@@ -1,0 +1,11 @@
+<!--pages/demos/index.wxml-->
+<!-- <text>pages/demos/index.wxml</text> -->
+<view class="demos">
+  <view>
+    <image src="{{imgUrl}}"></image>
+  </view>
+  <view class="text">Dweb工作室 -- 小程序开发</view>
+  <view  class="text name">BiliBili小UP主 -- 九弓子</view>
+  <view  class="text price">测试订单费用：10 元</view>
+  <button>测试支付</button>
+</view>

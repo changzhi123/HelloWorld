@@ -1,0 +1,37 @@
+/* pages/demos/index.wxss */
+page{
+  /* 渐变 */
+  background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+}
+.demos{
+  text-align:center;
+}
+.demos image{
+  width: 80px;
+  border-radius: 15px;
+  box-shadow: 0 3px 6px #000;
+  height: 80px;
+  margin-top: 30%;
+}
+.demos .text{
+font-size: 18px;
+color: ffff;
+font-weight: 700;
+margin-top: 15px;
+}
+.demos .price{
+  font-size:14px ;
+  color: #f90;
+}
+.demos .name{
+  color: #58bc58;
+}
+.demos button{
+  margin-top: 30px;
+  width: 180px;
+  background: #383838;
+  color: rgb(47, 209, 47);
+  font-size:30px ;
+ font-weight: 700;
+ box-shadow: 0 0 6px #000;
+}

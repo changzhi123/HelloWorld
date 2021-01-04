@@ -5,8 +5,8 @@
     "pages/logs/logs",
     "pages/list/index",
     "pages/text/index",
-    "pages/templates/swiper-template/index",
-    "pages/module/index"
+    "pages/module/index",
+    "pages/demos/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -41,8 +41,8 @@
         "selectedIconPath": "./images/tabs/ic_profile_selected.png"
       },
       {
-        "pagePath": "pages/module/index",
-        "text": "组件",
+        "pagePath": "pages/demos/index",
+        "text": "演示",
         "iconPath": "./images/tabs/ic_cart_unselect.png",
         "selectedIconPath": "./images/tabs/ic_cart_selected.png"
       }

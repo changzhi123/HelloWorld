@@ -22,3 +22,6 @@
 ></view>
 <button  bindtap="triggerTransition">触发 CSS 渐变</button>
 <button  bindtap="triggerAnimation">触发 CSS 动画</button>
+
+
+<button bindtap="cartoon">动画</button>

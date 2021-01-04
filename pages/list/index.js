@@ -31,6 +31,11 @@ Page({
       console.log(res,'target-class')
     })
   },
+  cartoon(){//跳转list
+    wx.navigateTo({
+      url: '../module/index'
+    })
+  },
  getElement(){//获取界面上的节点信息
     const query = wx.createSelectorQuery()
     console.log('获取界面上的节点信息',query.select('#the-id'))
