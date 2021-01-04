@@ -172,6 +172,7 @@ export default {
     width: 2em;
     line-height: 2em;
     border-radius: 50%;
+  
   }
 }
 </style>
