@@ -6,7 +6,8 @@
     "pages/list/index",
     "pages/text/index",
     "pages/module/index",
-    "pages/demos/index"
+    "pages/demos/index",
+    "pages/data/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,8 +32,8 @@
       {
         "pagePath": "pages/list/index",
         "text": "测试",
-        "iconPath": "./images/tabs/ic_category_unselect.png",
-        "selectedIconPath": "./images/tabs/ic_category_selected.png"
+        "iconPath": "./images/tabs/ic_cart_unselect.png",
+        "selectedIconPath": "./images/tabs/ic_cart_selected.png"
       },
       {
         "pagePath": "pages/home/index",
@@ -41,10 +42,10 @@
         "selectedIconPath": "./images/tabs/ic_profile_selected.png"
       },
       {
-        "pagePath": "pages/demos/index",
+        "pagePath": "pages/data/index/index",
         "text": "演示",
-        "iconPath": "./images/tabs/ic_cart_unselect.png",
-        "selectedIconPath": "./images/tabs/ic_cart_selected.png"
+        "iconPath": "./images/tabs/ic_category_unselect.png",
+        "selectedIconPath": "./images/tabs/ic_category_selected.png"
       }
     ]
   }
