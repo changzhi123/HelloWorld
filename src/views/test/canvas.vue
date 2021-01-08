@@ -53,12 +53,21 @@
         </Col>
       </Row>
     </div>
+     <div class="upand"></div>
+     <tuodong></tuodong>
+     <div class="upand"></div>
+     <fuzhi></fuzhi>
   </div>
 </template>
 <script>
+import tuodong from '@/components/Kanban/tuodong'
+import fuzhi from '@/components/Kanban/fuzhi'
 export default {
   data() {
     return {};
+  },
+  components:{
+    tuodong,fuzhi
   },
   mounted() {
     this.initCanvas();
@@ -114,6 +123,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.upand{
+  margin: 20px 0;
+}
 .canvas {
   width: 100%;
   .canvas_box {
