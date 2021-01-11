@@ -1,83 +1,189 @@
 <template>
-  <div>
-   <div class="form-box">
-        <VueForm
-        v-model="formData"
-        :ui-schema="uiSchema"
-        :schema="schema"
-    >
-    </VueForm>
-   </div>
-    <el-button @click="open">打印</el-button>
+  <div class="head">
+    <div class="tab">
+      <div class="tab-box" v-for="(item, idnex) in data" :key="idnex">
+        <h3>{{ item.groupName }}({{ item.componentList.length }})</h3>
+        <!--  group="Decoration" -->
+        <draggable
+          class="box"
+          v-model="item.componentList"
+          :options="{group:{name: 'itxst',pull:'clone'},sort: false}"
+          @start="onStart"
+          @end="onEnd"  :move="onMove"
+          chosenClass="chosenClass" 
+         :filter="`.disabled`" @filter="$message.error('该组件添加数目已达上限！')"
+        >
+          <transition-group>
+            <div 
+              :class="{'min':true, 'disabled':tab.nowNum>=tab.maxNum}"
+              v-for="(tab, idx) in item.componentList"
+              :key="idx" 
+            >
+              <i :class="tab.icon"></i>
+              <div>{{ tab.title }}</div>
+              <div>{{tab.nowNum}}/{{ tab.maxNum }}</div>
+            </div>
+          </transition-group>
+        </draggable>
+      </div>
+    </div>
+    <div class="main">
+        <!--  group="Decoration" -->
+      <draggable
+       :options="{group:{name: 'itxst',pull:'clone'},sort: true}"
+        @start="onStart"
+        chosenClass="chosenClass"
+        class="main-box"   v-model="list"
+        @end="onEnd" @change="handleDragChange"
+      >
+        <transition-group> 
+        </transition-group>
+      </draggable>
+
+      <el-button @click="open">测试</el-button>
+    </div>
   </div>
 </template>
-
-<script >
-//  使用
-import VueForm from '@lljj/vue-json-schema-form';
-
+<script>
+import draggable from "vuedraggable";
+import tools from "./tools";
+ import { getComponentsAndInitToolsConfig } from './utils';
+// 工具栏配置的组件
+    const components = getComponentsAndInitToolsConfig(tools);
 export default {
-    name: 'Demo',
-    components: {
-        VueForm
-    },
-    data() {
-        return {
-            formData: {},
-            schema: {
-                type: 'object',
-                required: [
-                    'userName',//是否为比填项目
-                    'age'
-                ],
-                properties: {
-                    userName: {
-                        type: 'string',
-                        title: '用户名',
-                        default: 'Liu.Jun',
-                    },
-                    age: {
-                        type: 'number',
-                        title: '年龄',
-                        default:10
-                    },
-                    bio: {
-                        type: 'string',
-                        title: '签名',
-                        minLength: 10,
-                        default: '知道的越多、就知道的越少',
-                    }
-                }
-            },
-            uiSchema: {
-                bio: {
-                    'ui:options': {
-                        placeholder: '请输入你的签名',
-                        type: 'textarea',
-                        rows: 1
-                    }
-                },
-                userName:{
-                    'ui:options':{
-                         placeholder: '请输入昵称',
-                    }
-                }
-            },
-        };
-    },
-    methods:{
-        open(){
-            console.log(this.formData,'formData',this.schema,this.uiSchema)
+  components: {
+    draggable,
+    ...components
+  },
+  data() {
+    return {
+      data: [],
+      list:[],
+       moveId:-1
+    };
+  },
+  computed: {
+    // data() {
+    //   return tools || [];
+    // },
+  },
+  watch: {
+    //   tools(val){
+    //       this.data=[...val]
+    //   }
+  },
+  mounted() {
+    this.data = [...tools];
+    console.log(components,'components')
+  },
+  methods: {
+     
+      handleDragChange(e){
+          console.log(e,'handleDragChange')
+      },
+    onMove(e,originalEvent){
+        const {maxNum,nowNum}=e.draggedContext.element
+        // console.log(e,originalEvent,'onMove',e.draggedContext.element)
+        if(nowNum>=maxNum){//判断当打到最大数量后不允许增加
+            return false
+        }else{
+            return true
         }
-    }
+    },
+    onEnd(e) {
+      console.log(e, "onEnd");
+      
+    },
+    onStart(e) {
+      console.log(e, "onStart");
+    },
+    open() {
+      console.log(tools, "测试",this.list);
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
-.form-box{
-    width: 500px;
-    min-height: 200px;
+$heide: calc(100vh - 84px);
+$tab-width: 300px;
+.head {
+  width: 100%;
+  height: $heide; //calc(100vh - 84px);
+  border: solid 1px #ccc;
+  // background: #58bc58;
+  display: flex;
+  > div {
+    height: 100%;
     border: solid 1px #ccc;
-    box-sizing: border-box;
-    padding: 10px;
+    overflow: auto;
+  }
+  .tab {
+    width: $tab-width; //200px;
+    // background: chartreuse;
+  }
+  .main {
+    //width: calc(100% - $tab-width);//calc(100% - 200px);
+    flex: 1;
+  }
 }
+.tab-box {
+  width: 100%;
+  min-height: 100px;
+  > h3 {
+    height: 40px;
+    line-height: 40px;
+    box-sizing: border-box;
+    padding: 0 20px;
+    display: block;
+    // border-bottom: solid 1px #ccc;
+    width: 100%;
+  }
+  .box {
+    > span {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    width: 100%;
+    .min {
+      width: 48%;
+      height: 100px;
+      border: solid 1px #ccc;
+      font-size: 16px;
+      display: flex;
+      text-align: center;
+      margin: 1%;
+      box-sizing: border-box;
+      padding: 10px 0;
+      border-radius: 10px;
+      flex-wrap: wrap;
+      > i {
+        font-size: 20px;
+        width: 100%;
+        display: block;
+      }
+      > div {
+        width: 100%;
+      }
+    }
+  }
+}
+.chosenClass {
+  //
+  border-color: #f90 !important;
+  transition: box-shadow 0.3s ease;
+}
+.main-box{
+    width: 100%;
+    >span{
+        width: 100%;
+        min-height: 100px;
+        box-sizing: border-box;
+        padding: 5px;display: block;
+    }
+}
+ .disabled {
+        cursor: no-drop;
+        opacity: 0.8;
+    }
 </style>

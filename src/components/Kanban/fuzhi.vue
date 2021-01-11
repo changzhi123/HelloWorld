@@ -4,9 +4,11 @@
 <div class="itxst">
 <div class="col">
 <div style="padding-left:6px">复制拖动</div>
- <draggable v-model="arr1"   @end="end1" :options="{group:{name: 'itxst',pull:'clone'},sort: true}"  animation="300"  :move="onMove">
+ <draggable v-model="arr1"   @end="end1" :options="{group:{name: 'itxst',pull:'clone'},sort: true}"
+   animation="300"  :move="onMove">
     <transition-group>
-     <div :class="item.id==1?'item forbid':'item'" v-for="item in arr1" :key="item.id">{{item.name}}</div>
+     <div :class="item.id==1?'item forbid':'item'" v-for="item in arr1" 
+     :key="item.id">{{item.name}}</div>
     </transition-group>
 </draggable> 
  </div>
@@ -14,7 +16,8 @@
 <div style="padding-left:6px">复制拖动</div>
  <draggable v-model="arr2"   @end="end2" group="itxst"  animation="300" :move="onMove">
     <transition-group>
-     <div :class="item.id==12?'item2 forbid':'item2'" v-for="item in arr2" :key="item.id">{{item.name}}</div>
+     <div :class="item.id==12?'item2 forbid':'item2'" v-for="item in arr2"
+      :key="item.id">{{item.name}}</div>
     </transition-group>
 </draggable> 
  </div>
@@ -48,7 +51,7 @@ export default {
   methods: {  
         //左边往右边拖动时的事件
        end1(e){
-         console.log(e)
+         console.log(e,'e')
          var that=this;
          var  items=this.arr2.filter(function(m){
            return  m.id==that.moveId
@@ -70,6 +73,7 @@ export default {
        },
       //move回调方法
        onMove(e,originalEvent){
+         
          this.moveId=e.relatedContext.element.id;
          //不允许停靠
          if (e.relatedContext.element.id == 1) return false;

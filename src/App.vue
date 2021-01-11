@@ -19,13 +19,34 @@ export default {
   //     isRouterAlive:true
   //   }
   // },
-  // methods:{
+  created(){
+    this.startVisibilitychange()
+     //  window.open(woUrl,'_self');//跳当前
+  },
+  methods:{
+    
+     // 开启切换选项卡操作 /监听浏览器窗口选项卡的切换
+      startVisibilitychange(){
+        console.log('startVisibilitychange')
+        document.addEventListener('visibilitychange', this.onVisibilitychange);
+        this.$once('hook:beforeDestroy', () => {
+          console.log('beforeDestroy')
+          document.removeEventListener('visibilitychange', this.onVisibilitychange);
+        });
+      },
+      // 切换选项卡的操作
+      onVisibilitychange(){
+         console.log(document.visibilityState)
+        if (document.visibilityState == 'visible') {
+        } else if (document.visibilityState == 'hidden') {
+        }
+      },
   //   reload(){
   //     this.isRouterAlive=false
   //     this.$nextTick(function(){
   //       this.isRouterAlive=true
   //     })
   //   }
-  // }
+  }
 };
 </script>
