@@ -1,5 +1,5 @@
 <template>
-  <div>AllGoodsList</div>
+  <div class="AllGoodsList">AllGoodsList</div >
 </template>
 
 <script>
@@ -8,6 +8,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.AllGoodsList{
+  height: 100px;
+  width: 100%;
+  background: chartreuse;
+}
 
 </style>

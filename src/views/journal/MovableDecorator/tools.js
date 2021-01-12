@@ -1,36 +1,3 @@
-/**
- * Created by Liu.Jun on 2019/9/29 18:58.
- */
-
-// // 轮播图
-import componentPackCarouselImg from './components/CarouselImg';
-
-// // 秒杀商品
-import componentPackFlashSaleGoodsList from './components/FlashSaleGoodsList';
-
-// // 纯文本
-import componentPackText from './components/Text';
-
-// // 多图模块一排5个
-import componentPackMultipleImg5 from './components/MultipleImg5';
-
-// // 多图模块 2-3
-import componentPackMultipleImg23 from './components/MultipleImg2_3';
-
-// // 多图模块 1-2
-import componentPackMultipleImg13 from './components/MultipleImg1_3';
-
-// // 分类管区
-import componentPackCategoryGoods from './components/CategoryGoods';
-
-// // 推荐
-import componentPackRecommendedGoodsList from './components/RecommendedGoodsList';
-
-// // 所有商品
-import componentPackAllGoodsList from './components/AllGoodsList';
-
-// // 优惠券
-import componentPackCoupon from './components/Coupon';
 
 
 /**
@@ -44,79 +11,174 @@ import componentPackCoupon from './components/Coupon';
 const tools = [
     {
         groupName: '图文类',
+        id:'1',
         componentList: [{
             title: '轮播 (普通数组)',
             maxNum: 2,
-            nowNum:2,
-            viewWidth: '1920px',
+            nowNum:0,
+            parent:'1',
             icon: 'el-icon-picture',
-           componentPack: componentPackCarouselImg
+           componentPack: 'CarouselImg',
+           styles:{
+            width:'',
+            height:''
+           },
+           arrData:[
+               {
+                   imgurl:"",
+                   name:''
+               }
+           ],
+           objData:{}
         }, {
             title: '秒杀商品',
             maxNum: 3,
             nowNum:0,
+            parent:'1',
             icon: 'el-icon-picture',
-           componentPack: componentPackFlashSaleGoodsList
+           componentPack:'FlashSaleGoodsList' ,
+           styles:{
+            width:'900px',
+            height:'' 
+           },
+           arrData:[],
+           objData:{
+               text:'',itme:'',
+               suffixUrl:'',prefixUrl:'',
+               data1:[
+                   {
+                       imgurl:'',
+                       nametext:'',
+                       price:'',secondPrice:''
+                   }
+               ],data2:[]
+           }
         }, {
             title: '多图(5)',
             maxNum: 5,
             nowNum:0,
+            parent:'1',
             icon: 'el-icon-picture',
-           componentPack: componentPackMultipleImg5
+           componentPack: 'MultipleImg5',
+           styles:{
+            width:'900px',
+            height:''
+           },
+           arrData:[
+               {
+                   imgurl:'',name:''
+               }
+           ],
+           objData:{}
         }, {
             title: '多图(2-3)',
             maxNum: 10,
             nowNum:0,
+            parent:'1',
             icon: 'el-icon-s-grid',
-           componentPack: componentPackMultipleImg23
+           componentPack: 'MultipleImg2_3',
+           styles:{
+            width:'900px',
+            height:'550px'
+           },
+           arrData:[ 
+               {
+                   imgurl:'',name:''
+               }
+           ],
+           objData:{}
         }, {
             title: '多图(1-3)',
             maxNum: 10,
             nowNum:0,
+            parent:'1',
             icon: 'el-icon-s-grid',
-           componentPack: componentPackMultipleImg13
+           componentPack: 'MultipleImg1_3',
+           styles:{
+            width:'900px',
+            height:'550px'
+           },
+           arrData:[ 
+            {
+                imgurl:'',name:''
+            }
+        ],
+           objData:{}
         }, {
             title: '分类管区',
             maxNum: 10,
+            parent:'1',
             nowNum:0,
             icon: 'el-icon-s-grid',
-           componentPack: componentPackCategoryGoods
+           componentPack:'CategoryGoods',
+           styles:{
+            width:'900px',
+            height:'550px'
+           },
+           arrData:[ ],
+           objData:{}
         }, {
             title: '纯文本',
             maxNum: 20,
+            parent:'1',
             nowNum:0,
             icon: 'el-icon-notebook-1',
-           componentPack: componentPackText
+           componentPack:'plainTextBlock',
+           styles:{
+            width:'',
+            height:''
+           },
+           arrData:[ ],
+           objData:{}
         }]
     },
     {
         groupName: '商品类',
+        id:'2',
         componentList: [{
             title: '全部商品',
             maxNum: 1,
+            parent:'2',
             nowNum:0,
             icon: 'el-icon-s-goods',
-            componentPack: componentPackAllGoodsList,
-            additional: {
-                bottomDisplay: true,
-                unRemove: true // 不可移除
-            }
+            componentPack: 'AllGoodsList',
+            styles:{
+                width:'',
+                height:''
+               },
+               arrData:[ ],
+               objData:{}
         }, {
             title: '推荐商品',
+            parent:'2',
             maxNum: 1,
             nowNum:0,
             icon: 'el-icon-s-goods',
-           componentPack: componentPackRecommendedGoodsList
+           componentPack: 'RecommendedGoodsList',
+           styles:{
+            width:'',
+            height:''
+           },
+           arrData:[ ],
+           objData:{}
         }]
     },
     {
         groupName: '营销互动类',
+        id:'3',
         componentList: [{
             title: '优惠券',
+            parent:'3',
             maxNum: 1,
             nowNum:0,
             icon: 'el-icon-s-ticket',
-           componentPack: componentPackCoupon
+           componentPack: 'Coupon',
+           styles:{
+            width:'',
+            height:''
+           },
+           arrData:[ ],
+           objData:{}
         }]
     }
 ];

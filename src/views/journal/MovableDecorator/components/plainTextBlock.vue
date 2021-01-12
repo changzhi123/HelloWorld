@@ -1,17 +1,17 @@
 <template>
-  <div class="Coupon">Coupon</div>
+  <div class="plainTextBlock">plainTextBlock</div >
 </template>
 
 <script>
 export default {
-name:'Coupon'
+name:'plainTextBlock'
 }
 </script>
 <style lang="scss" scoped>
-.Coupon{
+.plainTextBlock{
   height: 100px;
   width: 100%;
-  background: chartreuse;
+  background: #f90;
 }
 
 </style>

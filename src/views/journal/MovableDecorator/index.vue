@@ -1,7 +1,7 @@
 <template>
   <div class="head">
     <div class="tab">
-      <div class="tab-box" v-for="(item, idnex) in data" :key="idnex">
+      <div class="tab-box" v-for="(item, idnex) in objlist" :key="idnex">
         <h3>{{ item.groupName }}({{ item.componentList.length }})</h3>
         <!--  group="Decoration" -->
         <draggable
@@ -30,13 +30,20 @@
     <div class="main">
         <!--  group="Decoration" -->
       <draggable
-       :options="{group:{name: 'itxst',pull:'clone'},sort: true}"
-        @start="onStart"
+       :options="{group:{name: isName,pull:'clone'},sort: true}"
+        @start="Start"
         chosenClass="chosenClass"
         class="main-box"   v-model="list"
-        @end="onEnd" @change="handleDragChange"
+        @end="End" @change="handleDragChange"
       >
         <transition-group> 
+          <div v-for="(item,index) in list" :key='index' class="mian-form" >
+             <component
+            :is="item.componentPack" :styles='item.styles'
+          >
+          <!--  :is="item.componentPack"  动态渲染组件 -->
+          </component>
+          </div>
         </transition-group>
       </draggable>
 
@@ -47,48 +54,88 @@
 <script>
 import draggable from "vuedraggable";
 import tools from "./tools";
- import { getComponentsAndInitToolsConfig } from './utils';
-// 工具栏配置的组件
-    const components = getComponentsAndInitToolsConfig(tools);
 export default {
   components: {
     draggable,
-    ...components
+    CarouselImg:() => import('./components/CarouselImg'),
+    FlashSaleGoodsList:() => import('./components/FlashSaleGoodsList'),
+    plainTextBlock:() => import('./components/plainTextBlock'),
+    MultipleImg5:() => import('./components/MultipleImg5'),
+    MultipleImg2_3:() => import('./components/MultipleImg2_3'),
+    MultipleImg1_3:() => import('./components/MultipleImg1_3'),
+    CategoryGoods:() => import('./components/CategoryGoods'),
+    RecommendedGoodsList:() => import('./components/RecommendedGoodsList'),
+    AllGoodsList:() => import('./components/AllGoodsList'),
+    Coupon:() => import('./components/Coupon'),
   },
   data() {
     return {
-      data: [],
-      list:[],
-       moveId:-1
+      isName:'itxst',//原始数据的id
+      list:[ ],//已渲染的组件集合
+      setObj:{ },//记录组件已经渲染的重复次数
     };
   },
   computed: {
-    // data() {
-    //   return tools || [];
-    // },
+    objlist(){
+      const arr=[]
+      tools.filter(item=>{
+        // console.log(item,'itemn')
+        let obj={
+          id:item.id,
+          groupName:item.groupName,
+          componentList:[]
+        }
+        item.componentList.filter(v=>{
+          // console.log(v,'v')
+          obj.componentList.push({
+            componentPack:v.componentPack,
+            icon:v.icon,
+            maxNum:v.maxNum,
+            parent:v.parent,
+            title:v.title,
+            nowNum:this.setObj[v.componentPack]||0,
+            styles:v.styles
+          })
+        })
+        arr.push(obj)
+      })
+      return arr
+    }
   },
   watch: {
-    //   tools(val){
-    //       this.data=[...val]
-    //   }
+    list(val){
+      // console.log(val,'val')
+      this.setObj={}
+      this.list.filter(item=>{//更新记录组件已经渲染的数量
+        // console.log(item.componentPack,'item')
+        this.setObj[item.componentPack]? this.setObj[item.componentPack]+=1:this.setObj[item.componentPack]=1
+        
+      })
+    }
   },
   mounted() {
-    this.data = [...tools];
-    console.log(components,'components')
   },
   methods: {
-     
+    End(){
+        this.isName='itxst'//修改回原始数据的id，避免无法往右拖
+      // console.log('结束')
+    },
+     Start(){
+       this.isName='reqitxst'//修改原始数据id避免组件往回拖
+      //  console.log('开始')
+     },
       handleDragChange(e){
-          console.log(e,'handleDragChange')
+          //console.log(e.added.element,'list收到')
+       
       },
     onMove(e,originalEvent){
-        const {maxNum,nowNum}=e.draggedContext.element
+        // const {maxNum,nowNum}=e.draggedContext.element
         // console.log(e,originalEvent,'onMove',e.draggedContext.element)
-        if(nowNum>=maxNum){//判断当打到最大数量后不允许增加
-            return false
-        }else{
-            return true
-        }
+        // if(nowNum>=maxNum){//判断当打到最大数量后不允许增加
+        //     return false
+        // }else{
+        //     return true
+        // }
     },
     onEnd(e) {
       console.log(e, "onEnd");
@@ -98,7 +145,7 @@ export default {
       console.log(e, "onStart");
     },
     open() {
-      console.log(tools, "测试",this.list);
+      console.log(tools, "测试",this.list,this.setObj,this.obj);
     },
   },
 };
@@ -106,6 +153,10 @@ export default {
 <style lang="scss" scoped>
 $heide: calc(100vh - 84px);
 $tab-width: 300px;
+ .disabled {
+        cursor: no-drop;
+        opacity: 0.8;
+    }
 .head {
   width: 100%;
   height: $heide; //calc(100vh - 84px);
@@ -123,7 +174,8 @@ $tab-width: 300px;
   }
   .main {
     //width: calc(100% - $tab-width);//calc(100% - 200px);
-    flex: 1;
+    flex: 1; 
+      background: #f5f5f5;
   }
 }
 .tab-box {
@@ -181,9 +233,17 @@ $tab-width: 300px;
         box-sizing: border-box;
         padding: 5px;display: block;
     }
-}
- .disabled {
-        cursor: no-drop;
-        opacity: 0.8;
+    .mian-form{
+      width: 100%;
+      box-sizing: border-box;
+      margin: auto;
+      overflow: hidden; 
+      >div{
+      margin: auto;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      // background: #fff;
+      }
     }
+}
 </style>
