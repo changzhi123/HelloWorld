@@ -8,23 +8,26 @@
     </div>
     <div class="main">
       <div class="main-a">
-        <img class="images" :src="imglist.imgurl" alt="">
+        <img class="images" v-if="imglist.imgurl" :src="imglist.imgurl" alt="">
+        <div class="isimg" v-else>
+          <div><Icon type="md-image" /></div>
+        </div>
         <div class="View_bannerText_2SLqV">
-          <span class="View_bannerTitle_1gQsW">广告位</span>
-          <span class="View_bannerSubTitle_2K3Zh">广告位副标题</span>
+          <span class="View_bannerTitle_1gQsW">{{imglist.advertising}}</span>
+          <span class="View_bannerSubTitle_2K3Zh">{{imglist.toAdvertising}}</span>
           </div>
           <div class="icon-trxxt">
-            <!-- <i class="el-icon-arrow-right"></i> -->
             <img class="images" src="https://img.alicdn.com/tfs/TB1IQBtXaagSKJjy0FbXXa.mVXa-68-68.png" alt="">
           </div>
       </div>
       <div class="main-b">
         <div v-for="(item,index) in imglist.data" :key="index" class="tab-img">
           <div class="img-div">
-            <img class="images" :src="item.imgurl" alt="">
+            <img class="images" v-if="item.imgurl" :src="item.imgurl" alt="">
+             <Icon v-else type="ios-basket" class="skeleton-goods-img-icon" />
           </div>
-          <div class="View_goodsTitle_1oYUy"> 商品标题，可以结合具体业务活动商品数据 </div>
-          <div class="View_goodsPrice_1uqZX"> ￥69.8 </div>
+          <div class="View_goodsTitle_1oYUy"> {{item.text}} </div>
+          <div class="View_goodsPrice_1uqZX"> ￥{{item.price}}</div>
         </div>
       </div>
     </div>
@@ -37,32 +40,50 @@
     data() {
       return {
         imglist: {
-          imgurl: 'https://img.alicdn.com/tps/i4/TB1MesKcWmWQ1JjSZPhwu0CJFXa.png',
+          imgurl: '',//'https://img.alicdn.com/tps/i4/TB1MesKcWmWQ1JjSZPhwu0CJFXa.png',
           slogan: '打造爱巢',
           text: 'HOME',
+          advertising:'广告位',
+          toAdvertising:"广告位副标题",
           data: [{
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg'
+              imgurl: '',//'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
+              text:'商品标题，可以结合具体业务活动商品数据',
+              price:'69.8'
             },
             {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg'
+              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
+               text:'商品标题，可以结合具体业务活动商品数据',
+              price:'69.8'
             },
             {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg'
+              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
+               text:'商品标题，可以结合具体业务活动商品数据',
+              price:'69.8'
             },
             {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg'
+              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
+               text:'商品标题，可以结合具体业务活动商品数据',
+              price:'69.8'
             },
             {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg'
+              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
+               text:'商品标题，可以结合具体业务活动商品数据',
+              price:'69.8'
             },
             {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg'
+              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
+               text:'商品标题，可以结合具体业务活动商品数据',
+              price:'69.8'
             },
             {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg'
+              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
+               text:'商品标题，可以结合具体业务活动商品数据',
+              price:'69.8'
             },
             {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg'
+              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
+               text:'商品标题，可以结合具体业务活动商品数据',
+              price:'69.8'
             }
           ]
         }
@@ -78,6 +99,23 @@
   }
 </script>
 <style lang="scss" scoped>
+.isimg{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  background: #fff;
+  >div{
+    background: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    font-size: 50px;
+    color: rgba(97,165,255,.7);
+  }
+}
   .images {
     width: 100%;
     height: 100%;
@@ -204,6 +242,14 @@
         .img-div {
           width: 100%;
           height: 129px;
+          display: flex;    background: #f2f2f2;
+          justify-content: center;
+          align-items: center;
+          .skeleton-goods-img-icon{
+            
+  color: rgba(97,165,255,.7);
+    font-size: 50px;
+}
         }
 
         .View_goodsTitle_1oYUy {

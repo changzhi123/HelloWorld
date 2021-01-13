@@ -1,17 +1,40 @@
 <template>
-  <div class="plainTextBlock">plainTextBlock</div >
+<!-- 纯文本 -->
+  <div class="plainTextBlock" :style="`width:${styles.width||'100%'};height:${styles.height||'200px'};`">
+     <h2 :style="`line-height:${styles.height||'200px'};color:${styles.color||'#000'};`"> {{objlist.name}} </h2>
+  </div >
 </template>
 
 <script>
 export default {
-name:'plainTextBlock'
+name:'plainTextBlock',
+data(){
+  return{
+    objlist:{
+      name:' 超值进口新发现 '
+    }
+  }
+},
+props:{
+   styles: {
+        type: Object,
+        value: {}
+      }
+},
+methods:{}
 }
 </script>
 <style lang="scss" scoped>
 .plainTextBlock{
-  height: 100px;
-  width: 100%;
-  background: #f90;
+  // height: 100px;
+  // width: 100%;
+  background: #fff;
+  >h2{
+    height: 100%;
+    text-align: center;
+    font-size: 38px;
+    font-weight: 700;
+  }
 }
 
 </style>

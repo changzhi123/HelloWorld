@@ -125,10 +125,11 @@ const tools = [
             icon: 'el-icon-notebook-1',
            componentPack:'plainTextBlock',
            styles:{
-            width:'',
-            height:''
+            width:'900px',
+            height:'70px',
+            color:'#58bc58'
            },
-           arrData:[ ],
+           arrData:[],
            objData:{}
         }]
     },
@@ -143,8 +144,8 @@ const tools = [
             icon: 'el-icon-s-goods',
             componentPack: 'AllGoodsList',
             styles:{
-                width:'',
-                height:''
+                width:'900px',
+                height:'500px'
                },
                arrData:[ ],
                objData:{}
@@ -156,8 +157,8 @@ const tools = [
             icon: 'el-icon-s-goods',
            componentPack: 'RecommendedGoodsList',
            styles:{
-            width:'',
-            height:''
+            width:'900px',
+            height:'270px'
            },
            arrData:[ ],
            objData:{}
