@@ -1,7 +1,8 @@
 <template>
 <!-- 纯文本 -->
   <div class="plainTextBlock" :style="`width:${styles.width||'100%'};height:${styles.height||'200px'};`">
-     <h2 :style="`line-height:${styles.height||'200px'};color:${styles.color||'#000'};`"> {{objlist.name}} </h2>
+     <h2 :style="`line-height:${styles.height||'200px'};color:${styles.color||'#000'};
+     font-size:${styles.size||'38px'};`">{{objList.text}}</h2>
   </div >
 </template>
 
@@ -10,15 +11,17 @@ export default {
 name:'plainTextBlock',
 data(){
   return{
-    objlist:{
-      name:' 超值进口新发现 '
-    }
+    
   }
 },
 props:{
    styles: {
         type: Object,
         value: {}
+      },
+      objList:{
+        type:Object,
+        value:{}
       }
 },
 methods:{}
@@ -32,7 +35,6 @@ methods:{}
   >h2{
     height: 100%;
     text-align: center;
-    font-size: 38px;
     font-weight: 700;
   }
 }

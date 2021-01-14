@@ -249,7 +249,7 @@ export function deepCopy(data,obj={}){
     if (type == "[object Array]") {
       obj[key] = [...data[key]]; //判断是不是数组，是直接拷贝
     } else if (type == "[object Object]") {
-      obj[key] = this.deepCopy(data[key], obj[key]); //对象重复调用函数，深度循环
+      obj[key] = deepCopy(data[key], obj[key]); //对象重复调用函数，深度循环
     } else {
       obj[key] = data[key]; //普通值，直接拷贝,函数不用处理直接拷贝
     }

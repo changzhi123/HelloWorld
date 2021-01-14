@@ -10,13 +10,13 @@
     <span>全部商品</span>
   </div>
     <div
-      v-for="(item, index) in obj"
+      v-for="(item, index) in arrList"
       :key="index"
       class="boximg"
       :style="`height:calc(${styles.height || '500px'} / 2);`"
     >
       <div class="imglist">
-        <img :src="item.img" v-if="item.img" alt="" />
+        <img :src="item.imgurl" v-if="item.imgurl" alt="" />
         <div class="imgopen" v-else>
           <Icon type="ios-basket" /></div>
       </div>
@@ -33,30 +33,7 @@ export default {
   name: "AllGoodsList",
   data() {
     return {
-      img:
-        "https://gw.alicdn.com/bao/uploaded/i1/748159429/O1CN01xeiYck2JWX37gKDJk_!!2-item_pic.png",
-      obj: [
-        {
-          img:
-            "https://gw.alicdn.com/bao/uploaded/i1/748159429/O1CN01xeiYck2JWX37gKDJk_!!2-item_pic.png",
-          text: "商品标题，可以结合具体业务活动商品数据",
-          price: "69.8",
-        },
-        {
-          img:
-            "https://gw.alicdn.com/bao/uploaded/i1/748159429/O1CN01xeiYck2JWX37gKDJk_!!2-item_pic.png",
-          text: "商品标题，可以结合具体业务活动商品数据",
-          price: "69.8",
-        },
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-      ],
+      
     };
   },
   props: {
@@ -64,6 +41,10 @@ export default {
       type: Object,
       value: {},
     },
+    arrList:{
+      type:Array,
+      value:[]
+    }
   },
   methods: {},
 };

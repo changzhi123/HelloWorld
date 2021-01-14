@@ -10,7 +10,7 @@
       <span>推荐商品</span>
     </div>
     <div class="main">
-      <template v-for="(item, index) in obj">
+      <template v-for="(item, index) in arrList">
         <div :key="index" class="box-mian">
           <div class="imgtab">
             <img class="imglist" v-if="item.imgurl" :src="item.imgurl" alt="">
@@ -33,13 +33,7 @@ export default {
   name: "RecommendedGoodsList",
   data() {
     return {
-      obj:[
-        {
-          imgurl:'https://gw.alicdn.com/bao/uploaded/i1/2105113961/O1CN01C6b1kj1f8BJxju0i4_!!0-item_pic.jpg',
-          text:'商品标题，可以结合具体业务活动商品数据',
-          price:'69.8 '
-        },{},{},{},{}
-      ]
+     
     };
   },
   props: {
@@ -47,6 +41,10 @@ export default {
       type: Object,
       value: {},
     },
+    arrList:{
+      type:Array,
+      value:[]
+    }
   },
   methods: {},
 };

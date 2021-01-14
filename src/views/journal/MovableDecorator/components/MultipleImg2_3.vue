@@ -7,7 +7,7 @@
     }`"
   >
     <div class="tab-a">
-      <template v-for="(item, index) in imglist">
+      <template v-for="(item, index) in arrList">
         <div class="box-a" :key="index" v-if="index == 0">
           <img class="images" :src="item.imgurl" alt="" v-if="item.imgurl" />
           <div v-else class="View_imgItem_3Lvk6">
@@ -25,7 +25,7 @@
      
     </div>
     <div class="tab-b">
-      <template v-for="(item, index) in imglist">
+      <template v-for="(item, index) in arrList">
         <div :key="index" v-if="index != 0 && index != 1">
           <img class="images" :src="item.imgurl" v-if="item.imgurl" alt="" />
           <div v-else class="View_imgItem_3Lvk6">
@@ -42,28 +42,7 @@ export default {
   name: "MultipleImg2_3",
   data() {
     return {
-      imglist: [
-        {
-          imgurl:
-            "https://img.alicdn.com/tps/i4/TB1y4tuOxz1gK0jSZSgSuuvwpXa.jpg_500x1000q75s0.jpg_.webp",
-        },
-        {
-          imgurl:
-            "https://img.alicdn.com/tps/i4/TB1Q2Mnd2zO3e4jSZFxwu1P_FXa.png_500x1000q75.jpg_.webp",
-        },
-        {
-          imgurl:
-            "https://gw.alicdn.com/tfs/TB1xVR9oFP7gK0jSZFjXXc5aXXa-468-602.jpg",
-        },
-        {
-          imgurl: "",
-          //"https://gw.alicdn.com/tfs/TB1xVR9oFP7gK0jSZFjXXc5aXXa-468-602.jpg",
-        },
-        {
-          imgurl:
-            "https://img.alicdn.com/bao/uploaded/i3/2781891994/O1CN01usHqqQ1QbILCMqrJm_!!2781891994.jpg",
-        },
-      ],
+     
     };
   },
   props: {
@@ -71,6 +50,10 @@ export default {
       type: Object,
       value: {},
     },
+    arrList:{
+      type:Array,
+      value:[]
+    }
   },
   methods: {},
 };

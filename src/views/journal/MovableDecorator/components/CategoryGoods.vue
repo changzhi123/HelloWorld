@@ -3,31 +3,33 @@
   <div class="CategoryGoods" :style="`width:${styles.width||'100%'};height:${styles.height||'200px'};`">
     <div class="tab">
       <i class="View_colorMark_rhgAb"></i>
-      <span class="View_title_2mual">{{imglist.slogan}}</span>
-      <span class="View_subTitle_27eKa">{{imglist.text}}</span>
+      <span class="View_title_2mual">{{objList.slogan}}</span>
+      <span class="View_subTitle_27eKa">{{objList.text}}</span>
     </div>
     <div class="main">
       <div class="main-a">
-        <img class="images" v-if="imglist.imgurl" :src="imglist.imgurl" alt="">
+        <img class="images" v-if="objList.imgurl" :src="objList.imgurl" alt="">
         <div class="isimg" v-else>
           <div><Icon type="md-image" /></div>
         </div>
         <div class="View_bannerText_2SLqV">
-          <span class="View_bannerTitle_1gQsW">{{imglist.advertising}}</span>
-          <span class="View_bannerSubTitle_2K3Zh">{{imglist.toAdvertising}}</span>
+          <span class="View_bannerTitle_1gQsW">{{objList.advertising}}</span>
+          <span class="View_bannerSubTitle_2K3Zh">{{objList.toAdvertising}}</span>
           </div>
           <div class="icon-trxxt">
             <img class="images" src="https://img.alicdn.com/tfs/TB1IQBtXaagSKJjy0FbXXa.mVXa-68-68.png" alt="">
           </div>
       </div>
       <div class="main-b">
-        <div v-for="(item,index) in imglist.data" :key="index" class="tab-img">
+        <div v-for="(item,index) in objList.data" :key="index" class="tab-img">
           <div class="img-div">
             <img class="images" v-if="item.imgurl" :src="item.imgurl" alt="">
              <Icon v-else type="ios-basket" class="skeleton-goods-img-icon" />
           </div>
-          <div class="View_goodsTitle_1oYUy"> {{item.text}} </div>
-          <div class="View_goodsPrice_1uqZX"> ￥{{item.price}}</div>
+          <div class="View_goodsTitle_1oYUy" v-if="item.text"> {{item.text}} </div>
+          <div class="tomain" v-else></div>
+          <div class="View_goodsPrice_1uqZX" v-if="item.price"> ￥{{item.price}}</div>
+          <div class="tofoot" v-else></div>
         </div>
       </div>
     </div>
@@ -39,66 +41,37 @@
     name: 'CategoryGoods',
     data() {
       return {
-        imglist: {
-          imgurl: '',//'https://img.alicdn.com/tps/i4/TB1MesKcWmWQ1JjSZPhwu0CJFXa.png',
-          slogan: '打造爱巢',
-          text: 'HOME',
-          advertising:'广告位',
-          toAdvertising:"广告位副标题",
-          data: [{
-              imgurl: '',//'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
-              text:'商品标题，可以结合具体业务活动商品数据',
-              price:'69.8'
-            },
-            {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
-               text:'商品标题，可以结合具体业务活动商品数据',
-              price:'69.8'
-            },
-            {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
-               text:'商品标题，可以结合具体业务活动商品数据',
-              price:'69.8'
-            },
-            {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
-               text:'商品标题，可以结合具体业务活动商品数据',
-              price:'69.8'
-            },
-            {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
-               text:'商品标题，可以结合具体业务活动商品数据',
-              price:'69.8'
-            },
-            {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
-               text:'商品标题，可以结合具体业务活动商品数据',
-              price:'69.8'
-            },
-            {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
-               text:'商品标题，可以结合具体业务活动商品数据',
-              price:'69.8'
-            },
-            {
-              imgurl: 'https://gw.alicdn.com/bao/uploaded/i3/3243519086/O1CN016gQ0Ia2GzR82IAhdR_!!0-item_pic.jpg',
-               text:'商品标题，可以结合具体业务活动商品数据',
-              price:'69.8'
-            }
-          ]
-        }
+       
+        
       }
     },
     props: {
       styles: {
         type: Object,
         value: {}
+      },
+      objList:{
+        type:Object,
+        value:{}
       }
     },
     methods: {}
   }
 </script>
 <style lang="scss" scoped>
+.tofoot{
+  
+          margin: 10px auto;
+          height: 18px;
+          width: 100%;
+          background: #f2f2f2;
+}
+.tomain{
+  height: 40px;
+  width: 100%;background: #f2f2f2;
+  
+          margin: 8px auto;
+}
 .isimg{
   width: 100%;
   height: 100%;
