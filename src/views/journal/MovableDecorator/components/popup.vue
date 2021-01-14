@@ -48,7 +48,7 @@ export default {
     width: 35px;
     top: 0;
     text-align: center;
-    border: solid #ccc 1px;
+    // border: solid #ccc 1px;
     background: #fff;
     .tab{
         width: 100%;
