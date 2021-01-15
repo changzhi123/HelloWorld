@@ -36,13 +36,17 @@ export default {
     };
   },
   props: {
-    styles: {
+   styles: {
       type: Object,
-      value: {},
+      default:()=>({}),
     },
     arrList:{
       type:Array,
-      value:[]
+      default:()=>([]),
+    },
+    objList:{
+        type: Object,
+      default:()=>({}),
     }
   },
   methods: {},

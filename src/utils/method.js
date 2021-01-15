@@ -272,7 +272,7 @@ export function deepCopy(data,obj={}){
   Object.prototype.toString.call(window) ; //[object global] window 是全局对象 global 的引用
   */
 }
-//## 素组排序
+//## 数组排序
 export function sortMap (key)  {
   return (a, b) => {
     let a_item = a[key] || a,b_item = b[key] || b;

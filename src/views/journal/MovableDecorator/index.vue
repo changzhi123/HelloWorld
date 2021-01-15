@@ -40,20 +40,19 @@
         ghostClass="ghostClass"
         class="main-box"
         v-model="list"
-        @end="End" 
+        @end="End"  
         @choose='choose'
         @change="handleDragChange"
       >
-        <transition-group>
+        <transition-group >
           <component
             v-for="(item, index) in list"
             :key="index"
-            class="mian-form"
+            :class="{'mian-form':true,'main-put':objIndex==index}"
             :is="item.componentPack"
             :styles="item.styles"
             :objList='item.objList'
             :arrList='item.arrList'
-            :ref='item.refName'
           >
             <!--  :is="item.componentPack"  动态渲染组件 -->
           </component>
@@ -62,13 +61,14 @@
 
       <el-button @click="open" >测试</el-button>
     </div>
+    <popup ref="popups"  :data='data'  :objIndex='objIndex' @delList='delList' @setRank='setRank'></popup>
   </div>
 </template>
 <script>
 import draggable from "vuedraggable";
 import tools from "./tools";
-import {deepCopy} from '@/utils/method'
-import { vec4 } from 'gl-matrix';
+import {deepCopy,sortMap} from '@/utils/method'
+// import popup from './components/popup'
 export default {
   components: {
     draggable,
@@ -82,12 +82,16 @@ export default {
     RecommendedGoodsList: () => import("./components/RecommendedGoodsList"),
     AllGoodsList: () => import("./components/AllGoodsList"),
     Coupon: () => import("./components/Coupon"),
+    popup:()=>import('./components/popup')
   },
   data() {
     return {
       isName: "itxst", //原始数据的id
       list: [], //已渲染的组件集合
       setObj: {}, //记录组件已经渲染的重复次数
+      data:{},//打开弹窗组件的数据
+      objIndex:null,//打开弹窗的组件index
+      isOpen:true,//是否可以打开弹窗
     };
   },
   computed: {
@@ -114,38 +118,79 @@ export default {
   watch: {
     list(val) {
       this.setObj = {};
-      this.list.filter((item) => {
+      const length=this.list.length
+      this.list.filter((item,index) => {
         //更新记录组件已经渲染的数量
+        // console.log(index,'index')
+          item['index']=index//渲染素组的index
+          item['length']=length//渲染数组的length
+          if(item.isOpenType)this.objIndex=index//更新打开弹窗的组件的index
         // console.log(item.componentPack,'item')
         this.setObj[item.componentPack]
           ? (this.setObj[item.componentPack] += 1)
           : (this.setObj[item.componentPack] = 1);
       });
-      console.log(val,'val', this.setObj)
+      // console.log(val,'list更新了', this.setObj)
     },
   },
   mounted() {},
   methods: {
+    setRank(type,index){//弹窗排序
+      const num=type?index-1:index+1
+      if(type){//向上排序
+        this.list[index].index=num
+         this.list[num].index=index
+       
+      }else{//向下排序
+         this.list[index].index=num
+         this.list[num].index=index
+      }
+      this.list.sort((a,b)=>{
+         return a['index']-b['index']
+      })
+      this.objIndex=num//更新弹窗里面的index
+      // console.log(this.list,'this.list')
+    },
+    delList(key){//移除某一个组件
+      this.list.splice(key,1)
+    },
     choose(e){//被点击的
-      const idnex=e.oldIndex
-      const refName=this.list[idnex].refName
-      // console.log(idnex,'被点击的',this.list[idnex],refName,this.$refs)
-      this.$refs[refName][0].setOpenType()//特殊渲染组件，所以需要多解构一次[0]
+      const key=e.oldIndex
+      const{title,length}=this.list[key]
+      this.data['title']=title
+      
+      this.objIndex=key
+      this.data['length']=length
+      const _this=this
+      setTimeout(function(){
+         if(_this.isOpen){//异步处理拖动会打开弹窗bug，研制300 
+           _this.$refs.popups.setOpen(true)
+         }
+      },300);
+      this.list.filter((item,index)=>{
+         item.isOpenType=key==index?true:false//更新组件弹窗状态，true为打开 
+      })
+      console.log(key,'被点击的',this.list[key])
+      //this.$refs.[refName][0].$el.getBoundingClientRect() 获取组件元素样式的方法
     },
     setDialog(){
       console.log('选择弹窗')
     },
-    End() {
+    End(e) {
       this.isName = "itxst"; //修改回原始数据的id，避免无法往右拖
-      console.log('结束')
+      // console.log('结束拖动')
+      this.isOpen=true//选择拖动不能打开弹窗
     },
     Start() {
       this.isName = "reqitxst"; //修改原始数据id避免组件往回拖
-       console.log('开始')
+      //  console.log('开始拖动')
+       this.isOpen=false//拖动完成，可以开启打开弹窗权限
     },
     handleDragChange(e) {
-      //console.log(e.added.element,'list收到',e)//给新增过来的数据增加独一无二的ref，方便数据操作
-      e.added.element['refName']=`${e.added.element.componentPack}${new Date().getTime()}`
+      // const itme=new Date().getTime()
+      // const refName=`${e.added.element.componentPack}${itme}`
+      // e.added.element['refName']=refName
+      // console.log(e.added.element,'list收到',e,refName,this.list)//给新增过来的数据增加独一无二的ref，方便数据操作
     },
     onMove(e, originalEvent) {
       // const {maxNum,nowNum}=e.draggedContext.element
@@ -163,12 +208,16 @@ export default {
       // console.log(e, "onStart");
     },
     open() {
-      console.log(tools,this.objlist, "测试", this.list, this.setObj, this.obj);
+      console.log(tools,this.objlist, "测试", this.list, this.setObj, );
     },
   },
 };
 </script>
 <style lang="scss" scoped>
+.main-put{
+  box-shadow: inset 0 0 5px 3px #2b9939;
+  
+}
 $heide: calc(100vh - 84px);
 $tab-width: 300px;
 .disabled {

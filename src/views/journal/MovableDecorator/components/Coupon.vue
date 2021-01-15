@@ -19,11 +19,15 @@ export default {
   props: {
       styles: {
       type: Object,
-      value: {},
+      default:()=>({}),
+    },
+    arrList:{
+      type:Array,
+      default:()=>([]),
     },
     objList:{
-      type:Object,
-      value:{}
+        type: Object,
+      default:()=>({}),
     }
   },
   methods: {},

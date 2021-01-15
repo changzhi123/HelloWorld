@@ -84,12 +84,16 @@ export default {
   props: {
     styles: {
       type: Object,
-      value: {},
+      default:()=>({}),
     },
-    objList: {
-      type: Object,
-      value: {},
+    arrList:{
+      type:Array,
+      default:()=>([]),
     },
+    objList:{
+        type: Object,
+      default:()=>({}),
+    }
   },
   methods: {},
 };
@@ -98,7 +102,8 @@ export default {
 <style lang="scss" scoped>
 .FlashSaleGoodsList {
   // height: 100px;
-  // width: 100%;
+  // width: 100%; 
+  
   display: flex;
   background: #fff;
 

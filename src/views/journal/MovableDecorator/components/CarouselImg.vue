@@ -21,18 +21,14 @@
       </CarouselItem>
     </Carousel>
     <!-- <div class="open-list"></div> -->
-    <popup ref="popups" >
-       <div style="height:200px"></div>
-    </popup>
+ 
   </div>
 </template>
 
 <script>
-import popup from './popup'
 export default {
   name: "CarouselImg",
   components:{
-    popup
   },
   data() {
     return {
@@ -47,21 +43,25 @@ export default {
      
     };
   },
+ 
   props: {
-    styles: {
+  
+ styles: {
       type: Object,
-      value: {},
+      default:()=>({}),
     },
     arrList:{
       type:Array,
-      value:[]
+      default:()=>([]),
     },
+    objList:{
+        type: Object,
+      default:()=>({}),
+    }
    
   },
   methods:{
-    setOpenType(){
-      this.$refs.popups.setOpen(true)
-    }
+   
   },
 };
 </script>

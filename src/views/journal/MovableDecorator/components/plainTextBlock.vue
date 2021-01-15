@@ -15,14 +15,18 @@ data(){
   }
 },
 props:{
-   styles: {
+    styles: {
+      type: Object,
+      default:()=>({}),
+    },
+    arrList:{
+      type:Array,
+      default:()=>([]),
+    },
+    objList:{
         type: Object,
-        value: {}
-      },
-      objList:{
-        type:Object,
-        value:{}
-      }
+      default:()=>({}),
+    }
 },
 methods:{}
 }

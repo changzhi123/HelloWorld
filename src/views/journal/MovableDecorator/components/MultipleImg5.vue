@@ -20,14 +20,18 @@ data(){
   }
 },
 props:{
- styles: {
-        type: Object,
-        value: {}
-      },
-        arrList: {
-      type: Array,
-      value: [],
+  styles: {
+      type: Object,
+      default:()=>({}),
     },
+    arrList:{
+      type:Array,
+      default:()=>([]),
+    },
+    objList:{
+        type: Object,
+      default:()=>({}),
+    }
 },
 methods:{
 

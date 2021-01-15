@@ -19,7 +19,7 @@ const tools = [
             parent: '1',
             icon: "ios-image",//'el-icon-picture',
             componentPack: 'CarouselImg',
-            // isOpenType:true,
+            isOpenType:false,
             styles: {
                 width: '',
                 height: ''
