@@ -1,12 +1,7 @@
 
 
 /**
- * hidden 隐藏，不显示在工具栏
- * maxNum Number 最大可配置数
- * topDisplay Bool 最顶部显示
- * bottomDisplay Bool 最底部显示
- * onlyCanConfig Bool 是否只能配置数据，不能删除 copy
- * @type {*[]}
+
  */
 const tools = [
     {
@@ -21,7 +16,7 @@ const tools = [
             componentPack: 'CarouselImg',
             isOpenType:false,
             styles: {
-                width: '',
+                width: '1360px',//最多不能超过1368px
                 height: ''
             },
             arrList: [
@@ -165,11 +160,11 @@ const tools = [
             styles: {
                 width: '900px',
                 height: '70px',
-                color: '#58bc58',
-                size: '37px'
             },
             arrList: [],
             objList: {
+                color: '#58bc58',
+                size: '37px',
                 text: '超值进口新发现'
             }
         }]

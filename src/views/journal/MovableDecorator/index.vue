@@ -82,7 +82,7 @@ export default {
     RecommendedGoodsList: () => import("./components/RecommendedGoodsList"),
     AllGoodsList: () => import("./components/AllGoodsList"),
     Coupon: () => import("./components/Coupon"),
-    popup:()=>import('./components/popup')
+    popup:()=>import('./components/popup'),//弹窗
   },
   data() {
     return {
