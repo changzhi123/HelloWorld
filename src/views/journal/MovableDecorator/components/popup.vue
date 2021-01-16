@@ -6,9 +6,9 @@
     footer-hide  
     :closable="true"
     draggable  
+    :styles="{left:'-300px',top:'150px'}"
     :title="list.title"
   >
-    <!-- <slot></slot> -->
     <div class="open-box">
       <div class="footer">
         <Button @click="setOpen(false)">取消</Button>
