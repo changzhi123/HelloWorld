@@ -2,8 +2,8 @@
   <!-- 秒杀商品 -->
   <div
     class="FlashSaleGoodsList"
-    :style="`width:${styles.width || '100%'};height:${
-      styles.height || '200px'
+    :style="`width:${objList.width || '100%'};height:${
+      objList.height || '200px'
     };`"
   >
     <div
@@ -82,14 +82,7 @@ export default {
     };
   },
   props: {
-    styles: {
-      type: Object,
-      default:()=>({}),
-    },
-    arrList:{
-      type:Array,
-      default:()=>([]),
-    },
+   
     objList:{
         type: Object,
       default:()=>({}),

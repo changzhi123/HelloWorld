@@ -2,18 +2,18 @@
   <!-- 多图(1-3) -->
   <div
     class="MultipleImg1_3"
-    :style="`width:${styles.width || '100%'};height:${
-      styles.height || '200px'
+    :style="`width:${objList.width || '100%'};height:${
+      objList.height || '200px'
     };`"
   >
     <div>
-      <img class="images"  v-if="arrList[0].imgurl" :src="arrList[0].imgurl" alt="" />
+      <img class="images"  v-if="objList.data[0].imgurl" :src="objList.data[0].imgurl" alt="" />
       <div class="imgset" v-else>
             <Icon type="md-image" />
       </div>
     </div>
     <div class="imglist">
-      <template v-for="(item, index) in arrList">
+      <template v-for="(item, index) in objList.data">
         <div :key="index" v-if="index!=0">
           <img class="images" :src="item.imgurl" v-if="item.imgurl" alt="" />
           <div class="imgset" v-else>
@@ -36,14 +36,7 @@ export default {
     };
   },
   props: {
-   styles: {
-      type: Object,
-      default:()=>({}),
-    },
-    arrList:{
-      type:Array,
-      default:()=>([]),
-    },
+  
     objList:{
         type: Object,
       default:()=>({}),

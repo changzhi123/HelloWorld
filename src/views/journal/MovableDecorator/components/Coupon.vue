@@ -1,6 +1,6 @@
 <template>
   <!-- 优惠券 -->
-  <div class="Coupon" :style="`width:${styles.width||'100%'};height:${styles.height||'200px'}`">
+  <div class="Coupon" :style="`width:${objList.width||'100%'};height:${objList.height||'200px'}`">
      <img v-if="objList.imgurl" class="imglist" :src="objList.imgurl" alt="">
      <div v-else class="foot">
        <Icon type="md-barcode" />
@@ -17,14 +17,7 @@ export default {
     };
   },
   props: {
-      styles: {
-      type: Object,
-      default:()=>({}),
-    },
-    arrList:{
-      type:Array,
-      default:()=>([]),
-    },
+    
     objList:{
         type: Object,
       default:()=>({}),

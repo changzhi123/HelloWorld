@@ -2,15 +2,15 @@
   <!-- 推荐商品 -->
   <div
     class="RecommendedGoodsList"
-    :style="`width:${styles.width || '100%'};height:${
-      styles.height || '200px'
+    :style="`width:${objList.width || '100%'};height:${
+      objList.height || '200px'
     }`"
   >
     <div class="text">
       <span>推荐商品</span>
     </div>
     <div class="main">
-      <template v-for="(item, index) in arrList">
+      <template v-for="(item, index) in objList.data">
         <div :key="index" class="box-mian">
           <div class="imgtab">
             <img class="imglist" v-if="item.imgurl" :src="item.imgurl" alt="">
@@ -37,14 +37,7 @@ export default {
     };
   },
   props: {
-     styles: {
-      type: Object,
-      default:()=>({}),
-    },
-    arrList:{
-      type:Array,
-      default:()=>([]),
-    },
+    
     objList:{
         type: Object,
       default:()=>({}),

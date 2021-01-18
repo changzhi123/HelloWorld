@@ -15,30 +15,29 @@ const tools = [
             icon: "ios-image",//'el-icon-picture',
             componentPack: 'CarouselImg',
             isOpenType:false,
-            styles: {
-                width: '1360px',//最多不能超过1368px
-                height: ''
-            },
-            arrList: [
-                {
-                    imgurl: "https://gjusp.alicdn.com/img/img1550568121854-2927159970.jpg@1000y-0ic_50Q.jpg_.webp",
-                    name: ''
-                },
-                {
-                    imgurl: "https://gw.alicdn.com/tfs/TB1DKP9zCtYBeNjSspkXXbU8VXa-1920-450.jpg_Q90.jpg",
-                    name: ''
-                },
-                {
-                    imgurl: "https://gw.alicdn.com/tfs/TB1DKP9zCtYBeNjSspkXXbU8VXa-1920-450.jpg_Q90.jpg",
-                    name: ''
-                },
-                {
-                    imgurl: "https://gjusp.alicdn.com/img/img1550568121854-2927159970.jpg@1000y-0ic_50Q.jpg_.webp",
-                    name: ''
-                }
-
-            ],
-            objList: {}
+           
+            objList: {
+                width:'1360px',
+                height:'',
+                data:[
+                    {
+                        imgurl: '',//"https://gjusp.alicdn.com/img/img1550568121854-2927159970.jpg@1000y-0ic_50Q.jpg_.webp",
+                        name: '',
+                    },
+                    {
+                        // imgurl: "https://gw.alicdn.com/tfs/TB1DKP9zCtYBeNjSspkXXbU8VXa-1920-450.jpg_Q90.jpg",
+                        // name: ''
+                    },
+                    {
+                        // imgurl: "https://gw.alicdn.com/tfs/TB1DKP9zCtYBeNjSspkXXbU8VXa-1920-450.jpg_Q90.jpg",
+                        // name: ''
+                    },
+                    {
+                        // imgurl: "https://gjusp.alicdn.com/img/img1550568121854-2927159970.jpg@1000y-0ic_50Q.jpg_.webp",
+                        // name: ''
+                    }
+                ]
+            }
         }, {
             title: '秒杀商品',
             maxNum: 3,
@@ -46,12 +45,9 @@ const tools = [
             parent: '1',
             icon: 'ios-alarm',// 'el-icon-picture',
             componentPack: 'FlashSaleGoodsList',
-            styles: {
-                width: '900px',
-                height: ''
-            },
-            arrList: [],
             objList: {
+                width: '900px',
+                height: '',
                 imgurl: "",
                 backgroundImage:
                     "https://misc.360buyimg.com/mtd/pc/index_2019/1.0.0/assets/img/4a15d8883775742e3efbb850ae14def7.png",
@@ -78,18 +74,17 @@ const tools = [
             parent: '1',
             icon: 'ios-images',// 'el-icon-picture',
             componentPack: 'MultipleImg5',
-            styles: {
+            
+            objList: {
                 width: '900px',
-                height: ''
-            },
-            arrList: [
-                {
+                height: '',
+                data:[{
                     imgurl: 'https://img.alicdn.com/tps/i4/TB1y4tuOxz1gK0jSZSgSuuvwpXa.jpg_500x1000q75s0.jpg_.webp',
                     name: ''
                 },
-                {}, {}, {}, {}
-            ],
-            objList: {}
+                {}, {}, {}, {}]
+                
+            }
         }, {
             title: '多图(2-3)',
             maxNum: 10,
@@ -97,16 +92,16 @@ const tools = [
             parent: '1',
             icon: 'ios-images',//'el-icon-s-grid',
             componentPack: 'MultipleImg2_3',
-            styles: {
+           
+            objList: {
                 width: '900px',
-                height: '550px'
-            },
-            arrList: [
-                {
-                    imgurl: 'https://gw.alicdn.com/tfs/TB1xVR9oFP7gK0jSZFjXXc5aXXa-468-602.jpg', name: ''
-                }, {}, {}, {}, {}
-            ],
-            objList: {}
+                height: '550px',
+                data:[
+                    {
+                        imgurl: 'https://gw.alicdn.com/tfs/TB1xVR9oFP7gK0jSZFjXXc5aXXa-468-602.jpg', name: ''
+                    }, {}, {}, {}, {}
+                ]
+            }
         }, {
             title: '多图(1-3)',
             maxNum: 10,
@@ -114,16 +109,16 @@ const tools = [
             parent: '1',
             icon: 'ios-images',//'el-icon-s-grid',
             componentPack: 'MultipleImg1_3',
-            styles: {
+          
+            objList: {
                 width: '900px',
-                height: '550px'
-            },
-            arrList: [
-                {
-                    imgurl: 'https://gw.alicdn.com/tfs/TB1xVR9oFP7gK0jSZFjXXc5aXXa-468-602.jpg', name: ''
-                }, {}, {}, {}
-            ],
-            objList: {}
+                height: '550px',
+                data:[
+                    {
+                        imgurl: 'https://gw.alicdn.com/tfs/TB1xVR9oFP7gK0jSZFjXXc5aXXa-468-602.jpg', name: ''
+                    }, {}, {}, {}
+                ]
+            }
         }, {
             title: '分类管区',
             maxNum: 10,
@@ -131,12 +126,9 @@ const tools = [
             nowNum: 0,
             icon: 'ios-apps',//'el-icon-s-grid',
             componentPack: 'CategoryGoods',
-            styles: {
-                width: '900px',
-                height: '550px'
-            },
-            arrList: [],
             objList: {
+                width: '900px',
+                height: '550px',
                 imgurl: '',//'https://img.alicdn.com/tps/i4/TB1MesKcWmWQ1JjSZPhwu0CJFXa.png',
                 slogan: '打造爱巢',
                 text: 'HOME',
@@ -157,12 +149,10 @@ const tools = [
             nowNum: 0,
             icon: 'ios-paper',//'el-icon-notebook-1',
             componentPack: 'plainTextBlock',
-            styles: {
+           
+            objList: {
                 width: '900px',
                 height: '70px',
-            },
-            arrList: [],
-            objList: {
                 color: '#58bc58',
                 size: '37px',
                 text: '超值进口新发现'
@@ -179,20 +169,19 @@ const tools = [
             nowNum: 0,
             icon: 'md-appstore', //'el-icon-s-goods',
             componentPack: 'AllGoodsList',
-            styles: {
+           
+            objList: {
                 width: '900px',
-                height: '500px'
-            },
-            arrList: [
-                {
-                    imgurl:
-                        "https://gw.alicdn.com/bao/uploaded/i1/748159429/O1CN01xeiYck2JWX37gKDJk_!!2-item_pic.png",
-                    text: "商品标题，可以结合具体业务活动商品数据",
-                    price: "69.8",
-                },
-                {}, {}, {}, {}, {}, {}, {}, {}, {},
-            ],
-            objList: {}
+                height: '500px',data:[
+                    {
+                        imgurl:
+                            "https://gw.alicdn.com/bao/uploaded/i1/748159429/O1CN01xeiYck2JWX37gKDJk_!!2-item_pic.png",
+                        text: "商品标题，可以结合具体业务活动商品数据",
+                        price: "69.8",
+                    },
+                    {}, {}, {}, {}, {}, {}, {}, {}, {},
+                ]
+            }
         }, {
             title: '推荐商品',
             parent: '2',
@@ -200,18 +189,17 @@ const tools = [
             nowNum: 0,
             icon: 'md-cart',//'el-icon-s-goods',
             componentPack: 'RecommendedGoodsList',
-            styles: {
+           
+            objList: {
                 width: '900px',
-                height: '270px'
-            },
-            arrList: [
-                {
-                    imgurl: 'https://gw.alicdn.com/bao/uploaded/i1/2105113961/O1CN01C6b1kj1f8BJxju0i4_!!0-item_pic.jpg',
-                    text: '商品标题，可以结合具体业务活动商品数据',
-                    price: '69.8 '
-                }, {}, {}, {}, {}
-            ],
-            objList: {}
+                height: '270px',data:[
+                    {
+                        imgurl: 'https://gw.alicdn.com/bao/uploaded/i1/2105113961/O1CN01C6b1kj1f8BJxju0i4_!!0-item_pic.jpg',
+                        text: '商品标题，可以结合具体业务活动商品数据',
+                        price: '69.8 '
+                    }, {}, {}, {}, {}
+                ]
+            }
         }]
     },
     {
@@ -224,12 +212,9 @@ const tools = [
             nowNum: 0,
             icon: 'md-barcode',//'el-icon-s-ticket',
             componentPack: 'Coupon',
-            styles: {
-                width: '900px',
-                height: '150px'
-            },
-            arrList: [],
             objList: {
+                width: '900px',
+                height: '150px',
                 imgurl: ''
             }
         }]

@@ -50,9 +50,7 @@
             :key="index"
             :class="{'mian-form':true,'main-put':objIndex==index}"
             :is="item.componentPack"
-            :styles="item.styles"
             :objList='item.objList'
-            :arrList='item.arrList'
           >
             <!--  :is="item.componentPack"  动态渲染组件 -->
           </component>
@@ -61,13 +59,14 @@
 
       <el-button @click="open" >测试</el-button>
     </div>
-    <popup ref="popups"  :data='data'  :objIndex='objIndex' @delList='delList' @setRank='setRank'></popup>
+    <popup ref="popups"  :data='data' @setAmend='setAmend' :objIndex='objIndex'
+     @delList='delList' @setRank='setRank'></popup>
   </div>
 </template>
 <script>
 import draggable from "vuedraggable";
 import tools from "./tools";
-import {deepCopy,sortMap} from '@/utils/method'
+import {deepCopy} from '@/utils/method'
 // import popup from './components/popup'
 export default {
   components: {
@@ -154,13 +153,19 @@ export default {
     delList(key){//移除某一个组件
       this.list.splice(key,1)
     },
+    setAmend(obj,key){//提交修改
+       console.log(obj,key,'提交修改')
+       this.list[key].objList=deepCopy(obj)
+    },
     choose(e){//被点击的
       const key=e.oldIndex
-      const{title,length}=this.list[key]
+      const{title,length,objList,componentPack}=this.list[key]
       this.data['title']=title
-      
       this.objIndex=key
+      this.data['componentPack']=componentPack
       this.data['length']=length
+      this.data['objList']=deepCopy(objList)
+     
       const _this=this
       setTimeout(function(){
          if(_this.isOpen){//异步处理拖动会打开弹窗bug，研制300 

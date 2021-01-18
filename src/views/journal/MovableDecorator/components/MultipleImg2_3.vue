@@ -2,12 +2,12 @@
   <!-- 多图(2-3) -->
   <div
     class="MultipleImg2_3"
-    :style="`width:${styles.width || '100%'};height:${
-      styles.height || '200px'
+    :style="`width:${objList.width || '100%'};height:${
+      objList.height || '200px'
     }`"
   >
     <div class="tab-a">
-      <template v-for="(item, index) in arrList">
+      <template v-for="(item, index) in objList.data">
         <div class="box-a" :key="index" v-if="index == 0">
           <img class="images" :src="item.imgurl" alt="" v-if="item.imgurl" />
           <div v-else class="View_imgItem_3Lvk6">
@@ -25,7 +25,7 @@
      
     </div>
     <div class="tab-b">
-      <template v-for="(item, index) in arrList">
+      <template v-for="(item, index) in objList.data">
         <div :key="index" v-if="index != 0 && index != 1">
           <img class="images" :src="item.imgurl" v-if="item.imgurl" alt="" />
           <div v-else class="View_imgItem_3Lvk6">
@@ -46,14 +46,7 @@ export default {
     };
   },
   props: {
-    styles: {
-      type: Object,
-      default:()=>({}),
-    },
-    arrList:{
-      type:Array,
-      default:()=>([]),
-    },
+  
     objList:{
         type: Object,
       default:()=>({}),

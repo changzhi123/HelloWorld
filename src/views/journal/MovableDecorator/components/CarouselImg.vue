@@ -2,8 +2,8 @@
   <!--  轮播 (普通数组)-->
   <div
     class="CarouselImg"
-    :style="`width:${styles.width || '100%'};height:${
-      styles.height || '200px'
+    :style="`width:${objList.width||'100%'};height:${
+      objList.height||'200px'
     };`"
   >
   <Carousel
@@ -15,7 +15,7 @@
       :trigger="setting.trigger"
       :arrow="setting.arrow"
     >
-      <CarouselItem v-for="(item, index) in arrList" :key="index" :style="`height:${styles.height || '200px'}`">
+      <CarouselItem v-for="(item, index) in objList.data" :key="index" :style="`height:${objList.height||'200px'}`">
         <img class="imags" v-if="item.imgurl" :src="item.imgurl" alt="" />
         <div v-else class="imgput"><Icon type="ios-image" /></div>
       </CarouselItem>
@@ -45,15 +45,6 @@ export default {
   },
  
   props: {
-  
- styles: {
-      type: Object,
-      default:()=>({}),
-    },
-    arrList:{
-      type:Array,
-      default:()=>([]),
-    },
     objList:{
         type: Object,
       default:()=>({}),

@@ -1,6 +1,6 @@
 <template>
   <!-- 分类管区 -->
-  <div class="CategoryGoods" :style="`width:${styles.width||'100%'};height:${styles.height||'200px'};`">
+  <div class="CategoryGoods" :style="`width:${objList.width||'100%'};height:${objList.height||'200px'};`">
     <div class="tab">
       <i class="View_colorMark_rhgAb"></i>
       <span class="View_title_2mual">{{objList.slogan}}</span>
@@ -46,14 +46,7 @@
       }
     },
     props: {
-     styles: {
-      type: Object,
-      default:()=>({}),
-    },
-    arrList:{
-      type:Array,
-      default:()=>([]),
-    },
+     
     objList:{
         type: Object,
       default:()=>({}),

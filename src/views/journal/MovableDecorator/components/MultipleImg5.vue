@@ -1,7 +1,7 @@
 <template>
 <!-- 多图(5) -->
-  <div class="MultipleImg5" :style="`width:${styles.width||'100%'};height:${styles.height||'200px'};`">
-   <div v-for="(item,index) in arrList" :key="index">
+  <div class="MultipleImg5" :style="`width:${objList.width||'100%'};height:${objList.height||'200px'};`">
+   <div v-for="(item,index) in objList.data" :key="index">
      <img :src="item.imgurl" alt="" v-if="item.imgurl">
      <div v-else class="Thereisno">
        <div class="box"><Icon type="md-image" /></div>
@@ -20,14 +20,7 @@ data(){
   }
 },
 props:{
-  styles: {
-      type: Object,
-      default:()=>({}),
-    },
-    arrList:{
-      type:Array,
-      default:()=>([]),
-    },
+ 
     objList:{
         type: Object,
       default:()=>({}),

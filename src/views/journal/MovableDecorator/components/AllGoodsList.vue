@@ -2,18 +2,18 @@
   <!-- 全部商品 -->
   <div
     class="AllGoodsList"
-    :style="`width:${styles.width || '100%'};min-height:${
-      styles.height || '500px'
+    :style="`width:${objList.width || '100%'};min-height:${
+      objList.height || '500px'
     };`"
   >
   <div class="heida">
     <span>全部商品</span>
   </div>
     <div
-      v-for="(item, index) in arrList"
+      v-for="(item, index) in objList.data"
       :key="index"
       class="boximg"
-      :style="`height:calc(${styles.height || '500px'} / 2);`"
+      :style="`height:calc(${objList.height || '500px'} / 2);`"
     >
       <div class="imglist">
         <img :src="item.imgurl" v-if="item.imgurl" alt="" />
@@ -37,14 +37,7 @@ export default {
     };
   },
   props: {
-   styles: {
-      type: Object,
-      default:()=>({}),
-    },
-    arrList:{
-      type:Array,
-      default:()=>([]),
-    },
+ 
     objList:{
         type: Object,
       default:()=>({}),
