@@ -3,12 +3,12 @@
   <div class="CategoryGoods" :style="`width:${objList.width||'100%'};height:${objList.height||'200px'};`">
     <div class="tab">
       <i class="View_colorMark_rhgAb"></i>
-      <span class="View_title_2mual">{{objList.slogan}}</span>
+      <span class="View_title_2mual">{{objList.name}}</span>
       <span class="View_subTitle_27eKa">{{objList.text}}</span>
     </div>
     <div class="main">
       <div class="main-a">
-        <img class="images" v-if="objList.imgurl" :src="objList.imgurl" alt="">
+        <img class="images" v-if="objList.list[0].imgurl" :src="objList.list[0].imgurl" alt="">
         <div class="isimg" v-else>
           <div><Icon type="md-image" /></div>
         </div>

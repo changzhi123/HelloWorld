@@ -6,9 +6,9 @@
       objList.height || '200px'
     };`"
   >
-    <div
-      class="tab tab-img"
-      :style="`background-image:url(${objList.backgroundImage});`"
+      <div 
+      class="tab tab-img" 
+      :style="`background-image:url(${objList.list[0].imgurl});`"
     >
       <div class="seckill">{{ objList.name }}</div>
       <div class="text">
@@ -26,10 +26,10 @@
         :trigger="setting.trigger"
         :arrow="setting.arrow"
       >
-        <CarouselItem v-for="(item, index) in objList.data" :key="index">
+        <CarouselItem v-for="(item, index) in 2" :key="index">
           <div class="text-box">
-            <div v-for="(v, idx) in item" :key="idx">
-              <img class="imgs" v-if="v.imgurl" :src="v.imgurl" alt="" />
+            <div v-for="(v, idx) in objList.data" :key="idx"  v-if="type(index,idx)">
+                <img class="imgs" v-if="v.imgurl" :src="v.imgurl" alt="" />
               <div class="imgs" v-else>
                 <!-- <i class="el-icon-goods skeleton-goods-img-icon"></i> -->
                 <Icon type="ios-basket" class="skeleton-goods-img-icon" />
@@ -49,13 +49,14 @@
                 class="View_goodsPrice_Eg2v8"
                 style="background: #f2f2f2; border: none"
               ></div>
+            
             </div>
           </div>
         </CarouselItem>
       </Carousel>
     </div>
     <div class="tab">
-      <img class="imags" :src="objList.imgurl" v-if="objList.imgurl" alt="" />
+      <img class="imags" :src="objList.list[1].imgurl" v-if="objList.list[1].imgurl" alt="" />
       <div class="isimags imags" v-else>
         <div>
           <!-- <i class="el-icon-picture "></i> -->
@@ -88,7 +89,25 @@ export default {
       default:()=>({}),
     }
   },
-  methods: {},
+  methods: {
+    type(index,idx){
+      let isIndex=(index+1)*4+1,
+      isType=false,
+      isIdx=index*4,
+      numidx=idx+1
+      if(numidx<isIndex){
+        if(index==0){
+          isType=true
+        }else{
+           if(numidx>isIdx){
+             isType=true 
+           }  
+        }
+      }
+      // console.log(index,idx,'key',isIndex,isType,isIdx)
+      return isType
+    }
+  },
 };
 </script>
 
@@ -123,9 +142,11 @@ export default {
   }
 
   .text {
+    width: 100%;
     position: absolute;
     text-align: center;
     bottom: 15px;
+    font-size: 16px;
   }
 }
 
