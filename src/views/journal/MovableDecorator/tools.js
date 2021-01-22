@@ -210,9 +210,9 @@ const tools = [
                 width: '900px',
                 height: '150px',
                 maxData:1,
-                dataMessage:'请配置优惠券',
-                dataLabel:"优惠券",
-                dataPlaceholder:'请设置优惠券路径',
+                // dataMessage:'请配置优惠券',
+                // dataLabel:"优惠券",
+                // dataPlaceholder:'请设置优惠券路径',
                 data:[{
                     imgurl:'',
                     tourl:''

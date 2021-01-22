@@ -54,7 +54,7 @@
         <!-- 秒杀商品特有 -->
         <template v-if="data.componentPack=='FlashSaleGoodsList'">
           <FormItem label="标题" prop="name">
-            <Input v-model="objList.name" clearable placeholder="请输入标题"></Input>
+            <Input v-model="objList.name" clearable placeholder="请输入标题" />
           </FormItem>
           <FormItem label="秒杀时间" prop="itme">
             <DatePicker ref="datetime" v-model="itme" type="datetime" @on-change="(e)=>{objList.itme=e}"  format="yyyy-MM-dd HH:mm:ss" placeholder="请设置秒杀时间" ></DatePicker>
@@ -62,8 +62,9 @@
         </template>
         <!-- list特区 -->
          <template v-if="objList.list" >
-          <div v-for="(item,index) in objList.list"  :key="`${index}list`">
-               <FormItem :label="index==0?'前置图片':'后置图片'" 
+          <div :key="soleKeys.list">
+               <FormItem v-for="(item,index) in objList.list"  :key="`${index}list`" 
+               :label="index==0?'前置图片':'后置图片'" 
               :prop="`list.${index}.imgurl`" 
              :rules="{ required: true, message: index==0?'前置图片路径':'后置图片路径', trigger: 'change' }">
                <div class="img-box">
@@ -80,10 +81,10 @@
                 <div>
                   
                 </div>
-                <Input
+                <Input  @on-blur="refreshKey('list')"
                   v-model="item.imgurl" clearable
                   placeholder="请设置图片路径"
-                ></Input>
+               />
               </div>
             </div>
           </FormItem>
@@ -92,10 +93,10 @@
         <!-- data有商品配置特区 -->
         <template v-if="objList.data"  >
           <Divider>配置区域</Divider>
-          <div :key="indexKey">
-            <FormItem v-for="(item, index) in objList.data" :label="`${objList.dataLabel||'商品配置'}(${index + 1})`"
+          <div :key="soleKeys.data">
+            <FormItem v-for="(item, index) in objList.data" :label="`商品配置(${index + 1})`"
            :prop="`data.${index}.imgurl`" :key="`${index}data`"
-          :rules="{ required: true, message: objList.dataMessage||'请配置商品图片', trigger: 'change' }">
+          :rules="{ required: true, message: '请配置商品图片', trigger: 'change' }">
             <div class="img-box">
               <div>
                 <img
@@ -115,10 +116,10 @@
                   <Button icon="md-close" @click="delDtata(index)" :disabled="objList.data.length==1"></Button>
                 </ButtonGroup>
                 </div>
-                <Input
-                  v-model="item.imgurl" clearable
-                  :placeholder="`${objList.dataPlaceholder||'请设置商品图片路径'}`"
-                ></Input>
+                <Input @on-blur="refreshKey('data')"
+                  v-model.trim="item.imgurl" clearable
+                  placeholder="请设置商品图片路径"
+                />
               </div>
             </div>
           </FormItem>
@@ -158,18 +159,6 @@
 // cursor:not-allowed;鼠标不可点击时的样式
 export default {
   data() {
-     const validatePass = (rule, value, callback) => {
-       console.log(rule, value, callback,'value')
-                // if (value === '') {
-                //     callback(new Error('Please enter your password'));
-                // } else {
-                //     if (this.formCustom.passwdCheck !== '') {
-                //         // 对第二个密码框单独验证
-                //         this.$refs.formCustom.validateField('passwdCheck');
-                //     }
-                //     callback();
-                // }
-            };
     return {
       isOpen: false,
       list: {},
@@ -182,7 +171,10 @@ export default {
       },
       objList: {},
       itme:null,
-      indexKey:new Date().getTime()
+      soleKeys:{//dada和list的唯一key，可以动态控制组件更新
+        data:'data-index-key',
+        list:'list-index-key'
+      }
     };
   },
   props: {
@@ -196,17 +188,29 @@ export default {
       default: 0,
     },
   },
+  computed: {
+  
+  },
+  watch:{
+    
+  },
   methods: {
+    refreshKey(type){//刷新key
+      this.soleKeys[type]=new Date().getTime()
+      console.log(type,'更新了key')
+    },
     addData(){//新增data中的商品
     const length=this.objList.data.length
       this.objList.data.push({
-        index:length
+        index:length,
+        imgurl:''
       })
-      this.indexKey=new Date().getTime()
+      this.refreshKey('data')
     // console.log('新增商品',this.objList.data)
     },
     delDtata(key){//删除商品配置
        this.objList.data.splice(key,1)
+       this.refreshKey('data')
     },
     setSortord(type,key){//排序
       const index=type?key-1:key+1
@@ -215,11 +219,12 @@ export default {
           this.objList.data[index].index=key
         }else{//向下
          this.objList.data[key].index=index
-          this.objList.data[index].index=key
+        this.objList.data[index].index=key
         }
       this.objList.data.sort((a,b)=>{
          return a['index']-b['index']
       })
+      this.refreshKey('data')
         // console.log( this.objList.data,index,key,' this.objList.data')
     },
     handleSubmit(name) {
