@@ -51,6 +51,7 @@
             :class="{'mian-form':true,'main-put':objIndex==index}"
             :is="item.componentPack"
             :objList='item.objList'
+            :isWindowsOpen='isWindowsOpen'
           >
             <!--  :is="item.componentPack"  动态渲染组件 -->
           </component>
@@ -91,6 +92,7 @@ export default {
       data:{},//打开弹窗组件的数据
       objIndex:null,//打开弹窗的组件index
       isOpen:true,//是否可以打开弹窗
+      isWindowsOpen:false,//组件是否可以点击图片跳转
     };
   },
   computed: {

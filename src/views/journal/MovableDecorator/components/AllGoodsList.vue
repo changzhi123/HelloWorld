@@ -16,7 +16,7 @@
       :style="`height:calc(${objList.height || '500px'} / 2);`"
     >
       <div class="imglist">
-        <img :src="item.imgurl" v-if="item.imgurl" alt="" />
+        <img :src="item.imgurl" @click="skipOpen(item.tourl)" v-if="item.imgurl" alt="" />
         <div class="imgopen" v-else>
           <Icon type="ios-basket" /></div>
       </div>
@@ -41,9 +41,17 @@ export default {
     objList:{
         type: Object,
       default:()=>({}),
+    },
+    isWindowsOpen:{
+      type:Boolean,
+      defaule:true
     }
   },
-  methods: {},
+  methods: {
+     skipOpen(tourl){
+       if(this.isWindowsOpen&&tourl)window.open(tourl)
+     }
+  },
 };
 </script>
 
@@ -105,7 +113,7 @@ export default {
       height: 130px;
       > img {
         width: 100%;
-        height: 100%;
+        height: 100%;cursor:pointer;
       }
     }
 

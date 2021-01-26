@@ -13,7 +13,7 @@
       <template v-for="(item, index) in objList.data">
         <div :key="index" class="box-mian">
           <div class="imgtab">
-            <img class="imglist" v-if="item.imgurl" :src="item.imgurl" alt="">
+            <img class="imglist" @click="skipOpen(item.tourl)" v-if="item.imgurl" :src="item.imgurl" alt="">
             <div class="isimg" v-else>
                <Icon type="ios-basket" />
             </div>
@@ -37,13 +37,20 @@ export default {
     };
   },
   props: {
-    
+      isWindowsOpen:{
+      type:Boolean,
+      defaule:true
+    },
     objList:{
         type: Object,
       default:()=>({}),
     }
   },
-  methods: {},
+  methods: {
+     skipOpen(tourl){
+       if(this.isWindowsOpen&&tourl)window.open(tourl)
+     },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -69,7 +76,7 @@ export default {
 }
 .imglist{
   width: 100%;
-  height: 100%;
+  height: 100%;cursor:pointer;
 }
 .RecommendedGoodsList {
   // height: 100px;

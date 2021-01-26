@@ -8,7 +8,7 @@
     </div>
     <div class="main">
       <div class="main-a">
-        <img class="images" v-if="objList.list[0].imgurl" :src="objList.list[0].imgurl" alt="">
+        <img class="images"  v-if="objList.list[0].imgurl" :src="objList.list[0].imgurl" alt="">
         <div class="isimg" v-else>
           <div><Icon type="md-image" /></div>
         </div>
@@ -17,13 +17,13 @@
           <span class="View_bannerSubTitle_2K3Zh">{{objList.toAdvertising}}</span>
           </div>
           <div class="icon-trxxt">
-            <img class="images" src="https://img.alicdn.com/tfs/TB1IQBtXaagSKJjy0FbXXa.mVXa-68-68.png" alt="">
+            <img class="images" @click="skipOpen(objList.list[0].tourl)" src="https://img.alicdn.com/tfs/TB1IQBtXaagSKJjy0FbXXa.mVXa-68-68.png" alt="">
           </div>
       </div>
       <div class="main-b">
         <div v-for="(item,index) in objList.data" :key="index" class="tab-img">
           <div class="img-div">
-            <img class="images" v-if="item.imgurl" :src="item.imgurl" alt="">
+            <img class="images" @click="skipOpen(item.tourl)" v-if="item.imgurl" :src="item.imgurl" alt="">
              <Icon v-else type="ios-basket" class="skeleton-goods-img-icon" />
           </div>
           <div class="View_goodsTitle_1oYUy" v-if="item.text"> {{item.text}} </div>
@@ -50,9 +50,17 @@
     objList:{
         type: Object,
       default:()=>({}),
+    },
+      isWindowsOpen:{
+      type:Boolean,
+      defaule:true
     }
     },
-    methods: {}
+    methods: {
+        skipOpen(tourl){
+       if(this.isWindowsOpen&&tourl)window.open(tourl)
+     },
+    }
   }
 </script>
 <style lang="scss" scoped>
@@ -88,7 +96,7 @@
 }
   .images {
     width: 100%;
-    height: 100%;
+    height: 100%;cursor:pointer;
   }
 
   .CategoryGoods {

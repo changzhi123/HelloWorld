@@ -9,13 +9,13 @@
     <div class="tab-a">
       <template v-for="(item, index) in objList.data">
         <div class="box-a" :key="index" v-if="index == 0">
-          <img class="images" :src="item.imgurl" alt="" v-if="item.imgurl" />
+          <img class="images"  @click="skipOpen(item.tourl)" :src="item.imgurl" alt="" v-if="item.imgurl" />
           <div v-else class="View_imgItem_3Lvk6">
             <Icon type="md-image" />
           </div>
         </div>
         <div class="box-b" :key="index" v-if="index == 1">
-          <img class="images" :src="item.imgurl" v-if="item.imgurl" alt="" />
+          <img class="images" @click="skipOpen(item.tourl)" :src="item.imgurl" v-if="item.imgurl" alt="" />
 
           <div v-else class="View_imgItem_3Lvk6">
             <Icon type="md-image" />
@@ -27,7 +27,7 @@
     <div class="tab-b">
       <template v-for="(item, index) in objList.data">
         <div :key="index" v-if="index != 0 && index != 1">
-          <img class="images" :src="item.imgurl" v-if="item.imgurl" alt="" />
+          <img class="images" @click="skipOpen(item.tourl)" :src="item.imgurl" v-if="item.imgurl" alt="" />
           <div v-else class="View_imgItem_3Lvk6">
            <Icon type="md-image" />
           </div>
@@ -46,13 +46,20 @@ export default {
     };
   },
   props: {
-  
+    isWindowsOpen:{
+      type:Boolean,
+      defaule:true
+    },
     objList:{
         type: Object,
       default:()=>({}),
     }
   },
-  methods: {},
+  methods: {
+    skipOpen(tourl){
+       if(this.isWindowsOpen&&tourl)window.open(tourl)
+     },
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -101,6 +108,6 @@ export default {
 }
 .images {
   width: 100%;
-  height: 100%;
+  height: 100%;cursor:pointer;
 }
 </style>

@@ -8,7 +8,7 @@
   >
   <Carousel
       loop class="imgbode"
-      :autoplay="setting.autoplay"
+      :autoplay="objList.data.length>1?setting.autoplay:false"
       :autoplay-speed="setting.autoplaySpeed"
       :dots="setting.dots"
       :radius-dot="setting.radiusDot"
@@ -16,7 +16,7 @@
       :arrow="setting.arrow"
     >
       <CarouselItem v-for="(item, index) in objList.data" :key="index" :style="`height:${objList.height||'200px'}`">
-        <img class="imags" v-if="item.imgurl" :src="item.imgurl" alt="" />
+        <img class="imags" @click="skipOpen(item.tourl)" v-if="item.imgurl" :src="item.imgurl" alt="" />
         <div v-else class="imgput"><Icon type="ios-image" /></div>
       </CarouselItem>
     </Carousel>
@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       setting: {
-        autoplay: false,
+        autoplay: true,
         autoplaySpeed: 3000,
         dots: "inside",
         radiusDot: false,
@@ -48,11 +48,17 @@ export default {
     objList:{
         type: Object,
       default:()=>({}),
+    },
+    isWindowsOpen:{
+      type:Boolean,
+      defaule:true
     }
    
   },
   methods:{
-   
+     skipOpen(tourl){
+       if(this.isWindowsOpen&&tourl)window.open(tourl)
+     }
   },
 };
 </script>
@@ -84,6 +90,6 @@ export default {
 .imags {
   height: 100%;
   width: 100%;
-  box-sizing: border-box;
+  box-sizing: border-box;cursor:pointer;
 }
 </style>

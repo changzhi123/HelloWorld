@@ -19,6 +19,7 @@
       >
       <!-- 所有组件共有 -->
         <template>
+          <Divider>样式配置区域</Divider>
           <FormItem label="设置宽度" prop="width">
           <Input v-model="objList.width" clearable placeholder="宽度默认为100%" />
           </FormItem>
@@ -26,8 +27,10 @@
             <Input v-model="objList.height" clearable placeholder="高度默认为200px" />
           </FormItem>
         </template>
+        
         <!-- 纯文本特区 -->
         <template v-if="data.componentPack=='plainTextBlock'">
+           <Divider>文本配置区域</Divider>
           <FormItem label="文本" prop="text">
              <Input v-model="objList.text" clearable placeholder="请输入文本" />
            </FormItem>
@@ -62,13 +65,14 @@
         </template>
         <!-- list特区 -->
          <template v-if="objList.list" >
+          <Divider>海报配置区域</Divider>
           <div :key="soleKeys.list">
                <FormItem v-for="(item,index) in objList.list"  :key="`${index}list`" 
                :label="index==0?'前置图片':'后置图片'" 
               :prop="`list.${index}.imgurl`" 
-             :rules="{ required: true, message: index==0?'前置图片路径':'后置图片路径', trigger: 'change' }">
+             :rules="{ required: true, message: '请设置图片路径', trigger: 'change' }">
                <div class="img-box">
-              <div>
+              <div @click="setCommodity(index,'list')">
                 <img
                   class="imgurl"
                   v-if="item.imgurl"
@@ -82,8 +86,8 @@
                   
                 </div>
                 <Input  @on-blur="refreshKey('list')"
-                  v-model="item.imgurl" clearable
-                  placeholder="请设置图片路径"
+                  v-model="item.tourl" clearable
+                  placeholder="请设置图片跳转路径"
                />
               </div>
             </div>
@@ -92,13 +96,13 @@
            </template>
         <!-- data有商品配置特区 -->
         <template v-if="objList.data"  >
-          <Divider>配置区域</Divider>
+          <Divider>商品配置区域</Divider>
           <div :key="soleKeys.data">
             <FormItem v-for="(item, index) in objList.data" :label="`商品配置(${index + 1})`"
            :prop="`data.${index}.imgurl`" :key="`${index}data`"
           :rules="{ required: true, message: '请配置商品图片', trigger: 'change' }">
             <div class="img-box">
-              <div>
+              <div @click="setCommodity(index,'data')">
                 <img
                   class="imgurl"
                   v-if="item.imgurl"
@@ -117,8 +121,8 @@
                 </ButtonGroup>
                 </div>
                 <Input @on-blur="refreshKey('data')"
-                  v-model.trim="item.imgurl" clearable
-                  placeholder="请设置商品图片路径"
+                  v-model.trim="item.tourl" clearable
+                  placeholder="请设置商品图片跳转路径"
                 />
               </div>
             </div>
@@ -153,11 +157,16 @@
         <!-- <Button icon="logo-tumblr"></Button> -->
       </ButtonGroup>
     </div>
+    <pictureSelector ref="pictureSelectors" @setSubmit="setSubmit"/>
   </Modal>
 </template>
 <script>
 // cursor:not-allowed;鼠标不可点击时的样式
+import pictureSelector from './pictureSelector'
 export default {
+  components:{
+    pictureSelector
+  },
   data() {
     return {
       isOpen: false,
@@ -174,7 +183,8 @@ export default {
       soleKeys:{//dada和list的唯一key，可以动态控制组件更新
         data:'data-index-key',
         list:'list-index-key'
-      }
+      },
+      isType:{},//记录打开二级弹窗的对象
     };
   },
   props: {
@@ -192,12 +202,29 @@ export default {
   
   },
   watch:{
-    
+    isOpen(val){
+      if(!val){
+        this.$refs.pictureSelectors.isOpen=false
+      }
+    }
   },
   methods: {
+    setSubmit(row){
+      // console.log(row,'选择的参数')
+      const {type,index}=this.isType
+      this.objList[type][index]=JSON.parse(JSON.stringify(row))
+      this.refreshKey(type)
+    },
+    setCommodity(index,type){
+      // console.log('打开图片选择弹窗')
+      this.isType={
+        index,type
+      }
+      this.$refs.pictureSelectors.setOpen()
+    },
     refreshKey(type){//刷新key
       this.soleKeys[type]=new Date().getTime()
-      console.log(type,'更新了key')
+      // console.log(type,'更新了key')
     },
     addData(){//新增data中的商品
     const length=this.objList.data.length
@@ -228,7 +255,7 @@ export default {
         // console.log( this.objList.data,index,key,' this.objList.data')
     },
     handleSubmit(name) {
-      console.log(this.objList, "objList");
+      // console.log(this.objList, "objList");
       this.$refs[name].validate((valid) => {
         if (valid) {
           this.$emit("setAmend", this.objList, this.objIndex);

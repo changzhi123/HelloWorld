@@ -22,7 +22,7 @@ const tools = [
                 height:'',
                 maxData:8,
                 data:[
-                    {}, {}, {}, {}
+                    {}, //{}, {}, {}
                 ]
             }
         }, {
@@ -125,7 +125,8 @@ const tools = [
                 maxData:8,
                 list:[
                     {
-                        imgurl:''
+                        imgurl:'',
+                        
                     }
                 ],
                 data: [{
@@ -166,7 +167,8 @@ const tools = [
            
             objList: {
                 width: '900px', maxData:20,
-                height: '500px',data:[
+                height: '500px',
+                data:[
                     {
                         // imgurl:
                         //     "https://gw.alicdn.com/bao/uploaded/i1/748159429/O1CN01xeiYck2JWX37gKDJk_!!2-item_pic.png",
@@ -210,10 +212,8 @@ const tools = [
                 width: '900px',
                 height: '150px',
                 maxData:1,
-                // dataMessage:'请配置优惠券',
-                // dataLabel:"优惠券",
-                // dataPlaceholder:'请设置优惠券路径',
-                data:[{
+               
+                list:[{
                     imgurl:'',
                     tourl:''
                 }]

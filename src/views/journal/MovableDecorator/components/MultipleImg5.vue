@@ -2,7 +2,7 @@
 <!-- 多图(5) -->
   <div class="MultipleImg5" :style="`width:${objList.width||'100%'};height:${objList.height||'200px'};`">
    <div v-for="(item,index) in objList.data" :key="index">
-     <img :src="item.imgurl" alt="" v-if="item.imgurl">
+     <img :src="item.imgurl" @click="skipOpen(item.tourl)" alt="" v-if="item.imgurl">
      <div v-else class="Thereisno">
        <div class="box"><Icon type="md-image" /></div>
      </div>
@@ -24,10 +24,16 @@ props:{
     objList:{
         type: Object,
       default:()=>({}),
+    },
+     isWindowsOpen:{
+      type:Boolean,
+      defaule:true
     }
 },
 methods:{
-
+ skipOpen(tourl){
+       if(this.isWindowsOpen&&tourl)window.open(tourl)
+     },
 }
 }
 </script>
@@ -46,7 +52,7 @@ methods:{
     // padding: 0 1%;
     >img{
       width: 100%;
-      height: 100%;
+      height: 100%;cursor:pointer;
     }
     .Thereisno{
        width: 100%;

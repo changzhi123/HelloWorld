@@ -29,7 +29,7 @@
         <CarouselItem v-for="(item, index) in 2" :key="index">
           <div class="text-box">
             <div v-for="(v, idx) in objList.data" :key="idx"  v-if="type(index,idx)">
-                <img class="imgs" v-if="v.imgurl" :src="v.imgurl" alt="" />
+                <img class="imgs"  @click="skipOpen(v.tourl)"  v-if="v.imgurl" :src="v.imgurl" alt="" />
               <div class="imgs" v-else>
                 <!-- <i class="el-icon-goods skeleton-goods-img-icon"></i> -->
                 <Icon type="ios-basket" class="skeleton-goods-img-icon" />
@@ -56,7 +56,7 @@
       </Carousel>
     </div>
     <div class="tab">
-      <img class="imags" :src="objList.list[1].imgurl" v-if="objList.list[1].imgurl" alt="" />
+      <img class="imags" @click="skipOpen(objList.list[1].tourl)" :src="objList.list[1].imgurl" v-if="objList.list[1].imgurl" alt="" />
       <div class="isimags imags" v-else>
         <div>
           <!-- <i class="el-icon-picture "></i> -->
@@ -87,9 +87,16 @@ export default {
     objList:{
         type: Object,
       default:()=>({}),
+    },
+     isWindowsOpen:{
+      type:Boolean,
+      defaule:true
     }
   },
   methods: {
+    skipOpen(tourl){
+       if(this.isWindowsOpen&&tourl)window.open(tourl)
+     },
     type(index,idx){
       let isIndex=(index+1)*4+1,
       isType=false,
@@ -131,7 +138,7 @@ export default {
   background-position: 50%;
   position: relative;
   background-repeat: no-repeat;
-  background-color: #e83632;
+  background-color: #e83632;cursor:pointer;
 
   .seckill {
     width: 100%;
@@ -155,7 +162,7 @@ export default {
 
   .imags {
     width: 100%;
-    height: 100%;
+    height: 100%;cursor:pointer;
   }
   .isimags {
     box-sizing: border-box;
@@ -196,7 +203,7 @@ export default {
       text-align: center;
 
       .imgs {
-        width: 100%;
+        width: 100%;cursor:pointer;
         height: 100px;
         background: #f2f2f2;
         display: flex;

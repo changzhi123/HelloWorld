@@ -7,7 +7,7 @@
     };`"
   >
     <div>
-      <img class="images"  v-if="objList.data[0].imgurl" :src="objList.data[0].imgurl" alt="" />
+      <img class="images" @click="skipOpen(objList.data[0].tourl)"  v-if="objList.data[0].imgurl" :src="objList.data[0].imgurl" alt="" />
       <div class="imgset" v-else>
             <Icon type="md-image" />
       </div>
@@ -15,7 +15,7 @@
     <div class="imglist">
       <template v-for="(item, index) in objList.data">
         <div :key="index" v-if="index!=0">
-          <img class="images" :src="item.imgurl" v-if="item.imgurl" alt="" />
+          <img class="images" @click="skipOpen(item.tourl)" :src="item.imgurl" v-if="item.imgurl" alt="" />
           <div class="imgset" v-else>
             <Icon type="md-image" />
           </div>
@@ -40,15 +40,23 @@ export default {
     objList:{
         type: Object,
       default:()=>({}),
+    },
+     isWindowsOpen:{
+      type:Boolean,
+      defaule:true
     }
   },
-  methods: {},
+  methods: {
+     skipOpen(tourl){
+       if(this.isWindowsOpen&&tourl)window.open(tourl)
+     },
+  },
 };
 </script>
 <style lang="scss" scoped>
 .images {
   width: 100%;
-  height: 100%;
+  height: 100%;cursor:pointer;
 }
 .imgset{
   width: 100%;

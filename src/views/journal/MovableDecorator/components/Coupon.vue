@@ -6,9 +6,9 @@
       objList.height || '200px'
     }`"
   >
-    <template v-for="(item, index) in objList.data">
+    <template v-for="(item, index) in objList.list">
       <div :key="index" v-if="index==0">
-        <img
+        <img @click="skipOpen(item.tourl)"
           v-if="item.imgurl"
           class="imglist"
           :src="item.imgurl"
@@ -35,8 +35,16 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    isWindowsOpen:{
+      type:Boolean,
+      defaule:true
+    }
   },
-  methods: {},
+  methods: {
+     skipOpen(tourl){
+       if(this.isWindowsOpen&&tourl)window.open(tourl)
+     }
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -47,7 +55,7 @@ export default {
   align-items: center;
   .imglist {
     width: 100%;
-    height: 100%;
+    height: 100%;cursor:pointer;
   }
   .foot {
     width: calc(100% - 30px);
