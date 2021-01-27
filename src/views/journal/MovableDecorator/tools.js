@@ -1,7 +1,7 @@
 
 
 /**
-
+实现pc 的装修模板  主要使用 scss  draggable view-design 
  */
 const tools = [
     {
@@ -50,6 +50,7 @@ const tools = [
                             // text: "商品标题，可以结合具体业务活动商品数据",
                             // price: "599.00",
                             // toprice: "849.00",
+                            // tourl:""
                         },
                         {}, {}, {},{}, {}, {}, {}
                 ],
@@ -221,5 +222,5 @@ const tools = [
         }]
     }
 ];
-
 export default tools;
+

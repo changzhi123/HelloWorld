@@ -336,7 +336,7 @@ $tab-width: 300px;
     .mian-form {
       // width: 100%;
       box-sizing: border-box;
-      margin: auto;
+      margin: auto;cursor:move;
     }
   }
 }
