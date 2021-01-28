@@ -10,7 +10,7 @@
     <div class="dialog_box">
      <div v-for="(item,index) in icons" :key="index">
         <el-button
-          :style="`border:none;`"
+          style="border:none;"
           :type="type(item)?'primary':''"
           plain
           :autofocus="item==iconval"
@@ -92,6 +92,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
 .dialog {
   width: 100%;
 }

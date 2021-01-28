@@ -55,11 +55,20 @@ export function resetObj(req, val) { // 重置对象
 
 //##  获取指定目录下的所有文件名后缀名为svg的文件名字
 export function filename(url,type){
-  // const files = require.context('@/icons/svg', false, /.svg$/).keys();
+  // var context = require.context(url, false, /.svg$/).keys()
+  // console.log(context,'imgurl');
+
   const files = require.context('@/icons/svg', false, /.svg$/).keys();
+  console.log(files,'查询到的数据')
   return files.map(item=>{
     return(item.split("/"))[1].split(".")[0]
   })
+  /*
+  接受三个参数（require.context(directory,useSubdirectories,regExp)）
+    directory：说明需要检索的目录
+    useSubdirectories：是否检索子目录
+    regExp: 匹配文件的正则表达式,一般是文件名
+  */
 }
 
 // ##  格式化时间

@@ -152,7 +152,7 @@ export default {
     computed: {
 
         icons() {
-            return filename()
+            return filename('@/icons/svg')
         }
     },
     methods: {
