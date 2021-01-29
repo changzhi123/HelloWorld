@@ -53,9 +53,15 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  >div{
+    width: 100%;height: 100%; display: flex;
+  justify-content: center;
+  align-items: center;
+  }
   .imglist {
     width: 100%;
-    height: 100%;cursor:pointer;
+    height: 100%;
+    cursor:pointer;
   }
   .foot {
     width: calc(100% - 30px);

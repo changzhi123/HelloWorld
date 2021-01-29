@@ -2,8 +2,10 @@
 
 /**
 实现pc 的装修模板  主要使用 scss  draggable view-design 
+ move pc
  */
-const tools = [
+
+const pc = [
     {
         groupName: '图文类',
         id: '1',
@@ -15,7 +17,7 @@ const tools = [
             parent: '1',
             icon: "ios-image",//'el-icon-picture',
             componentPack: 'CarouselImg',
-            isOpenType:false,
+            // isOpenType:false,
             
             objList: {
                 width:'1360px',
@@ -222,5 +224,34 @@ const tools = [
         }]
     }
 ];
-export default tools;
+
+const move=[
+    {
+        groupName: '图文类',
+        id: '1',
+        componentList:[
+            {
+                title: '轮播图',
+                parent: '1',
+                maxNum: 3,
+                nowNum: 0,
+                icon: "ios-image",
+                componentPack: 'CarouselImg',
+                objList: {
+                    width:'100%',
+                    height:'',
+                    maxData:8,
+                    data:[
+                        {}, //{}, {}, {}
+                    ]
+                }
+            }
+        ]
+    }
+]
+
+export default {
+    move:move,
+    pc:pc
+};
 

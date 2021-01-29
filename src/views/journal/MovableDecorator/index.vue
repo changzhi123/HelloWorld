@@ -1,73 +1,100 @@
 <template>
   <div class="head">
-    <div class="tab">
-      <div class="tab-box" v-for="(item, idnex) in objlist" :key="idnex">
-        <h3>{{ item.groupName }}({{ item.componentList.length }})</h3>
+    <div class="head-header">
+      <Select
+        :size="form.size"
+        v-model="form.genreType"
+        @on-change="onChange"
+        style="width: 200px"
+      >
+        <Option
+          v-for="item in cityList"
+          :value="item.value"
+          :key="item.value"
+          >{{ item.label }}</Option
+        >
+      </Select>
+    </div>
+    <div class="head-main-box">
+      <div class="tab">
+        <div class="tab-box" v-for="(item, idnex) in objlist" :key="idnex">
+          <!-- <h3>{{ item.groupName }}({{ item.componentList.length }})</h3> -->
+          <Divider
+            >{{ item.groupName }}({{ item.componentList.length }})</Divider
+          >
+          <!--  group="Decoration" -->
+          <draggable
+            class="box"
+            v-model="item.componentList"
+            :options="{ group: { name: 'itxst', pull: 'clone' }, sort: false }"
+            @start="onStart"
+            @end="onEnd"
+            :move="onMove"
+            chosenClass="chosenClass"
+            dragClass="dragClass"
+            :filter="`.disabled`"
+            @filter="$message.error('该组件添加数目已达上限！')"
+          >
+            <transition-group>
+              <div
+                :class="{ min: true, disabled: tab.nowNum >= tab.maxNum }"
+                v-for="(tab, idx) in item.componentList"
+                :key="idx"
+              >
+                <!-- <i :class="tab.icon"></i> -->
+                <Icon :type="tab.icon" />
+                <div>{{ tab.title }}</div>
+                <div>{{ tab.nowNum }}/{{ tab.maxNum }}</div>
+              </div>
+            </transition-group>
+          </draggable>
+        </div>
+      </div>
+      <div class="main">
         <!--  group="Decoration" -->
         <draggable
-          class="box"
-          v-model="item.componentList"
-          :options="{ group: { name: 'itxst', pull: 'clone' }, sort: false }"
-          @start="onStart"
-          @end="onEnd"
-          :move="onMove"
-          chosenClass="chosenClass"
-          dragClass="dragClass"
-          :filter="`.disabled`"
-          @filter="$message.error('该组件添加数目已达上限！')"
+          :options="{ group: { name: isName, pull: 'clone' }, sort: true }"
+          @start="Start"
+          chosenClass="chosenClassTo"
+          ghostClass="ghostClass"
+          class="main-box"
+          v-model="list"
+          @end="End"
+          @choose="choose"
+          @change="handleDragChange"
         >
           <transition-group>
-            <div
-              :class="{ min: true, disabled: tab.nowNum >= tab.maxNum }"
-              v-for="(tab, idx) in item.componentList"
-              :key="idx"
+            <component
+              v-for="(item, index) in list"
+              :key="index"
+              :class="{ 'mian-form': true, 'main-put': objIndex == index }"
+              :is="item.componentPack"
+              :objList="item.objList"
+              :isWindowsOpen="isWindowsOpen"
             >
-              <!-- <i :class="tab.icon"></i> -->
-              <Icon :type="tab.icon" />
-              <div>{{ tab.title }}</div>
-              <div>{{ tab.nowNum }}/{{ tab.maxNum }}</div>
-            </div>
+              <!--  :is="item.componentPack"  动态渲染组件 -->
+            </component>
           </transition-group>
         </draggable>
+
+        <!-- <el-button @click="open" >测试</el-button> -->
       </div>
     </div>
-    <div class="main">
-      <!--  group="Decoration" -->
-      <draggable
-        :options="{ group: { name: isName, pull: 'clone' }, sort: true }"
-        @start="Start"
-        chosenClass="chosenClassTo"
-        ghostClass="ghostClass"
-        class="main-box"
-        v-model="list"
-        @end="End"  
-        @choose='choose'
-        @change="handleDragChange"
-      >
-        <transition-group >
-          <component
-            v-for="(item, index) in list"
-            :key="index"
-            :class="{'mian-form':true,'main-put':objIndex==index}"
-            :is="item.componentPack"
-            :objList='item.objList'
-            :isWindowsOpen='isWindowsOpen'
-          >
-            <!--  :is="item.componentPack"  动态渲染组件 -->
-          </component>
-        </transition-group>
-      </draggable>
 
-      <el-button @click="open" >测试</el-button>
-    </div>
-    <popup ref="popups"  :data='data' @setAmend='setAmend' :objIndex='objIndex'
-     @delList='delList' @setRank='setRank'></popup>
+    <popup
+      ref="popups"
+      :data="data"
+      @setAmend="setAmend"
+      :objIndex="objIndex"
+      @delList="delList"
+      @setRank="setRank"
+    ></popup>
   </div>
 </template>
 <script>
 import draggable from "vuedraggable";
 import tools from "./tools";
-import {deepCopy} from '@/utils/method'
+import { deepCopy } from "@/utils/method";
 // import popup from './components/popup'
 export default {
   components: {
@@ -82,36 +109,51 @@ export default {
     RecommendedGoodsList: () => import("./components/RecommendedGoodsList"),
     AllGoodsList: () => import("./components/AllGoodsList"),
     Coupon: () => import("./components/Coupon"),
-    popup:()=>import('./components/popup'),//弹窗
+    popup: () => import("./components/popup"), //弹窗
   },
   data() {
     return {
+      form: {
+        genreType: "pc",
+        size: "large",
+      },
+      cityList: [
+        {
+          label: "pc",
+          value: "pc",
+        },
+        {
+          label: "move",
+          value: "move",
+        },
+      ],
       isName: "itxst", //原始数据的id
       list: [], //已渲染的组件集合
       setObj: {}, //记录组件已经渲染的重复次数
-      data:{},//打开弹窗组件的数据
-      objIndex:null,//打开弹窗的组件index
-      isOpen:true,//是否可以打开弹窗
-      isWindowsOpen:false,//组件是否可以点击图片跳转
+      data: {}, //打开弹窗组件的数据
+      objIndex: null, //打开弹窗的组件index
+      isOpen: true, //是否可以打开弹窗
+      isWindowsOpen: false, //组件是否可以点击图片跳转
     };
   },
   computed: {
     objlist() {
+      const database = tools[this.form.genreType] || [];
       const arrlist = [];
-      tools.filter((item) => {
+      database.filter((item) => {
         // console.log(item,'item')
-        const objdata={
-          componentList:[],
-          groupName:item.groupName,
-          id:item.id
-        }
-        item.componentList.filter(v=>{
-            // console.log(v,'v')
-            let reslist=deepCopy(v)
-            reslist.nowNum=this.setObj[v.componentPack]||0
-            objdata.componentList.push(reslist)
-        })
-        arrlist.push(objdata)//(deepCopy(item))//深拷贝
+        const objdata = {
+          componentList: [],
+          groupName: item.groupName,
+          id: item.id,
+        };
+        item.componentList.filter((v) => {
+          // console.log(v,'v')
+          let reslist = deepCopy(v);
+          reslist.nowNum = this.setObj[v.componentPack] || 0;
+          objdata.componentList.push(reslist);
+        });
+        arrlist.push(objdata); //(deepCopy(item))//深拷贝
       });
       return arrlist;
     },
@@ -119,13 +161,13 @@ export default {
   watch: {
     list(val) {
       this.setObj = {};
-      const length=this.list.length
-      this.list.filter((item,index) => {
+      const length = this.list.length;
+      this.list.filter((item, index) => {
         //更新记录组件已经渲染的数量
         // console.log(index,'index')
-          item['index']=index//渲染素组的index
-          item['length']=length//渲染数组的length
-          if(item.isOpenType)this.objIndex=index//更新打开弹窗的组件的index
+        item["index"] = index; //渲染素组的index
+        item["length"] = length; //渲染数组的length
+        if (item.isOpenType) this.objIndex = index; //更新打开弹窗的组件的index
         // console.log(item.componentPack,'item')
         this.setObj[item.componentPack]
           ? (this.setObj[item.componentPack] += 1)
@@ -136,62 +178,71 @@ export default {
   },
   mounted() {},
   methods: {
-    setRank(type,index){//弹窗排序
-      const num=type?index-1:index+1
-      if(type){//向上排序
-        this.list[index].index=num
-         this.list[num].index=index
-       
-      }else{//向下排序
-         this.list[index].index=num
-         this.list[num].index=index
+    onChange() {
+      this.list = [];
+    },
+    setRank(type, index) {
+      //弹窗排序
+      const num = type ? index - 1 : index + 1;
+      if (type) {
+        //向上排序
+        this.list[index].index = num;
+        this.list[num].index = index;
+      } else {
+        //向下排序
+        this.list[index].index = num;
+        this.list[num].index = index;
       }
-      this.list.sort((a,b)=>{
-         return a['index']-b['index']
-      })
-      this.objIndex=num//更新弹窗里面的index
+      this.list.sort((a, b) => {
+        return a["index"] - b["index"];
+      });
+      this.objIndex = num; //更新弹窗里面的index
       // console.log(this.list,'this.list')
     },
-    delList(key){//移除某一个组件
-      this.list.splice(key,1)
+    delList(key) {
+      //移除某一个组件
+      this.list.splice(key, 1);
     },
-    setAmend(obj,key){//提交修改
-       console.log(obj,key,'提交修改')
-       this.list[key].objList=deepCopy(obj)
+    setAmend(obj, key) {
+      //提交修改
+      console.log(obj, key, "提交修改");
+      this.list[key].objList = deepCopy(obj);
     },
-    choose(e){//被点击的
-      const key=e.oldIndex
-      const{title,length,objList,componentPack}=this.list[key]
-      this.data['title']=title
-      this.objIndex=key
-      this.data['componentPack']=componentPack
-      this.data['length']=length
-      this.data['objList']=deepCopy(objList)
-     
-      const _this=this
-      setTimeout(function(){
-         if(_this.isOpen){//异步处理拖动会打开弹窗bug，研制300 
-           _this.$refs.popups.setOpen(true)
-         }
-      },300);
-      this.list.filter((item,index)=>{
-         item.isOpenType=key==index?true:false//更新组件弹窗状态，true为打开 
-      })
-      console.log(key,'被点击的',this.list[key])
+    choose(e) {
+      //被点击的
+      const key = e.oldIndex;
+      const { title, length, objList, componentPack } = this.list[key];
+      this.data["title"] = title;
+      this.objIndex = key;
+      this.data["componentPack"] = componentPack;
+      this.data["length"] = length;
+      this.data["objList"] = deepCopy(objList);
+
+      const _this = this;
+      setTimeout(function () {
+        if (_this.isOpen) {
+          //异步处理拖动会打开弹窗bug，研制300
+          _this.$refs.popups.setOpen(true);
+        }
+      }, 300);
+      this.list.filter((item, index) => {
+        item.isOpenType = key == index ? true : false; //更新组件弹窗状态，true为打开
+      });
+      console.log(key, "被点击的", this.list[key]);
       //this.$refs.[refName][0].$el.getBoundingClientRect() 获取组件元素样式的方法
     },
-    setDialog(){
-      console.log('选择弹窗')
+    setDialog() {
+      console.log("选择弹窗");
     },
     End(e) {
       this.isName = "itxst"; //修改回原始数据的id，避免无法往右拖
       // console.log('结束拖动')
-      this.isOpen=true//选择拖动不能打开弹窗
+      this.isOpen = true; //选择拖动不能打开弹窗
     },
     Start() {
       this.isName = "reqitxst"; //修改原始数据id避免组件往回拖
       //  console.log('开始拖动')
-       this.isOpen=false//拖动完成，可以开启打开弹窗权限
+      this.isOpen = false; //拖动完成，可以开启打开弹窗权限
     },
     handleDragChange(e) {
       // const itme=new Date().getTime()
@@ -215,15 +266,16 @@ export default {
       // console.log(e, "onStart");
     },
     open() {
-      console.log(tools,this.objlist, "测试", this.list, this.setObj, );
+      console.log(tools, this.objlist, "测试", this.list, this.setObj);
     },
   },
 };
 </script>
 <style lang="scss" scoped>
-.main-put{
+.main-put {
   box-shadow: inset 0 0 5px 3px #2b9939;
-  
+  padding: 1px;
+  // border-color: #2b9939;
 }
 $heide: calc(100vh - 84px);
 $tab-width: 300px;
@@ -233,29 +285,48 @@ $tab-width: 300px;
 }
 .head {
   width: 100%;
-  height: $heide; //calc(100vh - 84px);
-  border: solid 1px #ccc;
-  // background: #58bc58;
+  height: $heide;
+  box-sizing: border-box;
+}
+.head-header {
+  width: 100%;
+  height: 64px;
+  border-bottom: solid 1px #ccc;
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.3);
+  > div {
+    margin: 0 10px;
+  }
+}
+.head-main-box {
+  display: flex;
+  box-sizing: border-box;
+  height: calc(100% - 64px);
   > div {
     height: 100%;
-    border: solid 1px #ccc;
+    box-sizing: border-box;
+    background: #fff;
     overflow: auto;
   }
   .tab {
-    width: $tab-width; //200px;
-    // background: chartreuse;
-  }
-  .main {
-    //width: calc(100% - $tab-width);//calc(100% - 200px);
-    flex: 1;
-    background: #f5f5f5;
-  }
+  width: $tab-width; //200px;
+  border-right: solid 1px #ccc;
+  height: 100%;
 }
+.main {
+  flex: 1;
+  background: #f5f5f5;
+}
+}
+
+
 .tab-box {
   width: 100%;
   min-height: 100px;
-  > h3 {
+  overflow: auto;
+  .h3 {
     height: 40px;
     line-height: 40px;
     box-sizing: border-box;
@@ -336,7 +407,8 @@ $tab-width: 300px;
     .mian-form {
       // width: 100%;
       box-sizing: border-box;
-      margin: auto;cursor:move;
+      margin: auto;
+      cursor: move;
     }
   }
 }

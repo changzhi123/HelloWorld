@@ -38,7 +38,11 @@ export default {
       onVisibilitychange(){
          console.log(document.visibilityState)
         if (document.visibilityState == 'visible') {
+          //
+          console.log(1)
         } else if (document.visibilityState == 'hidden') {
+          //
+           console.log(2)
         }
       },
   //   reload(){
