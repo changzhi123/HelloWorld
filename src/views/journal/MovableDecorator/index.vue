@@ -58,6 +58,7 @@
           chosenClass="chosenClassTo"
           ghostClass="ghostClass"
           class="main-box"
+          :style="`width:${form.genreType=='pc'?'100%':'375px'};`"
           v-model="list"
           @end="End"
           @choose="choose"
@@ -273,9 +274,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .main-put {
-  box-shadow: inset 0 0 5px 3px #2b9939;
-  padding: 1px;
-  // border-color: #2b9939;
+  // box-shadow: inset 0 0 2px 2px #2b9939;
+  // padding: 1px;
+  border:2px solid #2b9939;
 }
 $heide: calc(100vh - 84px);
 $tab-width: 300px;
@@ -395,8 +396,10 @@ $tab-width: 300px;
   box-sizing: border-box;
   padding: 10px;
 }
-.main-box {
-  width: 100%;
+.main-box {   
+  box-shadow: 0 0 10px 1px rgba(0,0,0,.3);
+  margin:  auto;
+  box-sizing: border-box;
   > span {
     width: 100%;
     min-height: 300px;
@@ -409,6 +412,8 @@ $tab-width: 300px;
       box-sizing: border-box;
       margin: auto;
       cursor: move;
+      // border:2px solid #fff ;
+    
     }
   }
 }

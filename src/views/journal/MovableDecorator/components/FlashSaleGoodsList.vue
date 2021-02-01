@@ -26,7 +26,7 @@
         :trigger="setting.trigger"
         :arrow="setting.arrow"
       >
-        <CarouselItem v-for="(item, index) in 2" :key="index">
+        <CarouselItem  v-for="(item, index) in arrLength" :key="index">
           <div class="text-box">
             <div v-for="(v, idx) in objList.data" :key="idx"  v-if="type(index,idx)">
                 <img class="imgs"  @click="skipOpen(v.tourl)"  v-if="v.imgurl" :src="v.imgurl" alt="" />
@@ -81,6 +81,11 @@ export default {
         arrow: "hover",
       },
     };
+  },
+  computed:{
+     arrLength(){
+      return this.objList.data.length>4?2:1
+     }
   },
   props: {
    

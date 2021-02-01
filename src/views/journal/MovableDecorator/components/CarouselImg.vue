@@ -2,9 +2,7 @@
   <!--  轮播 (普通数组)-->
   <div
     class="CarouselImg"
-    :style="`width:${objList.width||'100%'};height:${
-      objList.height||'200px'
-    };`"
+    :style="`width:${objList.width||'100%'};`"
   >
   <Carousel
       loop class="imgbode"
@@ -15,8 +13,10 @@
       :trigger="setting.trigger"
       :arrow="setting.arrow"
     >
-      <CarouselItem v-for="(item, index) in objList.data" :key="index" :style="`height:${objList.height||'200px'}`">
-        <img class="imags" @click="skipOpen(item.tourl)" v-if="item.imgurl" :src="item.imgurl" alt="" />
+      <CarouselItem v-for="(item, index) in objList.data" :key="index" 
+       :style="`height:${objList.height||'200px'}`">
+        <img class="imags" @click="skipOpen(item.tourl)" v-if="item.imgurl"
+         :src="item.imgurl" alt="" />
         <div v-else class="imgput"><Icon type="ios-image" /></div>
       </CarouselItem>
     </Carousel>

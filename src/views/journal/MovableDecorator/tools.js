@@ -24,7 +24,11 @@ const pc = [
                 height:'',
                 maxData:8,
                 data:[
-                    {}, //{}, {}, {}
+                    {
+                        // imgurl:
+                        //         "https://img30.360buyimg.com/babel/s290x370_jfs/t1/133470/23/5172/252715/5f1a3b3cE2c82f4cf/4a92d18397680eee.jpg!cc_290x370.webp",
+                        //     text: "商品标题，可以结合具体业务活动商品数据",
+                    }, //{}, {}, {}
                 ]
             }
         }, {
@@ -54,7 +58,7 @@ const pc = [
                             // toprice: "849.00",
                             // tourl:""
                         },
-                        {}, {}, {},{}, {}, {}, {}
+                        {}, {}, {}
                 ],
             }
         }, {
@@ -239,11 +243,27 @@ const move=[
                 componentPack: 'CarouselImg',
                 objList: {
                     width:'100%',
-                    height:'',
+                    height:'100px',
                     maxData:8,
                     data:[
                         {}, //{}, {}, {}
                     ]
+                }
+            },
+            {
+                title: '纯文本',
+                maxNum: 20,
+                parent: '1',
+                nowNum: 0,
+                icon: 'ios-paper',//'el-icon-notebook-1',
+                componentPack: 'plainTextBlock',
+                objList: {
+                    width: '100%',
+                    height: '50px',
+                    color: '#58bc58',
+                    size: '18px',
+                    background:'#fff',
+                    text: '超值进口新发现'
                 }
             }
         ]
