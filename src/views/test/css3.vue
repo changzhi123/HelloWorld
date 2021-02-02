@@ -4,7 +4,15 @@
       <chartTypeAnnular :putOptions="putOptions" />
     </div>
     <div class="box">
-      <ChinaMap ref="ChinaMap" color='#000' :data="data" :option="options"></ChinaMap>
+      <ChinaMap
+        ref="ChinaMap"
+        color="#000"
+        :data="data"
+        :option="options"
+      ></ChinaMap>
+    </div>
+    <div class="box">
+    <TheNationalMap ref="TheNationalMaps"></TheNationalMap>
     </div>
   </div>
 </template>
@@ -12,10 +20,11 @@
 <script>
 import chartTypeAnnular from "@/components/Elements/chartTypeAnnular";
 import ChinaMap from "@/components/Elements/ChinaMap";
+import TheNationalMap from '@/components/Elements/TheNationalMap';
 import { data } from "./map.js";
 export default {
   components: {
-    chartTypeAnnular,
+    chartTypeAnnular,TheNationalMap,
     ChinaMap,
   },
   data() {
@@ -46,7 +55,7 @@ export default {
                   params.name +
                   "<br/>" +
                   "销售额 : " +
-                 myseries[i].value +
+                  myseries[i].value +
                   "</br>";
               }
             }
@@ -54,32 +63,31 @@ export default {
           },
         },
       },
-       data: [ ],
+      data: [],
       sale: {
         totalAmount: 0,
         tranOrders: 0,
       },
-     otherReverse: {
-                    '北京市': '北京',
-                    '天津市': '天津',
-                    '重庆市': '重庆',
-                    '上海市': '上海',
-                    '新疆维吾尔自治区': '新疆',
-                    '宁夏回族自治区': '宁夏',
-                    '内蒙古自治区': '内蒙古',
-                    '西藏自治区': '西藏',
-                    '广西壮族自治区': '广西',
-                    '香港特别行政区': '香港',
-                    '澳门特别行政区': '澳门',
-     },
+      otherReverse: {
+        北京市: "北京",
+        天津市: "天津",
+        重庆市: "重庆",
+        上海市: "上海",
+        新疆维吾尔自治区: "新疆",
+        宁夏回族自治区: "宁夏",
+        内蒙古自治区: "内蒙古",
+        西藏自治区: "西藏",
+        广西壮族自治区: "广西",
+        香港特别行政区: "香港",
+        澳门特别行政区: "澳门",
+      },
     };
   },
   mounted() {
-    console.log(this.data,'data')
+    console.log(this.data, "data");
     this.getData();
   },
   methods: {
-      
     getData() {
       this.sale = {
         totalAmount: 20,
@@ -105,10 +113,13 @@ export default {
 <style lang="scss" scoped>
 .css3 {
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 .box {
   width: 40%;
   height: 400px;
   border: 1px solid #ccc;
+  margin: 10px;
 }
 </style>
