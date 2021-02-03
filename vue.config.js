@@ -9,7 +9,7 @@ function resolve(dir) { //定义函数，svg配置svg-sprite-loader用
     return path.join(__dirname, dir)
 }
 
-const name = defaultSettings.title || 'vue Element Admin' //页标题
+const name = defaultSettings.title || '小绵羊基地' //页标题
 
 console.log(`当前构建环境：${process.env.NODE_ENV} -  ${process.env.ENV}  - ${process.env.VUE_APP_URL}`)
 
@@ -30,7 +30,7 @@ module.exports = {
         open: true, // 是否自动弹出浏览器页面
         //host: "localhost",
         port: port,
-        //https: false,//是否使用https协议
+        https: false,//是否使用https协议
         hotOnly: true, //是否开启热更新
         overlay: {
             warnings: false,
@@ -40,9 +40,9 @@ module.exports = {
             [process.env.VUE_APP_URL]: {
                 // target: 'http://localhost:3003/demo', //API服务器的地址
                 target: 'http://47.93.220.79:3003/demo', //API服务器的地址
-                //ws: true, // 代理websockets
+                ws: true, // 代理websockets
                 changeOrigin: true, //虚拟的站点需要更管origin
-                pathRewrite: { //重写路径 比如'/api/aaa/ccc'重写为'/aaa/ccc'
+                pathRewrite: { //重写路径 
                     ['^' + process.env.VUE_APP_URL]: ''
                 }
             }
