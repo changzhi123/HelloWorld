@@ -134,15 +134,20 @@ module.exports = {
                                     priority: 10,
                                     chunks: 'initial' //dependent只包最初依赖的第三方
                                 },
-                                iviewUI: {
-                                    name: 'chunk-iviewUI',//iviewUI
+                                viewDesign: {
+                                    name: 'chunk-viewDesign',//iviewUI
                                     priority: 20,
-                                    test: /[\\/]node_modules[\\/]_?iview(.*)/
+                                    test: /[\\/]node_modules[\\/]_?view-design(.*)/
                                 },
                                 echarts: {
                                     name: 'chunk-echarts',//echarts
                                     priority: 20,
                                     test: /[\\/]node_modules[\\/]_?echarts(.*)/
+                                },
+                                antDesignVue: {
+                                    name: 'chunk-antDesignVue',
+                                    priority: 20,
+                                    test: /[\\/]node_modules[\\/]_?ant-design-vue(.*)/
                                 },
                                 elementUI: {
                                     name: 'chunk-elementUI', //  将elementUI拆分成一个包

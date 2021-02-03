@@ -65,6 +65,7 @@
     <Button type="success">Success</Button>
     <Button type="warning">Warning</Button>
     <Button type="error">Error</Button>
+    <a-button type="primary"> antd</a-button>
   </div>
 </template>
 

@@ -78,35 +78,34 @@ export default {
                             normal: {
                                 show: true, // 是否显示对应地名
                                 textStyle: {
-                                    color: '#505050',//'#fff',
+                                    color: '#505050',//地图区域文字颜色
                                     fontSize:10
                                 },
                             },
                             emphasis: {
                                 show: false,
                                 textStyle: {
-                                    color: '#5961EB',
+                                    color: '#5961EB',//选中区域的文字颜色
                                 }
                             }
                         },
                         itemStyle: {
                             normal: {
-                                borderColor:'#5284F8', //'#00CCFF',
-                                shadowColor: 'rgba(48, 76, 159)',
+                                borderColor:'#5284F8', //'地图边框颜色
+                                shadowColor: 'rgba(48, 76, 159)',//轮廓阴影颜色
                                 areaColor: 'transparent',
                                 borderType: 'solid',
-                                // shadowColor: 'rgba(0,0,0,0.5)',
                                 shadowOffsetX: 0,
                                 shadowOffsetY: 3,
                                 shadowBlur: 16
                             },
                             emphasis: {
-                                areaColor: "#5284F8",
+                                areaColor: "#5961EB",//选中区域的填充颜色
                                 shadowOffsetX: 0,
                                 shadowOffsetY: 0,
                                 shadowBlur: 20,
-                                borderColor: '#5961EB',
-                                shadowColor: '#5961EB'
+                                borderColor: '#5961EB',//选中区域的边框颜色
+                                shadowColor: '#5961EB'//选中区域的阴影
                             }
                         },
                     },
@@ -125,7 +124,7 @@ export default {
                                 symbol: 'circle', //标记(气泡)的图形
                                 symbolSize: 10, //标记(气泡)的大小
                                 itemStyle:{
-                                    color: '#5284F8',
+                                    color: '#5284F8',//地图点的颜色
                                     borderColor: '#000',
                                     borderWidth: 0,
                                     borderType: 'solid',

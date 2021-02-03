@@ -16,6 +16,10 @@ import 'element-ui/lib/theme-chalk/index.css';
 // Vue.use(ElementUI, { locale })
 Vue.use(ElementUI)
 
+import 'ant-design-vue/dist/antd.css';//vue2.0版
+import Antd from 'ant-design-vue';
+Vue.use(Antd);
+
 import '@/styles/index.scss' // 全局 css
 import '@/permission'//权限控制，路由拦截
 
@@ -24,7 +28,7 @@ import ViewUI from 'view-design';
 import 'view-design/dist/styles/iview.css';
 Vue.use(ViewUI);//引入viewui
 
-// 将不必要的库卸载掉 npm uninstall xxx
+// 将不必要的库卸载掉 npm uninstall ant-design-vue
 
 import i18n from '@/i18n/i18n'
 
