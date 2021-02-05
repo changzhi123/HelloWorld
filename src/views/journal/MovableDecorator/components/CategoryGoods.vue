@@ -208,9 +208,9 @@
           box-sizing: border-box;
           // padding: 10%;
           width: 23.5%;
-          height: 49%;
+          height: 48.5%;
           // border: springgreen solid 1px;
-          padding: 20px;
+          padding: 20px 0;
           background: #fff;
         }
 

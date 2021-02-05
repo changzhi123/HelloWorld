@@ -80,6 +80,7 @@ export default {
   height: 25px;
   width: 100%;
   // border: springgreen 1px solid;
+  margin-bottom: 10px;
   position: relative;
   >span{
         position: absolute;
