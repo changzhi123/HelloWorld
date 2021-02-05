@@ -2,9 +2,7 @@
   <!-- 全部商品 -->
   <div
     class="AllGoodsList"
-    :style="`width:${objList.width || '100%'};min-height:${
-      objList.height || '500px'
-    };`"
+    :style="`max-width:${objList.width || '100%'};`"
   >
   <div class="heida">
     <span>全部商品</span>
@@ -13,7 +11,7 @@
       v-for="(item, index) in objList.data"
       :key="index"
       class="boximg"
-      :style="`height:calc(${objList.height || '500px'} / 2);`"
+      :style="`height:220px;`"
     >
       <div class="imglist">
         <img :src="item.imgurl" @click="skipOpen(item.tourl)" v-if="item.imgurl" alt="" />
@@ -95,6 +93,7 @@ export default {
   }
 }
 .AllGoodsList {
+  width: 100%;
   background: #fff;
   display: flex;
   flex-wrap: wrap;
@@ -102,7 +101,7 @@ export default {
   padding: 0px 0 0 0;
   .boximg {
     width: 18.5%;
-    padding: 2% 10px 0px 10px;
+    // padding: 2% 10px 0px 10px;
     // border: chartreuse 1px solid;
     box-sizing: border-box;
     text-align: center;

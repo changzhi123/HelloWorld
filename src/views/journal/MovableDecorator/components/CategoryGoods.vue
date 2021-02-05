@@ -1,6 +1,6 @@
 <template>
   <!-- 分类管区 -->
-  <div class="CategoryGoods" :style="`width:${objList.width||'100%'};height:${objList.height||'200px'};`">
+  <div class="CategoryGoods" :style="`max-width:${objList.width||'100%'};height:${objList.height||'200px'};`">
     <div class="tab">
       <i class="View_colorMark_rhgAb"></i>
       <span class="View_title_2mual">{{objList.name}}</span>
@@ -81,7 +81,7 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding: 15px;
+  padding: 15px 0 15px 0;
   background: #fff;
   >div{
     background: #f2f2f2;
@@ -101,6 +101,7 @@
 
   .CategoryGoods {
     background: #f5f5f5;
+    width: 100%;
 
     >div {
       width: 100%;

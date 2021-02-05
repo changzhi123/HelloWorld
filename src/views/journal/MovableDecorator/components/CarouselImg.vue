@@ -2,7 +2,7 @@
   <!--  轮播 (普通数组)-->
   <div
     class="CarouselImg"
-    :style="`width:${objList.width||'100%'};`"
+    :style="`max-width:${objList.width||'100%'};`"
   >
   <Carousel
       loop class="imgbode"
@@ -76,7 +76,7 @@ export default {
 }
 .CarouselImg {
   // height: 100px;
-  // width: 100%;
+  width: 100%;
   // background: chartreuse;
   position: relative;
   box-sizing: border-box;

@@ -2,7 +2,7 @@
   <!-- 多图(2-3) -->
   <div
     class="MultipleImg2_3"
-    :style="`width:${objList.width || '100%'};height:${
+    :style="`max-width:${objList.width || '100%'};height:${
       objList.height || '200px'
     }`"
   >
@@ -10,15 +10,15 @@
       <template v-for="(item, index) in objList.data">
         <div class="box-a" :key="index" v-if="index == 0">
           <img class="images"  @click="skipOpen(item.tourl)" :src="item.imgurl" alt="" v-if="item.imgurl" />
-          <div v-else class="View_imgItem_3Lvk6">
-            <Icon type="md-image" />
+          <div v-else class="View_imgItem_3Lvk6" style="padding: 15px 0 0 0;" >
+           <div><Icon type="md-image" /></div>
           </div>
         </div>
         <div class="box-b" :key="index" v-if="index == 1">
           <img class="images" @click="skipOpen(item.tourl)" :src="item.imgurl" v-if="item.imgurl" alt="" />
 
-          <div v-else class="View_imgItem_3Lvk6">
-            <Icon type="md-image" />
+          <div v-else class="View_imgItem_3Lvk6" style="padding: 15px 0 0 0;">
+            <div><Icon type="md-image" /></div>
           </div>
         </div>
       </template>
@@ -28,8 +28,8 @@
       <template v-for="(item, index) in objList.data">
         <div :key="index" v-if="index != 0 && index != 1">
           <img class="images" @click="skipOpen(item.tourl)" :src="item.imgurl" v-if="item.imgurl" alt="" />
-          <div v-else class="View_imgItem_3Lvk6">
-           <Icon type="md-image" />
+          <div v-else class="View_imgItem_3Lvk6" style="padding: 0px 0 15px 0;">
+           <div><Icon type="md-image" /></div>
           </div>
         </div>
       </template>
@@ -66,14 +66,22 @@ export default {
 .View_imgItem_3Lvk6 {
   width: 100%;
   height: 100%;
-  display: flex;
+  
+  
+  font-size: 50px;
+  color: rgba(97, 165, 255, 0.7);
+  box-sizing: border-box;
+  >div{ width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+display: flex;
   justify-content: center;
   align-items: center;
   background: #f2f2f2;
-  font-size: 50px;
-  color: rgba(97, 165, 255, 0.7);
+  }
 }
 .MultipleImg2_3 {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   background: #fff;

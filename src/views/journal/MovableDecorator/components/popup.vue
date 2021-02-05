@@ -27,38 +27,44 @@
             <Input v-model="objList.height" clearable placeholder="高度默认为200px" />
           </FormItem>
         </template>
-        
+        <!-- 公共 -->
+       <template> 
+         <FormItem label="标题" prop="name" v-if="objList.name">
+             <Input v-model="objList.name" clearable placeholder="请输入标题" />
+           </FormItem>
+           
+           <FormItem label="字体大小" v-if='objList.size' >
+             <Input v-model="objList.size" clearable placeholder="请设置字体大小" />
+           </FormItem>
+           <FormItem label="背景颜色" v-if="objList.background">
+             <Input v-model="objList.background" clearable placeholder="请设置背景颜色" />
+           </FormItem>
+            <FormItem label="字体颜色" v-if="objList.color">
+             <Input v-model="objList.color" clearable placeholder="请设置字体颜色" />
+           </FormItem>
+       </template>
         <!-- 纯文本特区 -->
         <template v-if="data.componentPack=='plainTextBlock'">
            <Divider>文本配置区域</Divider>
           <FormItem label="文本" prop="text">
              <Input v-model="objList.text" clearable placeholder="请输入文本" />
            </FormItem>
-           <FormItem label="字体大小" >
-             <Input v-model="objList.size" clearable placeholder="请设置字体大小" />
-           </FormItem>
-           <FormItem label="背景颜色">
-             <Input v-model="objList.background" clearable placeholder="请设置背景颜色" />
-           </FormItem>
-            <FormItem label="字体颜色">
-             <Input v-model="objList.color" clearable placeholder="请设置字体颜色" />
-           </FormItem>
         </template>
+        
         <!--商品分类特区  -->
         <template v-if="data.componentPack=='CategoryGoods'">
-           <FormItem label="标题" prop="name">
+           <!-- <FormItem label="标题" prop="name">
              <Input v-model="objList.name" clearable placeholder="请输入标题" />
-           </FormItem>
+           </FormItem> -->
            <FormItem label="文本" prop="text">
              <Input v-model="objList.text" clearable placeholder="请输入文本" />
            </FormItem>
-          
        </template>
         <!-- 秒杀商品特有 -->
         <template v-if="data.componentPack=='FlashSaleGoodsList'">
-          <FormItem label="标题" prop="name">
+          <!-- <FormItem label="标题" prop="name">
             <Input v-model="objList.name" clearable placeholder="请输入标题" />
-          </FormItem>
+          </FormItem> -->
           <FormItem label="秒杀时间" prop="itme">
             <DatePicker ref="datetime" v-model="itme" type="datetime" @on-change="(e)=>{objList.itme=e}"  format="yyyy-MM-dd HH:mm:ss" placeholder="请设置秒杀时间" ></DatePicker>
           </FormItem>
@@ -68,7 +74,7 @@
           <Divider>海报配置区域</Divider>
           <div :key="soleKeys.list">
                <FormItem v-for="(item,index) in objList.list"  :key="`${index}list`" 
-               :label="index==0?'前置图片':'后置图片'" 
+               :label="`图片配置（${index+1}）`" 
               :prop="`list.${index}.imgurl`" 
              :rules="{ required: true, message: '请设置图片路径', trigger: 'change' }">
                <div class="img-box">
@@ -98,7 +104,7 @@
         <template v-if="objList.data"  >
           <Divider>商品配置区域</Divider>
           <div :key="soleKeys.data">
-            <FormItem v-for="(item, index) in objList.data" :label="`商品配置(${index + 1})`"
+            <FormItem v-for="(item, index) in objList.data" :label="`商品配置（${index + 1}）`"
            :prop="`data.${index}.imgurl`" :key="`${index}data`"
           :rules="{ required: true, message: '请配置商品图片', trigger: 'change' }">
             <div class="img-box">
@@ -120,6 +126,10 @@
                   <Button icon="md-close" @click="delDtata(index)" :disabled="objList.data.length==1"></Button>
                 </ButtonGroup>
                 </div>
+                <Input @on-blur="refreshKey('data')"
+                  v-model.trim="item.name" clearable
+                  placeholder="请设置商品名称"
+                />
                 <Input @on-blur="refreshKey('data')"
                   v-model.trim="item.tourl" clearable
                   placeholder="请设置商品图片跳转路径"

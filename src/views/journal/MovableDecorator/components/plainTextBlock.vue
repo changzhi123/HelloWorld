@@ -1,6 +1,6 @@
 <template>
 <!-- 纯文本 -->
-  <div class="plainTextBlock" :style="`background:${objList.background||'#fff'};width:${objList.width||'100%'};height:${objList.height||'200px'};`">
+  <div class="plainTextBlock" :style="`background:${objList.background||'#fff'};max-width:${objList.width||'100%'};height:${objList.height||'200px'};`">
      <h2 :style="`line-height:${objList.height||'200px'};color:${objList.color||'#000'};
      font-size:${objList.size||'38px'};`">{{objList.text}}</h2>
   </div >
@@ -34,7 +34,7 @@ methods:{}
 <style lang="scss" scoped>
 .plainTextBlock{
   // height: 100px;
-  // width: 100%;
+  width: 100%;
   >h2{
     height: 100%;
     text-align: center;

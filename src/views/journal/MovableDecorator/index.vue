@@ -78,7 +78,6 @@
           </transition-group>
         </draggable>
 
-        <!-- <el-button @click="open" >测试</el-button> -->
       </div>
     </div>
 
@@ -96,22 +95,35 @@
 import draggable from "vuedraggable";
 import tools from "./tools";
 import { deepCopy } from "@/utils/method";
-// import popup from './components/popup'
+// import  './index.js'//全局祖册
+//局部注册
+const requireComponents = require.context('./components/', false, /\.vue$/) //读取当前文件夹下components文件夹下.vue文件
+const componentsObj = { }
+requireComponents.keys().forEach(filePath => {
+  const componentName = filePath.split('/')[1].replace(/\.vue$/, '')//获取组件名字
+  const componentConfig = requireComponents(filePath)//获取组件
+  componentsObj[componentName] = componentConfig.default || componentConfig
+  console.log(componentName,'当前组件',filePath)
+})
+componentsObj['draggable']=draggable
 export default {
-  components: {
-    draggable,
-    CarouselImg: () => import("./components/CarouselImg"),
-    FlashSaleGoodsList: () => import("./components/FlashSaleGoodsList"),
-    plainTextBlock: () => import("./components/plainTextBlock"),
-    MultipleImg5: () => import("./components/MultipleImg5"),
-    MultipleImg2_3: () => import("./components/MultipleImg2_3"),
-    MultipleImg1_3: () => import("./components/MultipleImg1_3"),
-    CategoryGoods: () => import("./components/CategoryGoods"),
-    RecommendedGoodsList: () => import("./components/RecommendedGoodsList"),
-    AllGoodsList: () => import("./components/AllGoodsList"),
-    Coupon: () => import("./components/Coupon"),
-    popup: () => import("./components/popup"), //弹窗
-  },
+  components:componentsObj,// 局部注册
+  // components: {
+  //   draggable,
+    // CarouselImg: () => import("./components/CarouselImg"),
+    // FlashSaleGoodsList: () => import("./components/FlashSaleGoodsList"),
+    // plainTextBlock: () => import("./components/plainTextBlock"),
+    // MultipleImg5: () => import("./components/MultipleImg5"),
+    // MultipleImg2_3: () => import("./components/MultipleImg2_3"),
+    // MultipleImg1_3: () => import("./components/MultipleImg1_3"),
+    // CategoryGoods: () => import("./components/CategoryGoods"),
+    // RecommendedGoodsList: () => import("./components/RecommendedGoodsList"),
+    // AllGoodsList: () => import("./components/AllGoodsList"),
+    // ArticleClassIfIcation:()=>import('./components/ArticleClassIfIcation'),
+    // recommend:()=>import('./components/recommend'),
+    // Coupon: () => import("./components/Coupon"),
+    // popup: () => import("./components/popup"), //弹窗
+  // },
   data() {
     return {
       form: {
@@ -120,11 +132,11 @@ export default {
       },
       cityList: [
         {
-          label: "pc",
+          label: "PC",
           value: "pc",
         },
         {
-          label: "move",
+          label: "M",
           value: "move",
         },
       ],
@@ -177,10 +189,13 @@ export default {
       // console.log(val,'list更新了', this.setObj)
     },
   },
-  mounted() {},
+  mounted() {
+  
+  },
   methods: {
     onChange() {
       this.list = [];
+      this.$refs.popups.setOpen(false);
     },
     setRank(type, index) {
       //弹窗排序
@@ -266,17 +281,16 @@ export default {
     onStart(e) {
       // console.log(e, "onStart");
     },
-    open() {
-      console.log(tools, this.objlist, "测试", this.list, this.setObj);
-    },
+   
   },
 };
 </script>
 <style lang="scss" scoped>
 .main-put {
-  // box-shadow: inset 0 0 2px 2px #2b9939;
+  // box-shadow: inset 0 0 -px 2px #2b9939;
   // padding: 1px;
-  border:2px solid #2b9939;
+  border:1px solid #2b9939;
+  // border-color: #2b9939;
 }
 $heide: calc(100vh - 84px);
 $tab-width: 300px;
@@ -402,7 +416,7 @@ $tab-width: 300px;
   box-sizing: border-box;
   > span {
     width: 100%;
-    min-height: 300px;
+    min-height: 450px;
     box-sizing: border-box;
     padding: 5px;
     display: block;
@@ -412,7 +426,10 @@ $tab-width: 300px;
       box-sizing: border-box;
       margin: auto;
       cursor: move;
-      // border:2px solid #fff ;
+      background: #fff;
+      margin-bottom: 2px;
+      // border: 2px solid #fff;
+      // border-bottom:1px solid  rgb(252, 239, 239) ;
     
     }
   }

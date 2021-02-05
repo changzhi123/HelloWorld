@@ -173,8 +173,9 @@ const pc = [
             componentPack: 'AllGoodsList',
            
             objList: {
-                width: '900px', maxData:20,
-                height: '500px',
+                width: '900px',
+                 maxData:20,
+                height: '200px',
                 data:[
                     {
                         // imgurl:
@@ -182,7 +183,7 @@ const pc = [
                         // text: "商品标题，可以结合具体业务活动商品数据",
                         // price: "69.8",
                     },
-                    {}, {}, {}, {}, {}, {}, {}, {}, {},
+                    {}, {}, {}, {},// {}, {}, {}, {}, {},
                 ]
             }
         }, {
@@ -236,11 +237,11 @@ const move=[
         componentList:[
             {
                 title: '轮播图',
-                parent: '1',
-                maxNum: 3,
-                nowNum: 0,
-                icon: "ios-image",
-                componentPack: 'CarouselImg',
+                parent: '1',//父级id
+                maxNum: 3,//最大数量
+                nowNum: 0,//当前数据
+                icon: "ios-image",//图标
+                componentPack: 'CarouselImg',//组件名称
                 objList: {
                     width:'100%',
                     height:'100px',
@@ -252,7 +253,7 @@ const move=[
             },
             {
                 title: '纯文本',
-                maxNum: 20,
+                maxNum: 10,
                 parent: '1',
                 nowNum: 0,
                 icon: 'ios-paper',//'el-icon-notebook-1',
@@ -264,6 +265,43 @@ const move=[
                     size: '18px',
                     background:'#fff',
                     text: '超值进口新发现'
+                }
+            },
+            {
+                title: '分类条',
+                maxNum: 10,
+                parent: '1',
+                nowNum: 0,
+                icon: 'md-grid',//'el-icon-notebook-1',
+                componentPack: 'ArticleClassIfIcation',
+                objList: {
+                    width: '100%',
+                    height: '100px',
+                    maxData:5,
+                    data:[{
+                        imgurl:'',
+                        tourl:'',
+                        name:""
+                    }]
+                }
+            },
+            {
+                title: '推荐商品',
+                maxNum: 10,
+                parent: '1',
+                nowNum: 0,
+                icon: 'ios-list-box',
+                componentPack: 'recommend',
+                objList: {
+                    width: '100%',
+                    height: '180px',
+                    maxData:4,
+                    name:'限时抢购',
+                    data:[{
+                        imgurl:'',
+                        tourl:'',
+                        name:""
+                    }]
                 }
             }
         ]

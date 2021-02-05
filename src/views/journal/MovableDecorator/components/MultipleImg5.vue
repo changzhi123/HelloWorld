@@ -1,6 +1,6 @@
 <template>
 <!-- 多图(5) -->
-  <div class="MultipleImg5" :style="`width:${objList.width||'100%'};height:${objList.height||'200px'};`">
+  <div class="MultipleImg5" :style="`max-width:${objList.width||'100%'};height:${objList.height||'200px'};`">
    <div v-for="(item,index) in objList.data" :key="index">
      <img :src="item.imgurl" @click="skipOpen(item.tourl)" alt="" v-if="item.imgurl">
      <div v-else class="Thereisno">
@@ -40,7 +40,7 @@ methods:{
 <style lang="scss" scoped>
 .MultipleImg5{
   // height: 100px;
-  // width: 100%;
+  width: 100%;
   // background: forestgreen;
   background: #fff;
   display: flex;

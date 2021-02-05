@@ -111,7 +111,7 @@ export default {
       height: 100%;
       width: calc(20% - 12px);
       // border: 1px solid springgreen;
-      padding: 0 10px;
+      padding: 0 0 10px 0; 
       display: flex;
       flex-wrap:wrap;
       text-align: center;

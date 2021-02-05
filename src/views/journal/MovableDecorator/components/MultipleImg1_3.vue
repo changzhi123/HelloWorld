@@ -2,22 +2,23 @@
   <!-- 多图(1-3) -->
   <div
     class="MultipleImg1_3"
-    :style="`width:${objList.width || '100%'};height:${
+    :style="`max-width:${objList.width || '100%'};height:${
       objList.height || '200px'
     };`"
   >
     <div>
-      <img class="images" @click="skipOpen(objList.data[0].tourl)"  v-if="objList.data[0].imgurl" :src="objList.data[0].imgurl" alt="" />
-      <div class="imgset" v-else>
-            <Icon type="md-image" />
+      <img class="images" @click="skipOpen(objList.data[0].tourl)"
+        v-if="objList.data[0].imgurl" :src="objList.data[0].imgurl" alt="" />
+      <div class="imgset" style="padding: 15px 0 0 0;" v-else>
+            <div><Icon type="md-image" /></div>
       </div>
     </div>
     <div class="imglist">
       <template v-for="(item, index) in objList.data">
         <div :key="index" v-if="index!=0">
           <img class="images" @click="skipOpen(item.tourl)" :src="item.imgurl" v-if="item.imgurl" alt="" />
-          <div class="imgset" v-else>
-            <Icon type="md-image" />
+          <div class="imgset" style="padding:0 0 15px 0" v-else>
+            <div><Icon type="md-image" /></div>
           </div>
         </div>
       </template>
@@ -61,15 +62,23 @@ export default {
 .imgset{
   width: 100%;
   height: 100%;
-  background: #f2f2f2;
-  font-size: 50px;
-  display: flex; color: rgba(97, 165, 255, 0.7);
+  // background: #f2f2f2;
+  font-size: 50px;color: rgba(97, 165, 255, 0.7);
+  display: flex; 
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+  >div{
+    background: #f2f2f2;
+    width: 100%;
+    height: 100%; display: flex; 
+  justify-content: center;
+  align-items: center;
+  }
 }
 .MultipleImg1_3 {
   // height: 100px;
-  // width: 100%;
+  width: 100%;
   background: #fff;
   // background: chartreuse;
   display: flex;

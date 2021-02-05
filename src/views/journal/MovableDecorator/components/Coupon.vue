@@ -2,7 +2,7 @@
   <!-- 优惠券 -->
   <div
     class="Coupon"
-    :style="`width:${objList.width || '100%'};height:${
+    :style="`max-width:${objList.width || '100%'};height:${
       objList.height || '200px'
     }`"
   >
@@ -49,6 +49,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .Coupon {
+  width: 100%;
   background: #fff;
   display: flex;
   justify-content: center;

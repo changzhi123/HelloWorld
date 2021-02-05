@@ -2,7 +2,7 @@
   <!-- 秒杀商品 -->
   <div
     class="FlashSaleGoodsList"
-    :style="`width:${objList.width || '100%'};height:${
+    :style="`max-width:${objList.width || '100%'};height:${
       objList.height || '200px'
     };`"
   >
@@ -126,7 +126,7 @@ export default {
 <style lang="scss" scoped>
 .FlashSaleGoodsList {
   // height: 100px;
-  // width: 100%; 
+  width: 100%; 
   
   display: flex;
   background: #fff;
@@ -171,7 +171,7 @@ export default {
   }
   .isimags {
     box-sizing: border-box;
-    padding: 15px 15px 15px 0;
+    padding: 15px  0 15px 0;
     > div {
       color: rgba(97, 165, 255, 0.7);
       font-size: 50px;
