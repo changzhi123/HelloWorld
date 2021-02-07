@@ -1,8 +1,7 @@
 <template>
   <div
     class="recommend"
-    :style="`max-width:${objList.width || '100%'};
-  height:${objList.height || '100px'}`"
+    :style="style"
   >
     <h3 class="header-h3">{{objList.name}}</h3>
     <div class="main-box">
@@ -21,6 +20,14 @@ export default {
   name: "recommend",
   data() {
     return {};
+  },
+  computed:{
+     style() {
+      return {
+        maxWidth: this.objList.width || "100%",
+        height: this.objList.height || "200px",
+      };
+    },
   },
   props: {
     objList: {

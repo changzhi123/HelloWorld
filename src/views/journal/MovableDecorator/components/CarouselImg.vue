@@ -2,7 +2,7 @@
   <!--  轮播 (普通数组)-->
   <div
     class="CarouselImg"
-    :style="`max-width:${objList.width||'100%'};`"
+    :style="style"
   >
   <Carousel
       loop class="imgbode"
@@ -14,7 +14,7 @@
       :arrow="setting.arrow"
     >
       <CarouselItem v-for="(item, index) in objList.data" :key="index" 
-       :style="`height:${objList.height||'200px'}`">
+       :style="height">
         <img class="imags" @click="skipOpen(item.tourl)" v-if="item.imgurl"
          :src="item.imgurl" alt="" />
         <div v-else class="imgput"><Icon type="ios-image" /></div>
@@ -30,6 +30,18 @@ export default {
   name: "CarouselImg",
   components:{
   },
+ computed:{
+   style(){
+     return{
+       maxWidth:this.objList.width||'100%'
+     }
+   },
+   height(){
+     return{
+       height:this.objList.height||'200px'
+     }
+   }
+ },
   data() {
     return {
       setting: {
@@ -43,7 +55,6 @@ export default {
      
     };
   },
- 
   props: {
     objList:{
         type: Object,

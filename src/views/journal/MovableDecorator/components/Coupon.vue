@@ -2,9 +2,7 @@
   <!-- 优惠券 -->
   <div
     class="Coupon"
-    :style="`max-width:${objList.width || '100%'};height:${
-      objList.height || '200px'
-    }`"
+    :style="style"
   >
     <template v-for="(item, index) in objList.list">
       <div :key="index" v-if="index==0">
@@ -29,6 +27,14 @@ export default {
     return {
       // img:''//"https://gjusp.alicdn.com/img/img1550568121854-2927159970.jpg@1000y-0ic_50Q.jpg_.webp"
     };
+  },
+  computed: {
+    style() {
+      return {
+        maxWidth: this.objList.width || "100%",
+        height: this.objList.height || "200px",
+      };
+    },
   },
   props: {
     objList: {

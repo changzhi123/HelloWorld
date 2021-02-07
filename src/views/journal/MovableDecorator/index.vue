@@ -1,6 +1,12 @@
 <template>
   <div class="head">
     <div class="head-header">
+      <Button style=" margin: 0 10px;" :size="form.size" @click="form.enshrine=!form.enshrine" >
+          <transition  name="fade" mode="out-in" >
+            <Icon v-if="form.enshrine" style="font-size: 30px;transition: 0.5s;" type="md-arrow-dropleft" />
+            <Icon v-else style="font-size: 30px;transition: 0.5s;" type="md-arrow-dropright" />
+          </transition>
+      </Button>
       <Select
         :size="form.size"
         v-model="form.genreType"
@@ -16,13 +22,12 @@
       </Select>
     </div>
     <div class="head-main-box">
-      <div class="tab">
-        <div class="tab-box" v-for="(item, idnex) in objlist" :key="idnex">
-          <!-- <h3>{{ item.groupName }}({{ item.componentList.length }})</h3> -->
+      <transition name="fade" mode="out-in" translate >
+        <div class="tab" v-show="form.enshrine">
+          <div class="tab-box" v-for="(item, idnex) in objlist" :key="idnex">
           <Divider
             >{{ item.groupName }}({{ item.componentList.length }})</Divider
           >
-          <!--  group="Decoration" -->
           <draggable
             class="box"
             v-model="item.componentList"
@@ -48,9 +53,10 @@
               </div>
             </transition-group>
           </draggable>
+          </div>
         </div>
-      </div>
-      <div class="main">
+      </transition>
+      <div class="main-form-bo ">
         <!--  group="Decoration" -->
         <draggable
           :options="{ group: { name: isName, pull: 'clone' }, sort: true }"
@@ -129,6 +135,7 @@ export default {
       form: {
         genreType: "pc",
         size: "large",
+        enshrine:true
       },
       cityList: [
         {
@@ -286,6 +293,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
 .main-put {
   // box-shadow: inset 0 0 -px 2px #2b9939;
   // padding: 1px;
@@ -293,24 +301,24 @@ export default {
   // border-color: #2b9939;
 }
 $heide: calc(100vh - 84px);
-$tab-width: 300px;
 .disabled {
   cursor: no-drop;
   opacity: 0.8;
 }
 .head {
   width: 100%;
-  height: $heide;
   box-sizing: border-box;
+  height:$heide ;
 }
 .head-header {
+  
   width: 100%;
   height: 64px;
   border-bottom: solid 1px #ccc;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px 0px #ccc;
   > div {
     margin: 0 10px;
   }
@@ -322,15 +330,14 @@ $tab-width: 300px;
   > div {
     height: 100%;
     box-sizing: border-box;
-    background: #fff;
-    overflow: auto;
+    overflow: auto;transition: 0.5s;
   }
-  .tab {
-  width: $tab-width; //200px;
+  .tab { 
+  width: 250px;    box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.3);
   border-right: solid 1px #ccc;
   height: 100%;
 }
-.main {
+.main-form-bo {
   flex: 1;
   background: #f5f5f5;
 }
@@ -347,7 +354,6 @@ $tab-width: 300px;
     box-sizing: border-box;
     padding: 0 20px;
     display: block;
-    // border-bottom: solid 1px #ccc;
     width: 100%;
   }
   .box {
@@ -360,7 +366,6 @@ $tab-width: 300px;
     .min {
       width: 48%;
       height: 100px;
-      // border: solid 1px #ccc;
       font-size: 16px;
       display: flex;
       text-align: center;
@@ -381,7 +386,6 @@ $tab-width: 300px;
   }
 }
 .dragClass {
-  // background: #f90 !important;
 }
 .chosenClassTo {
   box-sizing: border-box;
@@ -420,6 +424,7 @@ $tab-width: 300px;
     box-sizing: border-box;
     padding: 5px;
     display: block;
+      background: #f5f5f5;
     margin: auto;
     .mian-form {
       // width: 100%;

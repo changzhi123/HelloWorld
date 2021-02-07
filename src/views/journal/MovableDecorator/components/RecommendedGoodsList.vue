@@ -2,9 +2,7 @@
   <!-- 推荐商品 -->
   <div
     class="RecommendedGoodsList"
-    :style="`width:${objList.width || '100%'};height:${
-      objList.height || '200px'
-    }`"
+    :style="style"
   >
     <div class="text">
       <span>推荐商品</span>
@@ -35,6 +33,14 @@ export default {
     return {
      
     };
+  },
+  computed:{
+     style() {
+      return {
+        maxWidth: this.objList.width || "100%",
+        height: this.objList.height || "200px",
+      };
+    },
   },
   props: {
       isWindowsOpen:{

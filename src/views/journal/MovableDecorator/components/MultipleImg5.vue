@@ -1,6 +1,6 @@
 <template>
 <!-- 多图(5) -->
-  <div class="MultipleImg5" :style="`max-width:${objList.width||'100%'};height:${objList.height||'200px'};`">
+  <div class="MultipleImg5" :style="style">
    <div v-for="(item,index) in objList.data" :key="index">
      <img :src="item.imgurl" @click="skipOpen(item.tourl)" alt="" v-if="item.imgurl">
      <div v-else class="Thereisno">
@@ -18,7 +18,15 @@ data(){
   return{
    
   }
-},
+},   
+computed: {
+    style() {
+      return {
+        maxWidth: this.objList.width || "100%",
+        height: this.objList.height || "200px",
+      };
+    },
+  },
 props:{
  
     objList:{

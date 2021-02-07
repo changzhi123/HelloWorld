@@ -2,9 +2,7 @@
   <!-- 多图(2-3) -->
   <div
     class="MultipleImg2_3"
-    :style="`max-width:${objList.width || '100%'};height:${
-      objList.height || '200px'
-    }`"
+    :style="style"
   >
     <div class="tab-a">
       <template v-for="(item, index) in objList.data">
@@ -44,6 +42,14 @@ export default {
     return {
      
     };
+  },
+   computed: {
+    style() {
+      return {
+        maxWidth: this.objList.width || "100%",
+        height: this.objList.height || "200px",
+      };
+    },
   },
   props: {
     isWindowsOpen:{

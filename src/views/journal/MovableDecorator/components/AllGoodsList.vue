@@ -2,7 +2,7 @@
   <!-- 全部商品 -->
   <div
     class="AllGoodsList"
-    :style="`max-width:${objList.width || '100%'};`"
+    :style="style"
   >
   <div class="heida">
     <span>全部商品</span>
@@ -28,12 +28,20 @@
 
 <script>
 export default {
+  
   name: "AllGoodsList",
   data() {
     return {
       
     };
   },
+  computed:{
+   style(){
+     return{
+       maxWidth:this.objList.width||'100%'
+     }
+   }
+ },
   props: {
  
     objList:{

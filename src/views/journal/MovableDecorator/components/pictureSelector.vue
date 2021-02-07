@@ -88,7 +88,7 @@ export default {
       ],
       pitchOn: {},//选中的商品
     };
-  },
+  },   
   mounted() {},
   methods: {
     setOpen() {

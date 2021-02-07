@@ -2,9 +2,7 @@
   <!-- 多图(1-3) -->
   <div
     class="MultipleImg1_3"
-    :style="`max-width:${objList.width || '100%'};height:${
-      objList.height || '200px'
-    };`"
+    :style="style"
   >
     <div>
       <img class="images" @click="skipOpen(objList.data[0].tourl)"
@@ -35,6 +33,14 @@ export default {
     return {
     
     };
+  },
+   computed: {
+    style() {
+      return {
+        maxWidth: this.objList.width || "100%",
+        height: this.objList.height || "200px",
+      };
+    },
   },
   props: {
   

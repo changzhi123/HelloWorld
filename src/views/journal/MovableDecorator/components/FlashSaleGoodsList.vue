@@ -2,9 +2,7 @@
   <!-- 秒杀商品 -->
   <div
     class="FlashSaleGoodsList"
-    :style="`max-width:${objList.width || '100%'};height:${
-      objList.height || '200px'
-    };`"
+    :style="style"
   >
       <div 
       class="tab tab-img" 
@@ -82,7 +80,13 @@ export default {
       },
     };
   },
-  computed:{
+  computed:{ 
+    style() {
+      return {
+        maxWidth: this.objList.width || "100%",
+        height: this.objList.height || "200px",
+      };
+    },
      arrLength(){
       return this.objList.data.length>4?2:1
      }

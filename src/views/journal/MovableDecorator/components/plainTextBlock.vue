@@ -1,8 +1,8 @@
 <template>
 <!-- 纯文本 -->
-  <div class="plainTextBlock" :style="`background:${objList.background||'#fff'};max-width:${objList.width||'100%'};height:${objList.height||'200px'};`">
-     <h2 :style="`line-height:${objList.height||'200px'};color:${objList.color||'#000'};
-     font-size:${objList.size||'38px'};`">{{objList.text}}</h2>
+  <div class="plainTextBlock" 
+  :style="style">
+     <h2 :style="style2">{{objList.text}}</h2>
   </div >
 </template>
 
@@ -14,6 +14,24 @@ data(){
     
   }
 },
+computed: {
+    style() {
+      return {
+        maxWidth: this.objList.width || "100%",
+        height: this.objList.height || "200px",
+        background:this.objList.background||'#fff'
+      };
+    },
+    style2() {
+      return {
+        maxWidth: this.objList.width || "100%",
+        lineHeight: this.objList.height || "200px",
+        color:this.objList.color||'#000',
+        fontsize:this.objList.size||'38px'
+      };
+    },
+
+  },
 props:{
     styles: {
       type: Object,

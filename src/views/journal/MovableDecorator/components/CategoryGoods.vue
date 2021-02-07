@@ -1,6 +1,6 @@
 <template>
   <!-- 分类管区 -->
-  <div class="CategoryGoods" :style="`max-width:${objList.width||'100%'};height:${objList.height||'200px'};`">
+  <div class="CategoryGoods" :style="style">
     <div class="tab">
       <i class="View_colorMark_rhgAb"></i>
       <span class="View_title_2mual">{{objList.name}}</span>
@@ -41,10 +41,16 @@
     name: 'CategoryGoods',
     data() {
       return {
-       
-        
-      }
+        }
     },
+     computed: {
+    style() {
+      return {
+        maxWidth: this.objList.width || "100%",
+        height: this.objList.height || "200px",
+      };
+    },
+  },
     props: {
      
     objList:{
