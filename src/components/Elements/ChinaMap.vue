@@ -8,7 +8,6 @@ import echarts from "echarts";
 import { objset } from "@/utils/method";
 import latLngMap from "./lat-lng-map.js";
 const lodash = require("lodash");
-//   import '../../../../node_modules/echarts/map/js/china.js'
 import '../../../node_modules/echarts/map/js/china.js'
 export default {
   name: "ChinaMap",
@@ -45,7 +44,7 @@ export default {
     markPointData() {
       let markpointData = [];
       let max = lodash.maxBy(this.data, "value");
-      console.log(max,'xxxx');
+      console.log(max,'xxxx',lodash);
       this.data.map((value) => {
         let coord = latLngMap[value.name];
         if (coord && value.value) {

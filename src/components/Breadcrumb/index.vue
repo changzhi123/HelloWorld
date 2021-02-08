@@ -3,7 +3,7 @@
   <el-breadcrumb class="app-breadcrumb" separator-class="el-icon-arrow-right">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path">
-        <span
+        <span 
           v-if="item.redirect==='noRedirect'||index==levelList.length-1"
           class="no-redirect"
         >{{ item.meta.title }}</span>
@@ -29,6 +29,9 @@ export default {
   },
   created() {
     this.getBreadcrumb();
+  },
+  mounted(){
+    console.log(this.levelList,'面包屑')
   },
   methods: {
     getBreadcrumb() {
@@ -65,14 +68,14 @@ export default {
     },
     handleLink(item) {
       console.log("不跳转",item);
-      return;
+      // return;
       // 不跳转
       const { redirect, path } = item;
       if (redirect) {
         this.$router.push(redirect);
         return;
       }
-      this.$router.push(this.pathCompile(path));
+      this.$router.push(path)//(this.pathCompile(path));
     }
   }
 };
