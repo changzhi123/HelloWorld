@@ -273,7 +273,7 @@ const move=[
                 parent: '1',
                 nowNum: 0,
                 icon: 'md-grid',//'el-icon-notebook-1',
-                componentPack: 'ArticleClassIfIcation',
+                componentPack: 'IfIcation',
                 objList: {
                     width: '100%',
                     height: '100px',

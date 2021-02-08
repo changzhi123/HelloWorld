@@ -135,7 +135,7 @@ export default {
       form: {
         genreType: "pc",
         size: "large",
-        enshrine:true
+        enshrine:true,//是否展示选择框
       },
       cityList: [
         {

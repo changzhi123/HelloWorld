@@ -1,7 +1,6 @@
-
 <template>
-  <div class="ArticleClassIfIcation" :style="style">
-    <div class="img-list" v-for="(item, index) in objList.data" :key="index">
+    <div class="IfIcation">
+         <div class="img-list" v-for="(item,index) in objList.data" :key="index">
       <img
         class="imgurl"
         @click="skipOpen(item.tourl)"
@@ -13,11 +12,12 @@
       <h3 class="imgh3" v-if="item.name">{{ item.name }}</h3>
       <div class="imgh3" style="padding: 3px 10px" v-else><div></div></div>
     </div>
-  </div>
+    </div>
 </template>
+
 <script>
 export default {
-  name: "ArticleClassIfIcation",
+  name: "IfIcation",
   data() {
     return {};
   },
@@ -25,7 +25,7 @@ export default {
     style() {
       return {
         maxWidth: this.objList.width || "100%",
-        minHeight: this.objList.height || "100px",
+        height: this.objList.height || "100px",
       };
     },
   },
@@ -48,12 +48,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ArticleClassIfIcation {
+.IfIcation {
   width: 100%;
   // border:  solid 1px #ccc;
   display: flex;
   background: #fff;
   justify-content: space-around;
+  align-items: center;
   .img-list {
     width: 20%;
     height: 100%;
@@ -62,6 +63,8 @@ export default {
     flex-wrap: wrap;
     overflow: hidden;
     align-content: center;
+    justify-content: center;
+    align-items: center;
     .imgurl {
       width: 50px;
       margin: auto;
@@ -87,7 +90,7 @@ export default {
       > div {
         width: 100%;
         height: 100%;
-        background: rgba(97, 165, 255, 0.7);
+        background-color: rgba(97, 165, 255, 0.7);
       }
     }
   }
