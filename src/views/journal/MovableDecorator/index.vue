@@ -109,27 +109,11 @@ requireComponents.keys().forEach(filePath => {
   const componentName = filePath.split('/')[1].replace(/\.vue$/, '')//获取组件名字
   const componentConfig = requireComponents(filePath)//获取组件
   componentsObj[componentName] = componentConfig.default || componentConfig
-  console.log(componentName,'当前组件',filePath)
+  console.log(componentName,'当前组件',filePath,componentConfig,requireComponents)
 })
 componentsObj['draggable']=draggable
 export default {
   components:componentsObj,// 局部注册
-  // components: {
-  //   draggable,
-    // CarouselImg: () => import("./components/CarouselImg"),
-    // FlashSaleGoodsList: () => import("./components/FlashSaleGoodsList"),
-    // plainTextBlock: () => import("./components/plainTextBlock"),
-    // MultipleImg5: () => import("./components/MultipleImg5"),
-    // MultipleImg2_3: () => import("./components/MultipleImg2_3"),
-    // MultipleImg1_3: () => import("./components/MultipleImg1_3"),
-    // CategoryGoods: () => import("./components/CategoryGoods"),
-    // RecommendedGoodsList: () => import("./components/RecommendedGoodsList"),
-    // AllGoodsList: () => import("./components/AllGoodsList"),
-    // ArticleClassIfIcation:()=>import('./components/ArticleClassIfIcation'),
-    // recommend:()=>import('./components/recommend'),
-    // Coupon: () => import("./components/Coupon"),
-    // popup: () => import("./components/popup"), //弹窗
-  // },
   data() {
     return {
       form: {
