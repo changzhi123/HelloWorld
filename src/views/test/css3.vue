@@ -1,5 +1,8 @@
 <template>
   <div class="css3">
+    <div class='box'>
+      <visualizationMap ref="visualizationMaps"></visualizationMap>
+    </div>
     <div class="box">
       <chartTypeAnnular :putOptions="putOptions" />
     </div>
@@ -14,6 +17,9 @@
     <div class="box">
     <TheNationalMap ref="TheNationalMaps"></TheNationalMap>
     </div>
+    <div class="box">
+      <nationwideMap ref="nationwideMaps"></nationwideMap>
+    </div>
   </div>
 </template>
 
@@ -21,11 +27,13 @@
 import chartTypeAnnular from "@/components/Elements/chartTypeAnnular";
 import ChinaMap from "@/components/Elements/ChinaMap";
 import TheNationalMap from '@/components/Elements/TheNationalMap';
+import nationwideMap from '@/components/Elements/nationwideMap'
+import visualizationMap from '@/components/Elements/visualizationMap'
 import { data } from "./map.js";
 export default {
   components: {
     chartTypeAnnular,TheNationalMap,
-    ChinaMap,
+    ChinaMap,nationwideMap,visualizationMap
   },
   data() {
     return {
