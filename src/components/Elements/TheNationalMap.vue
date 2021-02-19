@@ -73,7 +73,7 @@ export default {
                 },
                 lineStyle: {
                     normal: {
-                        color: '#f90',
+                        color: '#58bc58',
                         width: 1,
                         opacity: 0.6,
                         curveness: 0.2
@@ -95,12 +95,12 @@ export default {
                         formatter: '{b}'
                     }
                 },
-                symbolSize: function(val) {
-                    return val[2] / 8;
-                },
+                // symbolSize: function(val) {
+                //     return val[2] / 8;
+                // },
                 itemStyle: {
                     normal: {
-                        color: '#58bc58',
+                        color: '#f90',
                     },
                     emphasis: {
                         areaColor: '#fff'
@@ -113,7 +113,6 @@ export default {
         // tooltip: {
         //   trigger: "item",
         // },
-      
           tooltip: {
                 trigger: 'item',
                 formatter: function(params, ticket, callback) {

@@ -1,5 +1,9 @@
 <template>
   <div class="css3">
+    <div class="box">
+      <Button class="btn" @click="$refs.DrillingMaps.back()">返回</Button>
+      <DrillingMap ref="DrillingMaps"></DrillingMap>
+    </div>
     <div class='box'>
       <visualizationMap ref="visualizationMaps"></visualizationMap>
     </div>
@@ -30,10 +34,11 @@ import TheNationalMap from '@/components/Elements/TheNationalMap';
 import nationwideMap from '@/components/Elements/nationwideMap'
 import visualizationMap from '@/components/Elements/visualizationMap'
 import { data } from "./map.js";
+import DrillingMap from '@/components/Elements/DrillingMap'
 export default {
   components: {
     chartTypeAnnular,TheNationalMap,
-    ChinaMap,nationwideMap,visualizationMap
+    ChinaMap,nationwideMap,visualizationMap,DrillingMap
   },
   data() {
     return {
@@ -125,9 +130,16 @@ export default {
   flex-wrap: wrap;
 }
 .box {
-  width: 40%;
+  width: 48%;
   height: 400px;
   border: 1px solid #ccc;
   margin: 10px;
+  position: relative;
+  .btn{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+  }
 }
 </style>
