@@ -85,25 +85,25 @@ export default {
     },
     //渲染echarts
     initEchartMap(mapData, sum, pointData) {
-      let xData = [],
-        yData = [];
+      // let xData = [],
+      //   yData = [];
       let min = mapData[mapData.length - 1].value;
       let max = mapData[0].value;
       if (mapData.length === 1) {
         min = 0;
       }
-      mapData.forEach((c) => {
-        xData.unshift(
-          c.name.replace(/(省|市|自治区|回族|维吾尔|壮族|特别行政区)/g, "")
-        );
-        yData.unshift(c.value);
-      });
+      // mapData.forEach((c) => {
+      //   xData.unshift(
+      //     c.name.replace(/(省|市|自治区|回族|维吾尔|壮族|特别行政区)/g, "")
+      //   );
+      //   yData.unshift(c.value);
+      // });
       //这里做个切换，全国的时候才显示南海诸岛  只有当注册的名字为china的时候才会显示南海诸岛
       echarts.registerMap(
         this.parentInfo.length === 1 ? "china" : "map",
         this.geoJson
       );
-
+     console.log(mapData,'mapData地图的数据')
       let option = {
         baseOption: {
           backgroundColor: "#f5f5f5",
