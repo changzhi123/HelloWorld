@@ -1,5 +1,5 @@
 const keyName={
-    tokenName:'userToken'//储存的token名称
+    token:'Token'//储存的token名称
 }
 
 export default keyName

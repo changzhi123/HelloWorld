@@ -1,8 +1,8 @@
-import request from '../utils/request'
+import request from '/@/utils/request'
 //登陆
 export function logIn(data) {
     return request({
-      url: '/webapi/v1/customer/platforms',
+      url: '/login',
       method: 'POST',
       data
     });
@@ -10,8 +10,16 @@ export function logIn(data) {
 //获取用户信息
 export function Info(params) {
     return request({
-      url: '/user/info',
+      url: '/users/getInfo',
       method: 'get',
       params
     });
   }
+//获取用户权限
+export function routers(params) {
+  return request({
+    url: '/users/getInfo',
+    method: 'get',
+    params
+  });
+}

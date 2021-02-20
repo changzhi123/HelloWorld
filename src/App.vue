@@ -9,11 +9,11 @@ export default {
   name: "App",
   components: {},
   computed:{
-    ...mapState(["username",])// 映射 this.count 为 store.state.count
+    // ...mapState(["username",])// 映射 this.count 为 store.state.count
   },
   mounted () {
-    console.log(this.username, "mapState",keyName.tokenName);
-    console.log(process.env,'当前环境',this.$store.state)
+    // console.log(this.username, "mapState",keyName.token);
+    console.log(process.env,'当前环境',this.$store.state.user)
   }
 };
 </script>
