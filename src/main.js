@@ -1,5 +1,20 @@
+// main.js
+
 import { createApp } from 'vue'
 import App from './App.vue'
-import './index.css'
 
-createApp(App).mount('#app')
+const app = createApp(App);
+
+import router from './router'//路由
+import store from './store'//vuex
+
+import Antd from 'ant-design-vue';//ui组件
+import 'ant-design-vue/dist/antd.css';//ui组件样式
+
+// 权限判定
+import './router/permission'
+
+
+app.use(router).use(store).use(Antd)
+
+app.mount('#app') 

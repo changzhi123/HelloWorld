@@ -2,11 +2,18 @@
   "name": "myVite",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build"
+    "serve": "vite  --mode development",
+    "serve-pro": "vite  --mode production",
+    "build": "vite build  --mode development",
+    "build-pro": "vite build  --mode production"
   },
   "dependencies": {
-    "vue": "^3.0.4"
+    "ant-design-vue": "^2.0.0",
+    "axios": "^0.21.1",
+    "vue": "^3.0.4",
+    "vue-cookies": "^1.7.4",
+    "vue-router": "^4.0.4",
+    "vuex": "^4.0.0-rc.2"
   },
   "devDependencies": {
     "vite": "^1.0.0-rc.13",
