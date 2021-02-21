@@ -16,12 +16,7 @@ export default {
       }
   },methods:{
     login(){
-      this.$store.dispatch("user/setLogin", this.data).then(res=>{
-        console.log(this.$store.state.user)
-        //  this.$router.push('/');//登陆成功后跳转首页
-        //           window.location.reload();//刷新页面
-        this.$store.dispatch("user/getInfo")
-      })
+      this.$store.dispatch("user/setLogin", this.data)
     }
   }
 }

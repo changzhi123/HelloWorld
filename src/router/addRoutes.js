@@ -9,5 +9,5 @@ const addRoutes=[
             requireLogin:true,// 需要权限才能访问
         }
     },
-]
+];
 export default addRoutes

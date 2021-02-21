@@ -16,7 +16,7 @@ export function Info(params) {
     });
   }
 //获取用户权限
-export function routers(params) {
+export function getRouters(params) {
   return request({
     url: '/users/getInfo',
     method: 'get',
