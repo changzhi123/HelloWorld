@@ -23,25 +23,24 @@ router.beforeEach((to, from, next) => {
     const { meta: { requireLogin }, fullPath } = to;
     const isUserInfo = store.getters.userInfo
 
-    console.log(requireLogin, '路由拦截', isUserInfo, isToken,to)
+    console.log(requireLogin, '路由拦截', isUserInfo, isToken, to)
 
     if (requireLogin) {//判断路由是否需要权限
         if (isToken) {//判断是否已经登陆
             if (isUserInfo) {//当vuex中userInfo为空，说明用户刷新了,重新获取用户信息/权限
 
                 next()//已登录直接通过
-                NProgress.done()
             } else {
                 try {
-                    // console.log('用户刷新了',userInfo)
-                    store.dispatch("user/getInfo").then(() => {
-                        next()
-                        NProgress.done()
-                        //   console.log(store.getters.userInfo,'userInfo再次获取')
+                    store.dispatch('user/getInfo')
+
+                    store.dispatch("user/setRouter").then(() => {
+                        next({ ...to, replace: true })
+                        console.log(store.getters.userInfo, 'userInfo再次获取')
                     })
-                } catch (error) {
-                    store.dispatch("user/delDatas")//删除本地所有数据重新登陆
-                    message.error('系统繁忙，请重新登陆！')
+                } catch {
+                     store.dispatch("user/delDatas")//删除本地所有数据重新登陆
+                    message.error('验证失败，请重新登陆！')
                     NProgress.done()
                 }
             }

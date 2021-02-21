@@ -22,10 +22,9 @@ const actions = {
                 // console.log(res, '登录成功')
                 setCookies(keyName.token, token) //登录成功后将token存储在cookie之中
 
-                dispatch('getInfo').then(() => {
                     router.push('/');//登陆成功后跳转首页
                     window.location.reload();//刷新页面
-                })
+               
                 resolve()
             }).catch(error => {
                 reject(error)
@@ -60,16 +59,12 @@ const actions = {
         return new Promise((resolve, reject) => {
             Info().then(res => {
                 // console.log(res, '获取用户信息')
-                const data = res.data || {}
-                if (!data) {
-                    reject('验证失败，请重新登录.')
-                }
-
+                const data = res.data 
+                
                 commit('stateUpdate', { key: 'userInfo', value: data })//储存数据
 
-                dispatch('setRouter')
-
-                resolve(res.data)
+            
+                resolve(data)
             }).catch(error => {
                 reject(error)
             })

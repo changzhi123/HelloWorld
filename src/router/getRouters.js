@@ -23,11 +23,13 @@ const getRouters = [//固定的路由
         }
 
     },
-    // {
-    //     path: '/404',
-    //     name: '404',
-    //     component : () => import('/@/views/404.vue'),
-    //     meta:{}
-    // }
+    {
+        path: '/item',
+        name: 'item',
+        component : () => import('/@/views/item/index.vue'),
+        meta:{
+            requireLogin: true,// 需要权限才能访问
+        }
+    }
 ];
 export default getRouters

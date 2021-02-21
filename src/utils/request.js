@@ -2,7 +2,8 @@ import axios from 'axios'
 import { setCookies, getCookies, delCookies } from '/@/utils'
 import { message } from 'ant-design-vue';
 import keyName from '/@/utils/keyName'
-// import store from '/@/store'
+import store from '/@/store'
+
 const baseURLs = {
     development: '/api',
     production: '/api',
@@ -32,13 +33,20 @@ service.interceptors.response.use(
         const res = response.data;
         console.log(res, 'respone拦截器')
         if (res.code != 0) {
-            message.error(res.message || '系统繁忙！')
+            if (res.code == 404 || res.code == 401) {
+                store.dispatch('user/delDatas')
+            }
+
+            message.error(res.msg || '系统繁忙！')
+
+            return Promise.reject(new Error(res.msg || 'Error'))
         } else {
             return res
         }
     },
     error => {
-        // console.log('err' + error)
+        console.log('err' + error)
         return Promise.reject(error)
     });
+
 export default service

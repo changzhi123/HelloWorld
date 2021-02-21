@@ -3,7 +3,8 @@
     <a-button type="primary" @click="set">清楚</a-button>
     hone
      <a-button type="primary" @click="sss">查看</a-button>
-     <a-button type="primary" @click="tttt">查</a-button>
+     <a-button type="primary" @click="tttt">text</a-button>
+     <a-button type="primary" @click="$router.push('/item')">item</a-button>
   </div>
 </template>
 
