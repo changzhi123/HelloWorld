@@ -3,14 +3,14 @@ import { logIn, Info, routers } from '/@/api/user'
 import { setCookies, getCookies, delCookies } from '/@/utils'
 import addRoutes from '/@/router/addRoutes'
 import keyName from '/@/utils/keyName'
-import {resetRouter,constantRoutes} from '/@/router'
+// import {resetRouter} from '/@/router'
 import router from '/@/router'
 const state = {
     username: '',
     token: '',//token
     userInfo: {},//用户信息
     addRoutes: [],//动态路由
-    routers:constantRoutes
+    routers:[]
 };
 
 const actions = {
@@ -22,36 +22,34 @@ const actions = {
                 const { token } = res.data || {}
                 // console.log(res, '登录成功')
                 setCookies(keyName.token, token) //登录成功后将token存储在cookie之中
-                commit('stateUpdate', {key:'token',value:token})
-                  
-                //   router.push( '/');//登陆成功后跳转首页
-                //   window.location.reload();//刷新页面
-
+                commit('stateUpdate', {key:'token',value:token})  
+        
                 resolve()
             }).catch(error => {
                 reject(error)
             });
         });
     },
-    //获取菜单
-    GenerateRoutes({ commit }) {
-        // return routers().then(res => {
-        //    const {accessedRouters}=res||{}
-           //筛选路由
-        //    console.log(addRoutes,'递归后获取菜单')
-           commit('stateUpdate',{ key:'addRoutes', value:addRoutes})
-        // })
-    },
+    
     //获取用户信息
     getInfo({ commit }) {
         return new Promise((resolve, reject) => {
             Info().then(res => {
                 // console.log(res, '获取用户信息')
-                if (!res.data) {
+                const {data}=res
+                if (!data) {
                     reject('验证失败，请重新登录.')
                 }
-                const { username, avatar, nickname } = res.data || {}
-                commit('stateUpdate', {key:'username', value:username})
+                const { username, avatar, nickname } = data || {}
+                
+                commit('stateUpdate', {key:'userInfo', value:res.data})
+                setCookies(keyName.userInfo, res.data) 
+
+                commit('stateUpdate',{ key:'addRoutes', value:addRoutes})
+
+                router.push( '/');//登陆成功后跳转首页
+                window.location.reload();//刷新页面
+
                 resolve(res.data)
             }).catch(error => {
                 reject(error)
@@ -63,10 +61,11 @@ const actions = {
     logout({commit,state}) {
         return new Promise((resolve, reject) => {
             logouts().then(() => {
-                commit('stateUpdate', {key:'username',value: ''})
+
+                commit('stateUpdate', {key:'userInfo',value: {}})
                 commit('stateUpdate', {key:'token', value:''})
                 delCookies(keyName.token)
-                resetRouter()//重置路由
+
                 resolve()
             }).catch(error => {
                 reject(error)
@@ -77,6 +76,7 @@ const actions = {
     resetToken({ commit }) {
         return new Promise(resolve => {
             commit('stateUpdate', {key:'token', value:''})
+            commit('stateUpdate', {key:'userInfo',value: {}})
             delCookies(keyName.token)
             resolve()
         })

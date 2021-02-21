@@ -1,12 +1,13 @@
 <template>
   <div>
-    <a-button type="primary" @click="set">Primary</a-button>
+    <a-button type="primary" @click="set">清楚</a-button>
     hone
   </div>
 </template>
 
 <script>
 import {setCookies,getCookies,delCookies}from '/@/utils'
+import kenName from '/@/utils/keyName'
 export default {
   name: "home",
   data() {
@@ -16,7 +17,8 @@ export default {
   },
   methods: {
     set(){
-      setCookies('name','changzhi')
+      delCookies(kenName.token,'')
+       delCookies(kenName.userInfo,'')
     }
   },
 };
