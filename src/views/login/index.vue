@@ -1,42 +1,159 @@
 <template>
-<!-- login -->
-  <div>
-    login
-    <a-button
-      type="primary"
-      @click="
-        $store.dispatch('user/setLogin', {
-          username: 'changzhi',
-          password: '123456adc',
-        })
-      "
-      >登陆</a-button
-    >
+  <!-- login -->
+  <div class="login">
+    <div class="login-box">
+      <h2>vite</h2>
+      <div class="imput-box">
+        <a-input
+          size="large"
+          :maxlength="30"
+          placeholder="请输入账号"
+          allowClear
+          @change="canonical('username')"
+          v-model:value="state.formData.username"
+        >
+          <template #prefix>
+            <UserOutlined />
+          </template>
+        </a-input>
+        <p v-if="state.rules.username.show" class="p-text">
+          {{ state.rules.username.text }}
+        </p>
+      </div>
+      <div class="imput-box">
+        <a-input-password
+          size="large"
+          :maxlength="18"
+          allowClear
+          placeholder="请输入密码"
+          @change="canonical('password')"
+          v-model:value="state.formData.password"
+          @pressEnter="login()"
+        >
+          <template #prefix>
+            <LockOutlined />
+          </template>
+        </a-input-password>
+        <p v-if="state.rules.password.show" class="p-text">
+          {{ state.rules.password.text }}
+        </p>
+      </div>
+
+      <a-button
+        type="primary"
+        size="large"
+        @click="login()"
+        block
+        :loading="state.loading"
+        >登录</a-button
+      >
+    </div>
   </div>
 </template>
 
 <script>
+import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
 import {
-  ref,
+//   ref,
   reactive,
-  computed,
-  onMounted,
-  onUpdated,
-  onUnmounted,
-  onRenderTracked,
-  onRenderTriggered,
+//   computed,
+//   onMounted,
+//   onUpdated,
+//   onUnmounted,
+//   onRenderTracked,
+//   onRenderTriggered,
 } from "vue";
+import store from "/@/store"; //vuex
 export default {
-  setup(){
-      const state = reactive({
-          
-      })
-      return{
-          state,
+  components: { UserOutlined, LockOutlined },
+  setup() {
+    const state = reactive({
+      formData: {
+        username: "changzhi",
+        password: "123456adc",
+      },
+      rules: {
+        username: {
+          text: "",
+          show: false,
+        },
+        password: {
+          text: "",
+          show: false,
+        },
+      },
+      loading: false,
+    });
+    //正则验证
+    function canonical(type) {
+      const keyName = {
+        username: "账户",
+        password: "密码",
+      };
+      if (!state.formData[type]) {
+        state.rules[type].text = `请输入${keyName[type]}！`;
+        state.rules[type].show = true;
+      } else {
+        state.rules[type].text = "";
+        state.rules[type].show = false;
       }
-  }
+      // console.log(type,state.rules[type])
+    }
+    //登陆
+    function login() {
+      state.loading = true;
+      let isType = false;
+      for (let key in state.rules) {
+        if (state.rules[key].show) isType = true;
+      }
+      if (isType) {
+        state.loading = false;
+        return;
+      }
+      //   console.log(isType, "isType");
+      store.dispatch("user/setLogin", state.formData).then(() => {
+        state.loading = false;
+      });
+    }
+    return {
+      state,
+      login,
+      canonical,
+    };
+  },
 };
 </script>
-
-<style>
+<style lang="less" scoped>
+.login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background: #f5f5f5;
+  .login-box {
+    width: 450px;
+    border: 1px solid #ccc;
+    background: #f2f2f2;
+    padding: 20px 50px 30px 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    h2 {
+      font-size: 30px;
+      width: 100%;
+      text-align: center;
+    }
+    .imput-box {
+      width: 100%;
+      height: 70px;
+    }
+    .p-text {
+      color: red;
+      text-align: left;
+      font-size: 14px;
+    }
+  }
+}
 </style>
