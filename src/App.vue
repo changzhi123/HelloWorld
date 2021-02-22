@@ -3,19 +3,37 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import keyName from '/@/utils/keyName'
-export default {
-  name: "App",
-  components: {},
-  computed:{
-    // ...mapState(["username",])// 映射 this.count 为 store.state.count
-  },
-  mounted () {
-    // console.log(this.username, "mapState",keyName.token);
-    console.log(process.env,'当前环境',this.$store.state.user)
-  }
-};
+  import {
+    //   ref,
+    toRefs,
+    reactive,
+    //   computed,
+    onMounted,
+    //   onUpdated,
+    //   onUnmounted,
+    //   onRenderTracked,
+    //   onRenderTriggered,
+    // defineComponent
+  } from "vue";
+  import { useStore  } from 'vuex'
+  export default {
+    name: "App",
+    components: {},
+    setup() {
+      const store=useStore()
+      const state = reactive({});
+      onMounted(() => {
+        console.log(process.env, '当前环境',store.state.user)
+      });
+      return {
+        ...toRefs(state),
+        // count: computed(() => store.state.count),
+        // increment: () => store.commit('increment'),
+        // asyncIncrement: () => store.dispatch('asyncIncrement')
+      };
+    },
+
+  };
 </script>
 <style scoped>
 

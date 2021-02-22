@@ -11,8 +11,8 @@
         computed
     } from 'vue'
     export default {
-        props:{
-        },
+        // props:{
+        // },
         setup(props,ctx) {
             console.log(props,'props')
             const state = reactive({})

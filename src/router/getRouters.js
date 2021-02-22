@@ -30,6 +30,14 @@ const getRouters = [//固定的路由
         meta: {
             requireLogin: true,// 需要权限才能访问
         }
-    }
+    },
+    {
+        path: '/toDoList',
+        name: 'toDoList',
+        component: () => import('/@/views/toDoList/index.vue'),
+        meta: {
+            requireLogin: true,// 需要权限才能访问
+        }
+    },
 ];
 export default getRouters

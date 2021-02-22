@@ -10,14 +10,14 @@
           placeholder="请输入账号"
           allowClear
           @change="canonical('username')"
-          v-model:value="state.formData.username"
+          v-model:value="formData.username"
         >
           <template #prefix>
             <UserOutlined />
           </template>
         </a-input>
-        <p v-if="state.rules.username.show" class="p-text">
-          {{ state.rules.username.text }}
+        <p v-if="rules.username.show" class="p-text">
+          {{ rules.username.text }}
         </p>
       </div>
       <div class="imput-box">
@@ -27,15 +27,15 @@
           allowClear
           placeholder="请输入密码"
           @change="canonical('password')"
-          v-model:value="state.formData.password"
+          v-model:value="formData.password"
           @pressEnter="login()"
         >
           <template #prefix>
             <LockOutlined />
           </template>
         </a-input-password>
-        <p v-if="state.rules.password.show" class="p-text">
-          {{ state.rules.password.text }}
+        <p v-if="rules.password.show" class="p-text">
+          {{ rules.password.text }}
         </p>
       </div>
 
@@ -44,7 +44,7 @@
         size="large"
         @click="login()"
         block
-        :loading="state.loading"
+        :loading="loading"
         >登录</a-button
       >
     </div>
@@ -54,14 +54,8 @@
 <script>
 import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
 import {
-//   ref,
-  reactive,
-//   computed,
-//   onMounted,
-//   onUpdated,
-//   onUnmounted,
-//   onRenderTracked,
-//   onRenderTriggered,
+  toRefs,
+  reactive
 } from "vue";
 import store from "/@/store"; //vuex
 export default {
@@ -116,7 +110,7 @@ export default {
       });
     }
     return {
-      state,
+      ...toRefs(state),
       login,
       canonical,
     };
@@ -131,12 +125,14 @@ export default {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  background: #f5f5f5;
+  // background: #f5f5f5;
+  background:url('../../assets/images/login.jpg') no-repeat;
+  background-size: 100% 100%;
   .login-box {
     width: 450px;
     border: 1px solid #ccc;
-    background: #f2f2f2;
-    padding: 20px 50px 30px 50px;
+    background: #f5f5f5;
+    padding: 20px 50px 50px 50px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
