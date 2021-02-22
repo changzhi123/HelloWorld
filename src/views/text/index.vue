@@ -3,8 +3,8 @@
     <div class="box">
       <!-- <a-input class="imptu" v-model:value="state.num1" @keyup="add()" placeholder="Basic usage" /><span>+</span>
       <a-input class="imptu" v-model:value="state.num2" @keyup="add()" placeholder="Basic usage" /><span>=</span> -->
-      <a-input class="imptu" v-model:value="state.num1" placeholder="Basic usage" /><span>+</span>
-      <a-input class="imptu" v-model:value="state.num2" placeholder="Basic usage" /><span>=</span>
+      <a-input class="imptu" v-model="state.num1" placeholder="Basic usage" /><span>+</span>
+      <a-input class="imptu" v-model="state.num2" placeholder="Basic usage" /><span>=</span>
       {{state.res}}
       <subassembly :msg="123" @set='set'></subassembly>
     </div>

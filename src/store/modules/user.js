@@ -5,11 +5,10 @@ import addRoutes from '/@/router/addRoutes'
 import keyName from '/@/utils/keyName'
 import router from '/@/router'
 const state = {
-    // username: '',
-    // token: '',//token
+   
     userInfo: null,//用户信息
     addRoutes: [],//动态路由
-    // routers:[]
+    
 };
 
 const actions = {
@@ -22,49 +21,41 @@ const actions = {
                 // console.log(res, '登录成功')
                 setCookies(keyName.token, token) //登录成功后将token存储在cookie之中
 
-                    router.push('/');//登陆成功后跳转首页
-                    window.location.reload();//刷新页面
-               
+                router.push('/');//登陆成功后跳转首页
+                window.location.reload();//刷新页面
+
                 resolve()
             }).catch(error => {
                 reject(error)
             });
         });
     },
-    //获取权限
-    setRouter({ commit, state, dispatch }) {
-        return new Promise((resolve, reject) => {
-            getRouters().then(res => {
-
-                commit('stateUpdate', { key: 'addRoutes', value: addRoutes })
-                //动态挂在赛选后的路由
-                const routerList=[...addRoutes,{ path: '/404',name:'404', component: () => import('/@/views/404.vue') }]
-                routerList.filter(item=>{
-                    router.addRoute(item)
-                }) 
-                // router.addRoute([
-                //        ...addRoutes,
-
-                //     { path: '/404',name:'404', component: () => import('/@/views/404') }
-
-                // ])
-                resolve(res)
-            }).catch(error => {
-                reject(error)
-            })
-        })
-    },
+  
     //获取用户信息
     getInfo({ commit, state, dispatch }) {
         return new Promise((resolve, reject) => {
             Info().then(res => {
                 // console.log(res, '获取用户信息')
-                const data = res.data 
-                
+                const data = res.data || {}
+
                 commit('stateUpdate', { key: 'userInfo', value: data })//储存数据
 
-            
-                resolve(data)
+                //获取用户权限
+                getRouters().then(res => {
+                    //    console.log(res,'获取用户权限')
+                    commit('stateUpdate', { key: 'addRoutes', value: addRoutes })
+                    //动态挂在赛选后的路由
+                    const routerList = [...addRoutes, { path: '/404', name: '404', component: () => import('/@/views/404.vue') }]
+                    // routerList.filter(item=>{
+                    //     router.addRoute(item)
+                    // }) 
+                    // router.addRoute(
+                    //     routerList
+                    // )
+
+                    resolve(data)
+                })
+
             }).catch(error => {
                 reject(error)
             })

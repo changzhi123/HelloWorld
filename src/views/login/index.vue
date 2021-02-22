@@ -1,27 +1,42 @@
 <template>
-  <div>login
-      <a-button type="primary" @click="login">登陆</a-button>
+<!-- login -->
+  <div>
+    login
+    <a-button
+      type="primary"
+      @click="
+        $store.dispatch('user/setLogin', {
+          username: 'changzhi',
+          password: '123456adc',
+        })
+      "
+      >登陆</a-button
+    >
   </div>
 </template>
 
 <script>
-import {ref} from 'vue';
+import {
+  ref,
+  reactive,
+  computed,
+  onMounted,
+  onUpdated,
+  onUnmounted,
+  onRenderTracked,
+  onRenderTriggered,
+} from "vue";
 export default {
-  data(){
+  setup(){
+      const state = reactive({
+          
+      })
       return{
-          data:{
-              username:'changzhi',
-              password:'123456adc'
-          }
+          state,
       }
-  },methods:{
-    login(){
-      this.$store.dispatch("user/setLogin", this.data)
-    }
   }
-}
+};
 </script>
 
 <style>
-
 </style>

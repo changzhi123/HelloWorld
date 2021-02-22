@@ -31,7 +31,7 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
     response => {
         const res = response.data;
-        console.log(res, 'respone拦截器')
+        console.log( 'respone拦截器:',res)
         if (res.code != 0) {
             if (res.code == 404 || res.code == 401) {
                 store.dispatch('user/delDatas')
@@ -45,7 +45,7 @@ service.interceptors.response.use(
         }
     },
     error => {
-        console.log('err' + error)
+        // console.log('拦截请求报错err' + error)
         return Promise.reject(error)
     });
 

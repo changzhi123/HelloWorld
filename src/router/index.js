@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
     const { meta: { requireLogin }, fullPath } = to;
     const isUserInfo = store.getters.userInfo
 
-    console.log(requireLogin, '路由拦截', isUserInfo, isToken, to)
+    // console.log(requireLogin, '路由拦截', isUserInfo, isToken, to)
 
     if (requireLogin) {//判断路由是否需要权限
         if (isToken) {//判断是否已经登陆
@@ -31,18 +31,15 @@ router.beforeEach((to, from, next) => {
 
                 next()//已登录直接通过
             } else {
-                try {
-                    store.dispatch('user/getInfo')
-
-                    store.dispatch("user/setRouter").then(() => {
+                   store.dispatch('user/getInfo').then(()=>{
                         next({ ...to, replace: true })
-                        console.log(store.getters.userInfo, 'userInfo再次获取')
+                        // console.log(store.getters.userInfo, 'userInfo再次获取')
+                    },()=>{
+                        // console.log('请求失败')
+                            store.dispatch("user/delDatas")//删除本地所有数据重新登陆
+                            message.error('验证失败，请重新登陆！')
+                            NProgress.done()
                     })
-                } catch {
-                     store.dispatch("user/delDatas")//删除本地所有数据重新登陆
-                    message.error('验证失败，请重新登陆！')
-                    NProgress.done()
-                }
             }
         } else {
             next('/login')
