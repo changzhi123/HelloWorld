@@ -107,6 +107,8 @@ export default {
       //   console.log(isType, "isType");
       store.dispatch("user/setLogin", state.formData).then(() => {
         state.loading = false;
+      },()=>{
+         state.loading = false;
       });
     }
     return {
