@@ -39,5 +39,14 @@ const getRouters = [//固定的路由
             requireLogin: true,// 需要权限才能访问
         }
     },
+    {
+        path : '/user',
+        name: 'user',
+        component : () => import('/@/views/user/index.vue'),
+        isShow:true,//是否显示在菜单栏中
+        meta:{
+            requireLogin:true,// 需要权限才能访问
+        }
+    },
 ];
 export default getRouters

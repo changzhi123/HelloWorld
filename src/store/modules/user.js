@@ -1,8 +1,8 @@
 
-import { logIn, Info, getRouters } from '/@/api/user'
+import { logIn, Info, getRouters,logouts } from '/@/api/user'
 import { setCookies, getCookies, delCookies } from '/@/utils'
 import addRoutes from '/@/router/addRoutes'
-import keyName from '/@/utils/keyName'
+import {tokenName} from '/@/utils/keyName.js'
 import router from '/@/router'
 const state = {
    
@@ -19,7 +19,7 @@ const actions = {
             logIn({ username, password: userInfo.password }).then(res => {
                 const { token } = res.data || {}
                 // console.log(res, '登录成功')
-                setCookies(keyName.token, token) //登录成功后将token存储在cookie之中
+                setCookies(tokenName, token) //登录成功后将token存储在cookie之中
 
                 router.push('/');//登陆成功后跳转首页
                 window.location.reload();//刷新页面
@@ -80,8 +80,7 @@ const actions = {
         return new Promise(resolve => {
 
             commit('stateUpdate', { key: 'addRoutes', value: [] })
-            delCookies(keyName.userInfo)//删除userInfo
-            delCookies(keyName.token)//删除token
+            delCookies(tokenName)//删除token
 
             router.push('/login')
 

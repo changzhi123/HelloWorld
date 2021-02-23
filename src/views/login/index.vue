@@ -1,8 +1,11 @@
 <template>
   <!-- login -->
   <div class="login">
+
     <div class="login-box">
+
       <h2>vite</h2>
+
       <div class="imput-box">
         <a-input
           size="large"
@@ -20,6 +23,7 @@
           {{ rules.username.text }}
         </p>
       </div>
+
       <div class="imput-box">
         <a-input-password
           size="large"
@@ -47,7 +51,9 @@
         :loading="loading"
         >登录</a-button
       >
+
     </div>
+
   </div>
 </template>
 
@@ -57,10 +63,11 @@ import {
   toRefs,
   reactive
 } from "vue";
-import store from "/@/store"; //vuex
+import { useStore } from "vuex";
 export default {
   components: { UserOutlined, LockOutlined },
   setup() {
+    const store = useStore();
     const state = reactive({
       formData: {
         username: "changzhi",
@@ -122,7 +129,7 @@ export default {
 <style lang="less" scoped>
 .login {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

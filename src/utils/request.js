@@ -1,9 +1,8 @@
 import axios from 'axios'
 import { setCookies, getCookies, delCookies } from '/@/utils'
 import { message } from 'ant-design-vue';
-import keyName from '/@/utils/keyName'
+import {tokenName} from '/@/utils/keyName.js'
 import store from '/@/store'
-
 const baseURLs = {
     development: '/api',
     production: '/api',
@@ -16,7 +15,8 @@ const service = axios.create({
 
 // request拦截器
 service.interceptors.request.use(config => {
-    const token = getCookies(keyName.token)
+    const token = getCookies(tokenName)
+    
     if (token) {
         config.headers['vue_Token'] = token // 让每个请求携带
     }

@@ -14,7 +14,6 @@ import 'ant-design-vue/dist/antd.css';//ui组件样式
 
 // console.log(app,'app')
 
-
 app.use(router).use(store).use(Antd)//.use(iconsVue)
 
 app.mount('#app') 

@@ -5,7 +5,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css' // 进度条样式
 
 import getRouters from './getRouters'
-import kenName from '/@/utils/keyName'
+import {tokenName} from '/@/utils/keyName.js'
 import { setCookies, getCookies, delCookies } from '/@/utils'
 import store from '/@/store'//vuex
 
@@ -19,7 +19,7 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
     NProgress.start()//开启进度条
 
-    const isToken = getCookies(kenName.token)
+    const isToken = getCookies(tokenName)
     const { meta: { requireLogin }, fullPath } = to;
     const isUserInfo = store.getters.userInfo
 

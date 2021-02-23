@@ -23,3 +23,11 @@ export function getRouters(params) {
     params
   });
 }
+//退出登陆
+export function logouts(params){
+  return request({
+    url: '/users/logouts',
+    method: 'get',
+    params
+  });
+}
