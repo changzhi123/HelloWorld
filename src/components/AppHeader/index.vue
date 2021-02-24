@@ -53,7 +53,7 @@ export default {
       flex: 1;
     }
     >div:nth-child(2n-1){
-      min-width: 15%;
+      min-width: 100px;
     }
   }
 }
