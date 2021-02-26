@@ -28,13 +28,13 @@ export default {
   components: {
     AppHeader,
   },
-  setup(ctx) {
+  setup(props,ctx) {
     const router = useRouter();
     const route = useRoute();
     const store = useStore();
     const state = reactive({});
     onMounted(() => {
-      console.log(process.env, "当前环境", store.state.user,ctx);
+      console.log(process.env, "当前环境", store.state.user,ctx );
     });
     return {
       ...toRefs(state),
