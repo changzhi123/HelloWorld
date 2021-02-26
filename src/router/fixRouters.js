@@ -1,4 +1,4 @@
-const getRouters = [//固定的路由
+const fixRouters = [//固定的路由
     {
         path: '/',
         name: 'home',
@@ -13,6 +13,14 @@ const getRouters = [//固定的路由
         name: 'login',
         component: () => import('/@/views/login/index.vue'),
         meta: {}
+    },
+    {
+        path: '/404',
+        name: '404',
+        component: () => import('/@/views/404.vue'),
+        meta: {
+            
+        }
     },
     {
         path: '/text',
@@ -49,4 +57,5 @@ const getRouters = [//固定的路由
         }
     },
 ];
-export default getRouters
+
+export default fixRouters

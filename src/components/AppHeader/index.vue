@@ -1,7 +1,8 @@
 <template>
   <!-- AppHeader 头部组件-->
   <div class="AppHeader">
-    <div class="headerContent">
+    <!-- breadthWidth 为true时，header宽度为100% -->
+    <div :class="{'headerContent':true,'breadthWidth':false}">
       <headerPrefix />
       <headeRsubject />
       <headerSuffix />
@@ -44,6 +45,7 @@ export default {
     height: 100%;
     margin: 0 auto;
     width: 1200px;
+    box-sizing: border-box;
     display:flex;
     justify-content: space-between;
     >div{
@@ -55,6 +57,10 @@ export default {
     >div:nth-child(2n-1){
       min-width: 100px;
     }
+  }
+  .breadthWidth{
+    width: 100%;
+    padding: 0 30px;
   }
 }
 

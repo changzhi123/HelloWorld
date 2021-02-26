@@ -32,11 +32,11 @@ const actions = {
     },
   
     //获取用户信息
-    getInfo({ commit, state, dispatch }) {
+     getInfo({ commit, state, dispatch }) {
         return new Promise((resolve, reject) => {
-            Info().then(res => {
-                // console.log(res, '获取用户信息')
-                const data = res.data || {}
+            Info().then(response => {
+                // console.log(response, '获取用户信息')
+                const data = response.data || {}
 
                 commit('stateUpdate', { key: 'userInfo', value: data })//储存数据
 
@@ -45,7 +45,7 @@ const actions = {
                     //    console.log(res,'获取用户权限')
                     commit('stateUpdate', { key: 'addRoutes', value: addRoutes })
                     //动态挂在赛选后的路由
-                    const routerList = [...addRoutes, { path: '/404', name: '404', component: () => import('/@/views/404.vue') }]
+                    // const routerList = [...addRoutes, { path: '/404', name: '404', component: () => import('/@/views/404.vue') }]
                     // routerList.filter(item=>{
                     //     router.addRoute(item)
                     // }) 
@@ -53,10 +53,12 @@ const actions = {
                     //     routerList
                     // )
 
-                    resolve(data)
+                    resolve(response)
+                },error=>{
+                    reject(error)
                 })
 
-            }).catch(error => {
+            },error=>{
                 reject(error)
             })
         })
@@ -67,7 +69,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             logouts().then((res) => {
 
-                dispatch('delDatas')
+                dispatch('delDatas')//调用本地删除所有数据
 
                 resolve()
             }).catch(error => {
@@ -78,12 +80,9 @@ const actions = {
     // 本地删除所有数据
     delDatas({ commit, state, dispatch }) {
         return new Promise(resolve => {
-
-            commit('stateUpdate', { key: 'addRoutes', value: [] })
+            commit('stateUpdate', { key: 'userInfo', value: null })//删除userInfo
+            commit('stateUpdate', { key: 'addRoutes', value: [] })//删除addRoutes
             delCookies(tokenName)//删除token
-
-            router.push('/login')
-
             resolve()
         })
     }

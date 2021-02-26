@@ -14,7 +14,7 @@
         // props:{
         // },
         setup(props,ctx) {
-            console.log({...props},'和',{...ctx.attrs})
+            console.log({...props},'和组件传值',{...ctx.attrs})
             const state = reactive({})
             const open=()=>{
                 console.log('open',props)

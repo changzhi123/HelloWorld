@@ -1,5 +1,5 @@
 <template>
-  <div class="mainBody">
+  <div class="rootBody">
     <AppHeader></AppHeader>
     <div class="AppMain">
       <router-view></router-view>
@@ -10,15 +10,15 @@
 <script>
 import AppHeader from "/@/components/AppHeader/index.vue";
 import {
-  //   ref,
+  // ref,
   toRefs,
   reactive,
-  //   computed,
+  // computed,
   onMounted,
-  //   onUpdated,
-  //   onUnmounted,
-  //   onRenderTracked,
-  //   onRenderTriggered,
+  // onUpdated,
+  // onUnmounted,
+  // onRenderTracked,
+  // onRenderTriggered,
   // defineComponent
 } from "vue";
 import { useStore } from "vuex";
@@ -28,13 +28,13 @@ export default {
   components: {
     AppHeader,
   },
-  setup(props, ctx) {
+  setup(ctx) {
     const router = useRouter();
     const route = useRoute();
     const store = useStore();
     const state = reactive({});
     onMounted(() => {
-      console.log(process.env, "当前环境", store.state.user);
+      console.log(process.env, "当前环境", store.state.user,ctx);
     });
     return {
       ...toRefs(state),
@@ -46,7 +46,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
-.mainBody {
+.rootBody {
   width: 100%;
   height: 100vh;
   box-sizing: border-box;

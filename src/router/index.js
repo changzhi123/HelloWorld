@@ -4,15 +4,15 @@ import { message } from 'ant-design-vue';
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css' // 进度条样式
 
-import getRouters from './getRouters'
-import {tokenName} from '/@/utils/keyName.js'
+import fixRouters from './fixRouters'
+import { tokenName } from '/@/utils/keyName.js'
 import { setCookies, getCookies, delCookies } from '/@/utils'
 import store from '/@/store'//vuex
 
 
 const router = createRouter({
     history: createWebHistory(),
-    routes: [...getRouters]
+    routes: [...fixRouters]
 });
 
 //路由拦截
@@ -28,19 +28,19 @@ router.beforeEach((to, from, next) => {
     if (requireLogin) {//判断路由是否需要权限
         if (isToken) {//判断是否已经登陆
             if (isUserInfo) {//当vuex中userInfo为空，说明用户刷新了,重新获取用户信息/权限
-
                 next()//已登录直接通过
             } else {
-                   store.dispatch('user/getInfo').then(()=>{
-                        next({ ...to, replace: true })
-                        // console.log(store.getters.userInfo, 'userInfo再次获取')
-                    },()=>{
-                        // console.log('请求失败')
-                            store.dispatch("user/delDatas")//删除本地所有数据重新登陆
-                            message.error('验证失败，请重新登陆！')
-                            NProgress.done()
-                    })
+                store.dispatch('user/getInfo').then(() => {
+                    next()
+                    // next({ ...to, replace: true })
+                    // console.log(store.getters.userInfo, 'userInfo再次获取')
+                }, error => {
+                    store.dispatch("user/delDatas")//删除本地所有数据重新登陆
+                    message.error('验证失败，请重新登陆！')
+                    next('/login')
+                })
             }
+            NProgress.done()
         } else {
             next('/login')
             NProgress.done()
@@ -48,11 +48,10 @@ router.beforeEach((to, from, next) => {
     } else {//不需要权限的路由
         if (to.name === 'login' && isToken) {
             next({ path: '/' })// 跳转到home页
-            NProgress.done()
         } else {
             next()
-            NProgress.done()
         }
+        NProgress.done()
     }
 });
 

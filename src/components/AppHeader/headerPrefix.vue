@@ -1,8 +1,9 @@
 <template>
   <!-- 前缀 -->
   <div class="headerPrefix">
-    <img class="PrefixImg" src="/@/assets/logo.png" alt="" />
-    <h3>{{title}}</h3>
+    <img class="PrefixImg" src="/@/assets/images/title.jpg" alt="" />
+    <h3>{{projectName}} </h3>
+    <!-- -->
   </div>
 </template>
 
@@ -15,10 +16,9 @@ import {
 } from "vue";
 export default {
   setup(props, ctx){
-    const state=reactive({
-       title:computed(()=>projectName)
-    })
+    const state=reactive({ })
     return{
+      projectName,
       ...toRefs(state)
     }
 
@@ -31,13 +31,14 @@ export default {
   display: flex;
   align-items: center;
   .PrefixImg {
-    width: 36px;
-    height: 36px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
+    margin-right:10px ;
   }
   >h3{
     font-size: 24px;
-     margin-left: 10px;
+    margin: 0;
   }
 
 }

@@ -4,7 +4,7 @@
 
     <div class="login-box">
 
-      <h2>vite</h2>
+      <h2>{{projectName}}</h2>
 
       <div class="imput-box">
         <a-input
@@ -64,6 +64,7 @@ import {
   reactive
 } from "vue";
 import { useStore } from "vuex";
+import {projectName} from '/@/utils/keyName.js'
 export default {
   components: { UserOutlined, LockOutlined },
   setup() {
@@ -119,6 +120,7 @@ export default {
       });
     }
     return {
+      projectName,
       ...toRefs(state),
       login,
       canonical,

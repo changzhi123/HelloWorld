@@ -45,7 +45,8 @@ service.interceptors.response.use(
         }
     },
     error => {
-        // console.log('拦截请求报错err' + error)
+        console.error('拦截请求报错err' + error)
+        // message.error( '系统繁忙！')
         return Promise.reject(error)
     });
 

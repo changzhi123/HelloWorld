@@ -6,9 +6,12 @@
       v-for="(item, index) in navigation"
       :key="index"
     >
-      <router-link :to="item.path">
-        <span class="item">{{ item.name }}</span></router-link
+      <router-link
+        :to="item.path"
+        :style="`color:${isRouter == item.path ? '#2d8cf0' : '#000'};`"
       >
+        {{ item.name }}
+      </router-link>
     </div>
   </div>
 </template>
@@ -24,6 +27,10 @@ export default {
     const state = reactive({
       List: [
         {
+          name: "首页",
+          path: "/",
+        },
+        {
           name: "应用中心",
           path: "/text",
         },
@@ -31,18 +38,20 @@ export default {
           name: "个人中心",
           path: "/user",
         },
-        {
-          name: "首页",
-          path: "/",
-        },
+        
       ],
-      isRouter: computed(() => route.path),//获取当前路由，高亮导航栏
+      isUserInfo: computed(() => store.getters.userInfo), //没有登陆不展示导航拦
+      isRouter: computed(() => route.path), //获取当前路由，高亮导航栏
       navigation: computed(() => {
         //赛选是否有权限展示
-        return state.List;
+        const arr = [];
+        state.List.filter((item) => {
+          if (!state.isUserInfo) return;
+          arr.push(item);
+        });
+        return arr//.reverse();
       }),
     });
-
     return {
       ...toRefs(state),
     };
@@ -53,11 +62,12 @@ export default {
 <style lang="less" scoped>
 .headeRsubject {
   display: flex;
-  flex-direction: row-reverse;
+  justify-content:flex-end;
   padding: 0 10px;
   .RsubjectTag {
+    min-width: 20px;
     height: 100%;
-    padding: 10px;
+    padding: 0 15px;
     font-size: 16px;
     display: flex;
     justify-content: center;
@@ -67,11 +77,11 @@ export default {
       color: #333;
     }
     &:hover .item {
-    color: #2d8cf0;
+      color: #2d8cf0;
+    }
   }
-  }
-  .highlight {
-    border-top: 3px solid #2d8cf0;
-  }
+}
+.highlight {
+  border-top: 3px solid #2d8cf0;
 }
 </style>

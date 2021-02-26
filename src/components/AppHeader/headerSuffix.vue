@@ -3,14 +3,12 @@
   <div class="headerSuffix">
     <!-- 没有登陆 -->
     <div v-if="!userInfo" class="noLoign">
-      <router-link to="/login"> <span class="a-text">注册</span></router-link>
-      <router-link to="/login">
-        <span class="a-text a-text-to">登陆</span></router-link
+      <router-link to="/login" class="a-text"> 注册</router-link>
+      <router-link to="/login" class="a-text a-text-to">登陆</router-link
       >
     </div>
     <!-- 已登录 -->
     <div v-else class="yeLogin">
-      <!-- <span class="yeLogin-span">欢迎您，{{ userInfo.nickname }}</span> -->
       <img class="yeLogin-imgs" :src="userInfo.avatar" alt="">
       <a-dropdown>
     <a class="ant-dropdown-link" @click.prevent>
@@ -37,18 +35,26 @@ import {
 } from "vue";
 import { useStore } from "vuex";
 import { DownOutlined } from '@ant-design/icons-vue'
+import { useRouter } from "vue-router";
 export default {
   components:{
       DownOutlined
   },
   setup(props, ctx) {
+    const router = useRouter();
     const store = useStore();
     const state = reactive({
-      userInfo: computed(() => store.getters.userInfo),
     });
+    //退出登陆
+    function logout(){
+      store.dispatch('user/logout').then(()=>{
+        router.push('/login')
+      })
+    }
     return {
+       userInfo: computed(() => store.getters.userInfo),
       ...toRefs(state),
-      logout: () =>  store.dispatch('user/logout')
+      logout
     };
   },
 };
@@ -77,14 +83,10 @@ export default {
   }
   .yeLogin {
     color: #333;
-    // .yeLogin-span {
-    //   padding: 0 10px;
-    //   border-right: 1px solid #ccc;
-    //   border-left: 1px solid #ccc;
-    // }
+  
     .yeLogin-imgs{
-        width: 36px;
-        height: 36px;
+        width: 50px;
+        height: 50px;
         border-radius:50% ;
         margin: 0 10px ;
     }
