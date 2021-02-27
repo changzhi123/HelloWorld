@@ -16,9 +16,9 @@ export function Info(params) {
     });
   }
 //获取用户权限
-export function getRouters(params) {
+export function getMenus(params) {
   return request({
-    url: '/users/getInfo',
+    url: '/users/getrouter',
     method: 'get',
     params
   });

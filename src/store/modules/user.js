@@ -1,14 +1,16 @@
 
-import { logIn, Info, getRouters,logouts } from '/@/api/user'
+import { logIn, Info, getMenus, logouts } from '/@/api/user'
 import { setCookies, getCookies, delCookies } from '/@/utils'
 import addRoutes from '/@/router/addRoutes'
-import {tokenName} from '/@/utils/keyName.js'
+import fixRouters from '/@/router/fixRouters'
+import { tokenName } from '/@/utils/keyName.js'
 import router from '/@/router'
 const state = {
-   
+    token:getCookies(tokenName),//确保token实时最新的
+    fixRouters: fixRouters,//固定路由
     userInfo: null,//用户信息
     addRoutes: [],//动态路由
-    
+
 };
 
 const actions = {
@@ -30,35 +32,31 @@ const actions = {
             });
         });
     },
-  
+    //获取用户权限
+    GenerateRoutes({ commit, state, dispatch }) {
+        return getMenus().then(response => {
+            const accessedRouters = response.data || []
+            commit('stateUpdate', { key: 'addRoutes', value: addRoutes })
+            const routerList=[...addRoutes,{path:"/:pathMatch(.*)*",redirect:{ name:'404'}}]
+            routerList.filter(item => {
+                router.addRoute(item)
+            })
+        })
+    },
     //获取用户信息
-     getInfo({ commit, state, dispatch }) {
+    getInfo({ commit, state, dispatch }) {
         return new Promise((resolve, reject) => {
             Info().then(response => {
                 // console.log(response, '获取用户信息')
                 const data = response.data || {}
 
                 commit('stateUpdate', { key: 'userInfo', value: data })//储存数据
-
-                //获取用户权限
-                getRouters().then(res => {
-                    //    console.log(res,'获取用户权限')
-                    commit('stateUpdate', { key: 'addRoutes', value: addRoutes })
-                    //动态挂在赛选后的路由
-                    // const routerList = [...addRoutes, { path: '/404', name: '404', component: () => import('/@/views/404.vue') }]
-                    // routerList.filter(item=>{
-                    //     router.addRoute(item)
-                    // }) 
-                    // router.addRoute(
-                    //     routerList
-                    // )
-
-                    resolve(response)
-                },error=>{
-                    reject(error)
+                
+                dispatch('GenerateRoutes').then(()=>{
+                    resolve()
                 })
 
-            },error=>{
+            }, error => {
                 reject(error)
             })
         })
@@ -69,7 +67,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             logouts().then((res) => {
 
-                dispatch('delDatas')//调用本地删除所有数据
+                dispatch('resetToken')//调用本地删除所有数据
 
                 resolve()
             }).catch(error => {
@@ -78,7 +76,7 @@ const actions = {
         })
     },
     // 本地删除所有数据
-    delDatas({ commit, state, dispatch }) {
+    resetToken({ commit, state, dispatch }) {
         return new Promise(resolve => {
             commit('stateUpdate', { key: 'userInfo', value: null })//删除userInfo
             commit('stateUpdate', { key: 'addRoutes', value: [] })//删除addRoutes

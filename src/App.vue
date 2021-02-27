@@ -56,6 +56,12 @@ export default {
     padding-top: 64px;
     height: 100vh;
     box-sizing: border-box;
+    >div{
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      background: #f2f2f2;
+    }
   }
 }
 </style>

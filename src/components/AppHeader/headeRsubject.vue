@@ -32,7 +32,7 @@ export default {
         },
         {
           name: "应用中心",
-          path: "/text",
+          path: "/apply",
         },
         {
           name: "个人中心",

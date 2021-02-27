@@ -130,13 +130,9 @@ export default {
 </script>
 <style lang="less" scoped>
 .login {
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
-  // background: #f5f5f5;
   background:url('../../assets/images/login.jpg') no-repeat;
   background-size: 100% 100%;
   .login-box {

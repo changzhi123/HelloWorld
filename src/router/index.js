@@ -15,44 +15,46 @@ const router = createRouter({
     routes: [...fixRouters]
 });
 
+const whiteList = ['/login']//白名单
+
 //路由拦截
 router.beforeEach((to, from, next) => {
     NProgress.start()//开启进度条
 
-    const isToken = getCookies(tokenName)
-    const { meta: { requireLogin }, fullPath } = to;
-    const isUserInfo = store.getters.userInfo
+    const hasToken = getCookies(tokenName)
+    const hasGetUserInfo = store.getters.userInfo
 
-    // console.log(requireLogin, '路由拦截', isUserInfo, isToken, to)
+    // console.log('路由拦截', hasGetUserInfo, hasToken, to)
 
-    if (requireLogin) {//判断路由是否需要权限
-        if (isToken) {//判断是否已经登陆
-            if (isUserInfo) {//当vuex中userInfo为空，说明用户刷新了,重新获取用户信息/权限
-                next()//已登录直接通过
+    if (hasToken) {//判断是否已经登陆
+        if (to.path == '/login') {
+            next('/')
+        } else {
+            if (hasGetUserInfo) {//判断用户是否刷新页面
+                next()//没有刷新直接通过
             } else {
-                store.dispatch('user/getInfo').then(() => {
-                    next()
-                    // next({ ...to, replace: true })
-                    // console.log(store.getters.userInfo, 'userInfo再次获取')
+               
+                store.dispatch('user/getInfo').then(() => {//再次获取用户权限
+                    next({ ...to, replace: true })
                 }, error => {
-                    store.dispatch("user/delDatas")//删除本地所有数据重新登陆
                     message.error('验证失败，请重新登陆！')
+                    store.dispatch("user/resetToken")//清楚所有数据
                     next('/login')
+                    NProgress.done()
                 })
             }
-            NProgress.done()
+        }
+    } else {
+        if (whiteList.includes(to.path)) {
+            next()//白名单直接进入
         } else {
             next('/login')
             NProgress.done()
         }
-    } else {//不需要权限的路由
-        if (to.name === 'login' && isToken) {
-            next({ path: '/' })// 跳转到home页
-        } else {
-            next()
-        }
-        NProgress.done()
+
     }
+
+
 });
 
 router.afterEach(() => {

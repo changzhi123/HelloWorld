@@ -10,7 +10,7 @@ const baseURLs = {
 
 const service = axios.create({
     baseURL: baseURLs[process.env.NODE_ENV],
-    timeout: 5000, // 请求超时时间
+    timeout: 4000, // 请求超时时间
 });
 
 // request拦截器
