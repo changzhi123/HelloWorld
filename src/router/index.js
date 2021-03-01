@@ -4,10 +4,10 @@ import { message } from 'ant-design-vue';
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css' // 进度条样式
 
-import fixRouters from './fixRouters'
-import { tokenName,whiteList } from '/@/utils/keyName.js'
-import { setCookies, getCookies, delCookies } from '/@/utils'
-import store from '/@/store'//vuex
+import fixRouters from './fixRouters.js'
+import { tokenName,whiteList } from '../utils/keyName.js'
+import { setCookies, getCookies, delCookies } from '../utils/index.js'
+import store from '../store/index.js'//vuex
 
 
 const router = createRouter({
@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
     const hasToken = getCookies(tokenName)
     const hasGetUserInfo = store.getters.userInfo
 
-    // console.log('路由拦截', hasGetUserInfo, hasToken, to)
+    console.log('路由拦截', hasGetUserInfo, hasToken, to)
 
     if (hasToken) {//判断是否已经登陆
         if (to.path == '/login') {

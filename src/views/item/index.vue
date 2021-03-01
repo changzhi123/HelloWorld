@@ -1,18 +1,15 @@
 <template>
   <div>item
-    <!-- <h3>{{setup.val}}</h3> -->
+  <HelloWorld msg='HelloWorld'></HelloWorld>
   </div>
 </template>
 
 <script>
-// <script setup>
-// import {reactive}from 'vue'
-// const state=reactive({
-//   val:1
-// })
-// </script>
+import  HelloWorld from "./HelloWorld.vue";
 export default {
-  
+  components: {
+    HelloWorld
+  }
 }
 </script>
 

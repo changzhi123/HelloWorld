@@ -1,14 +1,14 @@
 <template>
   <!-- 前缀 -->
   <div class="headerPrefix">
-    <img class="PrefixImg" src="/@/assets/images/title.jpg" alt="" />
+    <img class="PrefixImg" src="../../assets/images/title.jpg" alt="" />
     <h3>{{projectName}} </h3>
     <!-- -->
   </div>
 </template>
 
 <script>
-import {projectName} from '/@/utils/keyName.js'
+import {projectName} from '../../utils/keyName.js'
 import {
   toRefs,
   reactive,

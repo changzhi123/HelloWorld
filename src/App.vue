@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import AppHeader from "/@/components/AppHeader/index.vue";
+import AppHeader from "./components/AppHeader/index.vue";
 import {
   // ref,
   toRefs,
@@ -23,6 +23,7 @@ import {
 } from "vue";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
+import {projectName} from '@/utils/keyName.js'
 export default {
   name: "App",
   components: {
@@ -34,7 +35,7 @@ export default {
     const store = useStore();
     const state = reactive({});
     onMounted(() => {
-      console.log(process.env, "当前环境", store.state.user,ctx );
+      // console.log(  store.state.user,ctx,projectName,"当前环境",process.env);
     });
     return {
       ...toRefs(state),

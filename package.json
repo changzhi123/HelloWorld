@@ -1,26 +1,28 @@
 {
-  "name": "myVite",
+  "name": "my-vite",
   "version": "0.0.0",
   "scripts": {
-    "serve": "vite  --mode development",
-    "serve-pro": "vite  --mode production",
+    "dev": "vite  --mode development",
+    "dev-pro": "vite  --mode production",
     "build": "vite build  --mode development",
-    "build-pro": "vite build  --mode production"
+    "build-pro": "vite build  --mode production",
+    "serve": "vite preview"
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.0.1",
     "ant-design-vue": "^2.0.0",
     "axios": "^0.21.1",
     "nprogress": "^0.2.0",
-    "vue": "^3.0.4",
+    "vue": "^3.0.5",
     "vue-cookies": "^1.7.4",
     "vue-router": "^4.0.4",
     "vuex": "^4.0.0-rc.2"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.0.4",
+    "@vitejs/plugin-vue": "^1.1.5",
+    "@vue/compiler-sfc": "^3.0.5",
     "less": "^4.1.1",
     "less-loader": "^8.0.0",
-    "vite": "^1.0.0-rc.13"
+    "vite": "^2.0.1"
   }
 }

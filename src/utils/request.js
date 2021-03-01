@@ -1,8 +1,8 @@
 import axios from 'axios'
-import { setCookies, getCookies, delCookies } from '/@/utils'
+import { setCookies, getCookies, delCookies } from '../utils/index.js'
 import { message } from 'ant-design-vue';
-import {tokenName} from '/@/utils/keyName.js'
-import store from '/@/store'
+import {tokenName} from '../utils/keyName.js'
+import store from '../store/index.js'
 const baseURLs = {
     development: '/api',
     production: '/api',
@@ -10,7 +10,7 @@ const baseURLs = {
 
 const service = axios.create({
     baseURL: baseURLs[process.env.NODE_ENV],
-    timeout: 4000, // 请求超时时间
+    timeout: 5000, // 请求超时时间
 });
 
 // request拦截器
@@ -32,6 +32,7 @@ service.interceptors.response.use(
     response => {
         const res = response.data;
         console.log( 'respone拦截器:',res)
+
         if (res.code != 0) {
             if (res.code == 404 || res.code == 401) {
                 store.dispatch('user/delDatas')
@@ -43,6 +44,7 @@ service.interceptors.response.use(
         } else {
             return res
         }
+
     },
     error => {
         console.error('拦截请求报错err' + error)
