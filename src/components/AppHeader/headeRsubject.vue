@@ -38,6 +38,10 @@ export default {
           name: "个人中心",
           path: "/user",
         },
+         {
+          name: "vite2写法",
+          path: "/item",
+        },
         
       ],
       isUserInfo: computed(() => store.getters.userInfo), //没有登陆不展示导航拦
