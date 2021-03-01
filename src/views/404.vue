@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <div  class="img-404"></div>
-  </div>
+  <div class="img-404"></div>
 </template>
 
 <script>

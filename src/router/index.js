@@ -5,7 +5,7 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css' // 进度条样式
 
 import fixRouters from './fixRouters'
-import { tokenName } from '/@/utils/keyName.js'
+import { tokenName,whiteList } from '/@/utils/keyName.js'
 import { setCookies, getCookies, delCookies } from '/@/utils'
 import store from '/@/store'//vuex
 
@@ -15,7 +15,6 @@ const router = createRouter({
     routes: [...fixRouters]
 });
 
-const whiteList = ['/login']//白名单
 
 //路由拦截
 router.beforeEach((to, from, next) => {
