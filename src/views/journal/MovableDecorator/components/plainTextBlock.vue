@@ -16,10 +16,12 @@ data(){
 },
 computed: {
     style() {
+      let imgurl=`url('${this.objList.backgroundImg}') 100% 100% no-repeat`
+     
       return {
         maxWidth: this.objList.width || "100%",
         height: this.objList.height || "200px",
-        background:this.objList.background||'#fff'
+        background:this.objList.backgroundImg?imgurl:this.objList.backgroundColor
       };
     },
     style2() {

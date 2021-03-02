@@ -45,10 +45,12 @@ export default {
   },
    computed: {
     style() {
-      return {
-        maxWidth: this.objList.width || "100%",
+       let imgurl=`url('${this.objList.backgroundImg}') 100% 100% no-repeat`
+     return{
+       maxWidth:this.objList.width||'100%',
         height: this.objList.height || "200px",
-      };
+       background:this.objList.backgroundImg?imgurl:this.objList.backgroundColor
+     }
     },
   },
   props: {

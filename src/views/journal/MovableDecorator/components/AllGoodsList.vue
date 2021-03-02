@@ -37,9 +37,12 @@ export default {
   },
   computed:{
    style(){
+      let imgurl=`url('${this.objList.backgroundImg}') 100% 100% no-repeat`
      return{
-       maxWidth:this.objList.width||'100%'
+       maxWidth:this.objList.width||'100%',
+       background:this.objList.backgroundImg?imgurl:this.objList.backgroundColor
      }
+     
    }
  },
   props: {

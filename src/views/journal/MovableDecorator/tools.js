@@ -20,8 +20,12 @@ const pc = [
             // isOpenType:false,
             
             objList: {
-                width:'1360px',
+                width:'1200px',
                 height:'',
+                padding:0,
+                backgroundColor:'#f2f2f2',
+                    backgroundImg:"",
+                    borderRadius:0,
                 maxData:8,
                 data:[
                     {
@@ -40,6 +44,9 @@ const pc = [
             componentPack: 'FlashSaleGoodsList',
             objList: {
                 width: '900px',
+                
+                backgroundColor:'#f2f2f2',
+                backgroundImg:"",
                 height: '',
                 name: "秒杀商品",
                 itme: '2021-01-20 00:44:12',
@@ -72,6 +79,8 @@ const pc = [
             objList: {
                 width: '900px',
                 height: '',
+                backgroundColor:'#f2f2f2',
+                backgroundImg:"",
                 maxData:5,
                 data:[{
                     // imgurl: 'https://img.alicdn.com/tps/i4/TB1y4tuOxz1gK0jSZSgSuuvwpXa.jpg_500x1000q75s0.jpg_.webp',
@@ -89,6 +98,9 @@ const pc = [
             objList: {
                 width: '900px',
                 height: '550px',
+                
+                backgroundColor:'#f2f2f2',
+                backgroundImg:"",
                 maxData:5,
                 data:[
                     {
@@ -108,6 +120,8 @@ const pc = [
             objList: {
                 width: '900px',
                 height: '550px',
+                backgroundColor:'#f2f2f2',
+                backgroundImg:"",
                 maxData:4,
                 data:[
                     {
@@ -125,6 +139,8 @@ const pc = [
             objList: {
                 width: '900px',
                 height: '550px',
+                backgroundColor:'#f2f2f2',
+                backgroundImg:"",
                 name: '打造爱巢',
                 text: 'HOME',
                 advertising: '广告位',
@@ -156,7 +172,8 @@ const pc = [
                 height: '70px',
                 color: '#58bc58',
                 size: '37px',
-                background:'#fff',
+                backgroundColor:'#f2f2f2',
+                    backgroundImg:"",
                 text: '超值进口新发现'
             }
         }]
@@ -176,6 +193,8 @@ const pc = [
                 width: '900px',
                  maxData:20,
                 height: '200px',
+                backgroundColor:'#f2f2f2',
+                backgroundImg:"",
                 data:[
                     {
                         // imgurl:
@@ -196,7 +215,10 @@ const pc = [
            
             objList: {
                 width: '900px',maxData:5,
-                height: '270px',data:[
+                height: '270px',
+                backgroundColor:'#f2f2f2',
+                backgroundImg:"",
+                data:[
                     {
                         // imgurl: 'https://gw.alicdn.com/bao/uploaded/i1/2105113961/O1CN01C6b1kj1f8BJxju0i4_!!0-item_pic.jpg',
                         // text: '商品标题，可以结合具体业务活动商品数据',
@@ -219,6 +241,8 @@ const pc = [
             objList: {
                 width: '900px',
                 height: '150px',
+                backgroundColor:'#f2f2f2',
+                backgroundImg:"",
                 maxData:1,
                
                 list:[{
@@ -245,6 +269,10 @@ const move=[
                 objList: {
                     width:'100%',
                     height:'100px',
+                    backgroundColor:'#f2f2f2',
+                    backgroundImg:"",
+                    borderRadius:0,
+                    padding:0,
                     maxData:8,
                     data:[
                         {}, //{}, {}, {}
@@ -263,7 +291,8 @@ const move=[
                     height: '50px',
                     color: '#58bc58',
                     size: '18px',
-                    background:'#fff',
+                    backgroundColor:'#f2f2f2',
+                    backgroundImg:"",
                     text: '超值进口新发现'
                 }
             },
@@ -277,6 +306,8 @@ const move=[
                 objList: {
                     width: '100%',
                     height: '100px',
+                    backgroundColor:'#f2f2f2',
+                    backgroundImg:"",
                     maxData:5,
                     data:[{
                         imgurl:'',
@@ -295,6 +326,8 @@ const move=[
                 objList: {
                     width: '100%',
                     height: '180px',
+                    backgroundColor:'#f2f2f2',
+                    backgroundImg:"",
                     maxData:4,
                     name:'限时抢购',
                     data:[{

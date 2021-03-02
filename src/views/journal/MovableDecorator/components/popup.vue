@@ -17,130 +17,228 @@
         label-position="top"
         class="from-box"
       >
-      <!-- 所有组件共有 -->
+        <!-- 所有组件共有 -->
         <template>
           <Divider>样式配置区域</Divider>
           <FormItem label="设置宽度" prop="width">
-          <Input v-model="objList.width" clearable placeholder="宽度默认为100%" />
+            <Input
+              v-model="objList.width"
+              clearable
+              placeholder="宽度默认为100%"
+            />
           </FormItem>
           <FormItem label="设置高度" prop="height">
-            <Input v-model="objList.height" clearable placeholder="高度默认为200px" />
+            <Input
+              v-model="objList.height"
+              clearable
+              placeholder="高度默认为200px"
+            />
+          </FormItem>
+          <FormItem
+            label="设置背景颜色"
+            prop="backgroundColor"
+            v-if="objList.backgroundColor"
+          >
+            <ColorPicker
+              :key="kesName.backgroundColor"
+              @on-change="setkesName('backgroundColor')"
+              alpha
+              v-model="objList.backgroundColor"
+            />
+          </FormItem>
+          <FormItem label="设置背景图片" prop="backgroundImg">
+            <Input
+              v-model="objList.backgroundImg"
+              clearable
+              placeholder="背景图片会覆盖背景颜色"
+            />
           </FormItem>
         </template>
-        <!-- 公共 -->
-       <template> 
-         <FormItem label="标题" prop="name" v-if="objList.name">
-             <Input v-model="objList.name" clearable placeholder="请输入标题" />
-           </FormItem>
-           
-           <FormItem label="字体大小" v-if='objList.size' >
-             <Input v-model="objList.size" clearable placeholder="请设置字体大小" />
-           </FormItem>
-           <FormItem label="背景颜色" v-if="objList.background">
-             <Input v-model="objList.background" clearable placeholder="请设置背景颜色" />
-           </FormItem>
-            <FormItem label="字体颜色" v-if="objList.color">
-             <Input v-model="objList.color" clearable placeholder="请设置字体颜色" />
-           </FormItem>
-       </template>
-        <!-- 纯文本特区 -->
-        <template v-if="data.componentPack=='plainTextBlock'">
-           <Divider>文本配置区域</Divider>
-          <FormItem label="文本" prop="text">
-             <Input v-model="objList.text" clearable placeholder="请输入文本" />
-           </FormItem>
+        <!-- 轮播图特区 -->
+        <template v-if="data.componentPack == 'CarouselImg'">
+          <FormItem
+            label="边框圆弧度"
+            prop="borderRadius"
+          >
+            <Slider
+              :marks="{ '100': '100px' }"
+              show-input
+              v-model="objList.borderRadius"
+            ></Slider>
+          </FormItem>
+          <FormItem
+            label="图片镂空度"
+            prop="borderRadius"
+          >
+            <Slider
+            v-model="objList.padding"
+              :marks="{ '100': '100px' }"
+              show-input
+            ></Slider>
+          </FormItem>
         </template>
-        
-        <!--商品分类特区  -->
-        <template v-if="data.componentPack=='CategoryGoods'">
-           <!-- <FormItem label="标题" prop="name">
-             <Input v-model="objList.name" clearable placeholder="请输入标题" />
-           </FormItem> -->
-           <FormItem label="文本" prop="text">
-             <Input v-model="objList.text" clearable placeholder="请输入文本" />
-           </FormItem>
-       </template>
-        <!-- 秒杀商品特有 -->
-        <template v-if="data.componentPack=='FlashSaleGoodsList'">
-          <!-- <FormItem label="标题" prop="name">
+
+        <!-- 公共 -->
+        <template>
+          <FormItem label="标题" prop="name" v-if="objList.name">
             <Input v-model="objList.name" clearable placeholder="请输入标题" />
-          </FormItem> -->
+          </FormItem>
+
+          <FormItem label="字体大小" v-if="objList.size">
+            <Input
+              v-model="objList.size"
+              clearable
+              placeholder="请设置字体大小"
+            />
+          </FormItem>
+
+          <FormItem label="字体颜色" v-if="objList.color">
+            <ColorPicker
+              :key="kesName.color"
+              @on-change="setkesName('color')"
+              alpha
+              v-model="objList.color"
+            />
+          </FormItem>
+        </template>
+        <!-- 纯文本特区 -->
+        <template v-if="data.componentPack == 'plainTextBlock'">
+          <Divider>文本配置区域</Divider>
+          <FormItem label="文本" prop="text">
+            <Input v-model="objList.text" clearable placeholder="请输入文本" />
+          </FormItem>
+        </template>
+
+        <!--商品分类特区  -->
+        <template v-if="data.componentPack == 'CategoryGoods'">
+          <FormItem label="文本" prop="text">
+            <Input v-model="objList.text" clearable placeholder="请输入文本" />
+          </FormItem>
+        </template>
+        <!-- 秒杀商品特有 -->
+        <template v-if="data.componentPack == 'FlashSaleGoodsList'">
           <FormItem label="秒杀时间" prop="itme">
-            <DatePicker ref="datetime" v-model="itme" type="datetime" @on-change="(e)=>{objList.itme=e}"  format="yyyy-MM-dd HH:mm:ss" placeholder="请设置秒杀时间" ></DatePicker>
+            <DatePicker
+              ref="datetime"
+              v-model="itme"
+              type="datetime"
+              @on-change="
+                (e) => {
+                  objList.itme = e;
+                }
+              "
+              format="yyyy-MM-dd HH:mm:ss"
+              placeholder="请设置秒杀时间"
+            ></DatePicker>
           </FormItem>
         </template>
         <!-- list特区 -->
-         <template v-if="objList.list" >
+        <template v-if="objList.list">
           <Divider>海报配置区域</Divider>
           <div :key="soleKeys.list">
-               <FormItem v-for="(item,index) in objList.list"  :key="`${index}list`" 
-               :label="`图片配置（${index+1}）`" 
-              :prop="`list.${index}.imgurl`" 
-             :rules="{ required: true, message: '请设置图片路径', trigger: 'change' }">
-               <div class="img-box">
-              <div @click="setCommodity(index,'list')">
-                <img
-                  class="imgurl"
-                  v-if="item.imgurl"
-                  :src="item.imgurl"
-                  alt=""
-                />
-                <Icon class="icon" type="md-add" v-else />
-              </div>
-              <div>
-                <div>
-                  
+            <FormItem
+              v-for="(item, index) in objList.list"
+              :key="`${index}list`"
+              :label="`图片配置（${index + 1}）`"
+              :prop="`list.${index}.imgurl`"
+              :rules="{
+                required: true,
+                message: '请设置图片路径',
+                trigger: 'change',
+              }"
+            >
+              <div class="img-box">
+                <div @click="setCommodity(index, 'list')">
+                  <img
+                    class="imgurl"
+                    v-if="item.imgurl"
+                    :src="item.imgurl"
+                    alt=""
+                  />
+                  <Icon class="icon" type="md-add" v-else />
                 </div>
-                <Input  @on-blur="refreshKey('list')"
-                  v-model="item.tourl" clearable
-                  placeholder="请设置图片跳转路径"
-               />
+                <div>
+                  <div></div>
+                  <Input
+                    @on-blur="refreshKey('list')"
+                    v-model="item.tourl"
+                    clearable
+                    placeholder="请设置图片跳转路径"
+                  />
+                </div>
               </div>
-            </div>
-          </FormItem>
+            </FormItem>
           </div>
-           </template>
+        </template>
         <!-- data有商品配置特区 -->
-        <template v-if="objList.data"  >
+        <template v-if="objList.data">
           <Divider>商品配置区域</Divider>
           <div :key="soleKeys.data">
-            <FormItem v-for="(item, index) in objList.data" :label="`商品配置（${index + 1}）`"
-           :prop="`data.${index}.imgurl`" :key="`${index}data`"
-          :rules="{ required: true, message: '请配置商品图片', trigger: 'change' }">
-            <div class="img-box">
-              <div @click="setCommodity(index,'data')">
-                <img
-                  class="imgurl"
-                  v-if="item.imgurl"
-                  :src="item.imgurl"
-                  alt=""
-                />
-                <Icon class="icon" type="md-add" v-else />
-              </div>
-              <div>
-                <div>
-                  <div class="top-num">{{index+1}}</div>
-                  <ButtonGroup>
-                  <Button icon="md-arrow-dropup" :disabled="index==0" @click="setSortord(true,index)"></Button>
-                  <Button icon="md-arrow-dropdown"  @click="setSortord(false,index)" :disabled='index==objList.data.length-1'></Button>
-                  <Button icon="md-close" @click="delDtata(index)" :disabled="objList.data.length==1"></Button>
-                </ButtonGroup>
+            <FormItem
+              v-for="(item, index) in objList.data"
+              :label="`商品配置（${index + 1}）`"
+              :prop="`data.${index}.imgurl`"
+              :key="`${index}data`"
+              :rules="{
+                required: true,
+                message: '请配置商品图片',
+                trigger: 'change',
+              }"
+            >
+              <div class="img-box">
+                <div @click="setCommodity(index, 'data')">
+                  <img
+                    class="imgurl"
+                    v-if="item.imgurl"
+                    :src="item.imgurl"
+                    alt=""
+                  />
+                  <Icon class="icon" type="md-add" v-else />
                 </div>
-                <Input @on-blur="refreshKey('data')"
-                  v-model.trim="item.name" clearable
-                  placeholder="请设置商品名称"
-                />
-                <Input @on-blur="refreshKey('data')"
-                  v-model.trim="item.tourl" clearable
-                  placeholder="请设置商品图片跳转路径"
-                />
+                <div>
+                  <div>
+                    <div class="top-num">{{ index + 1 }}</div>
+                    <ButtonGroup>
+                      <Button
+                        icon="md-arrow-dropup"
+                        :disabled="index == 0"
+                        @click="setSortord(true, index)"
+                      ></Button>
+                      <Button
+                        icon="md-arrow-dropdown"
+                        @click="setSortord(false, index)"
+                        :disabled="index == objList.data.length - 1"
+                      ></Button>
+                      <Button
+                        icon="md-close"
+                        @click="delDtata(index)"
+                        :disabled="objList.data.length == 1"
+                      ></Button>
+                    </ButtonGroup>
+                  </div>
+                  <Input
+                    @on-blur="refreshKey('data')"
+                    v-model.trim="item.name"
+                    clearable
+                    placeholder="请设置商品名称"
+                  />
+                  <Input
+                    @on-blur="refreshKey('data')"
+                    v-model.trim="item.tourl"
+                    clearable
+                    placeholder="请设置商品图片跳转路径"
+                  />
+                </div>
               </div>
+            </FormItem>
+            <div class="add-list" v-if="isOpen">
+              <Button
+                @click="addData"
+                :disabled="objList.data.length >= objList.maxData"
+                icon="md-add"
+                >( {{ objList.data.length }} / {{ objList.maxData }} )</Button
+              >
             </div>
-          </FormItem>
-          <div class="add-list" v-if="isOpen" >
-             <Button @click="addData" :disabled="objList.data.length>=objList.maxData"
-              icon="md-add" >( {{objList.data.length}} / {{objList.maxData}} )</Button>
-          </div>
           </div>
         </template>
       </Form>
@@ -167,34 +265,47 @@
         <!-- <Button icon="logo-tumblr"></Button> -->
       </ButtonGroup>
     </div>
-    <pictureSelector ref="pictureSelectors" @setSubmit="setSubmit"/>
+    <pictureSelector ref="pictureSelectors" @setSubmit="setSubmit" />
   </Modal>
 </template>
 <script>
 // cursor:not-allowed;鼠标不可点击时的样式
-import pictureSelector from './pictureSelector'
+import pictureSelector from "./pictureSelector";
 export default {
-  components:{
-    pictureSelector
+  components: {
+    pictureSelector,
   },
   data() {
     return {
+      kesName: {
+        //为了避免组件深层次嵌套不会自动更新，手动刷新
+        // borderRadius:new Date().getTime(),
+        backgroundColor: new Date().getTime(),
+        color: new Date().getTime(),
+      },
       isOpen: false,
       list: {},
       ruleValidate: {
-        name:[{ required: true, message: '请输入标题', trigger: 'change' } ],
-        itme:[{ required: true, message: '请设置秒杀时间', trigger: 'change' }],
-        text:[{ required: true, message: '请输入文本', trigger: 'change' }],
-        advertising:[{ required: true, message: '请输入广告位标题', trigger: 'change' }],
-        toAdvertising:[{required: true, message: '请输入广告位副标题', trigger: 'change' }],
+        name: [{ required: true, message: "请输入标题", trigger: "change" }],
+        itme: [
+          { required: true, message: "请设置秒杀时间", trigger: "change" },
+        ],
+        text: [{ required: true, message: "请输入文本", trigger: "change" }],
+        advertising: [
+          { required: true, message: "请输入广告位标题", trigger: "change" },
+        ],
+        toAdvertising: [
+          { required: true, message: "请输入广告位副标题", trigger: "change" },
+        ],
       },
       objList: {},
-      itme:null,
-      soleKeys:{//dada和list的唯一key，可以动态控制组件更新
-        data:'data-index-key',
-        list:'list-index-key'
+      itme: null,
+      soleKeys: {
+        //dada和list的唯一key，可以动态控制组件更新
+        data: "data-index-key",
+        list: "list-index-key",
       },
-      isType:{},//记录打开二级弹窗的对象
+      isType: {}, //记录打开二级弹窗的对象
     };
   },
   props: {
@@ -208,61 +319,70 @@ export default {
       default: 0,
     },
   },
-  computed: {
-  
-  },
-  watch:{
-    isOpen(val){
-      if(!val){
-        this.$refs.pictureSelectors.isOpen=false
+  computed: {},
+  watch: {
+    isOpen(val) {
+      if (!val) {
+        this.$refs.pictureSelectors.isOpen = false;
       }
-    }
+    },
   },
   methods: {
-    setSubmit(row){
+    setkesName(name) {
+      this.kesName[name] = new Date().getTime();
+    },
+
+    setSubmit(row) {
       // console.log(row,'选择的参数')
-      const {type,index}=this.isType
-      this.objList[type][index]=JSON.parse(JSON.stringify(row))
-      this.refreshKey(type)
+      const { type, index } = this.isType;
+      this.objList[type][index] = JSON.parse(JSON.stringify(row));
+      this.refreshKey(type);
     },
-    setCommodity(index,type){
+    setCommodity(index, type) {
       // console.log('打开图片选择弹窗')
-      this.isType={
-        index,type
-      }
-      this.$refs.pictureSelectors.setOpen()
+      this.isType = {
+        index,
+        type,
+      };
+      this.$refs.pictureSelectors.setOpen();
     },
-    refreshKey(type){//刷新key
-      this.soleKeys[type]=new Date().getTime()
+    refreshKey(type) {
+      //刷新key
+      this.soleKeys[type] = new Date().getTime();
       // console.log(type,'更新了key')
     },
-    addData(){//新增data中的商品
-    const length=this.objList.data.length
+    addData() {
+      //新增data中的商品
+      const length = this.objList.data.length;
       this.objList.data.push({
-        index:length,
-        imgurl:''
-      })
-      this.refreshKey('data')
-    // console.log('新增商品',this.objList.data)
+        index: length,
+        imgurl: "",
+      });
+      this.refreshKey("data");
+      // console.log('新增商品',this.objList.data)
     },
-    delDtata(key){//删除商品配置
-       this.objList.data.splice(key,1)
-       this.refreshKey('data')
+    delDtata(key) {
+      //删除商品配置
+      this.objList.data.splice(key, 1);
+      this.refreshKey("data");
     },
-    setSortord(type,key){//排序
-      const index=type?key-1:key+1
-        if(type){//向上
-          this.objList.data[key].index=index
-          this.objList.data[index].index=key
-        }else{//向下
-         this.objList.data[key].index=index
-        this.objList.data[index].index=key
-        }
-      this.objList.data.sort((a,b)=>{
-         return a['index']-b['index']
-      })
-      this.refreshKey('data')
-        // console.log( this.objList.data,index,key,' this.objList.data')
+    setSortord(type, key) {
+      //排序
+      const index = type ? key - 1 : key + 1;
+      if (type) {
+        //向上
+        this.objList.data[key].index = index;
+        this.objList.data[index].index = key;
+      } else {
+        //向下
+        this.objList.data[key].index = index;
+        this.objList.data[index].index = key;
+      }
+      this.objList.data.sort((a, b) => {
+        return a["index"] - b["index"];
+      });
+      this.refreshKey("data");
+      // console.log( this.objList.data,index,key,' this.objList.data')
     },
     handleSubmit(name) {
       // console.log(this.objList, "objList");
@@ -285,14 +405,15 @@ export default {
         console.log(this.data, "this.data");
         this.list = JSON.parse(JSON.stringify(this.data)); //this.data
         // this.objList = JSON.parse(JSON.stringify(this.data.objList));
-      this.objList={}
-      for(let key in this.data.objList){
-        this.objList[key]=this.data.objList[key]
-      }
-      if(this.objList.itme)this.itme=this.objList.itme
-        if(this.objList.data)this.objList.data.filter((item,index)=>{
-          item['index']=index//给数字中的每一项都添加索引，方便排序
-        })
+        this.objList = {};
+        for (let key in this.data.objList) {
+          this.objList[key] = this.data.objList[key];
+        }
+        if (this.objList.itme) this.itme = this.objList.itme;
+        if (this.objList.data)
+          this.objList.data.filter((item, index) => {
+            item["index"] = index; //给数字中的每一项都添加索引，方便排序
+          });
       }
       this.isOpen = type;
     },
@@ -310,7 +431,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
 .img-box {
   width: 100%;
   height: 100px;
@@ -339,19 +459,23 @@ export default {
     padding: 0 0 0 10px;
     // border: solid 1px #ccc;
     display: flex;
-    flex-wrap:wrap ;
-    >div:nth-child(1){
- width: 100%;
- display: flex;
-justify-content: space-between;
- .top-num{
-   background: #e2e2e2;
-   color: rgba(97, 165, 255, 0.7);
-   height: 32px;
-   text-align: center;line-height: 32px;
-   display: inline-block;
-   padding: 0 10px;font-size: 18px;border-radius:5px ;font-weight:bold;
- }
+    flex-wrap: wrap;
+    > div:nth-child(1) {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .top-num {
+        background: #e2e2e2;
+        color: rgba(97, 165, 255, 0.7);
+        height: 32px;
+        text-align: center;
+        line-height: 32px;
+        display: inline-block;
+        padding: 0 10px;
+        font-size: 18px;
+        border-radius: 5px;
+        font-weight: bold;
+      }
     }
   }
 }
@@ -384,13 +508,13 @@ justify-content: space-between;
   // border: springgreen solid 1px;
   background: #fff;
   box-sizing: border-box;
-  overflow: auto;   
-  .add-list{
+  overflow: auto;
+  .add-list {
     text-align: right;
   }
-  .from-box{
- background: hsla(0,0%,94.9%,.8);
-  padding: 10px;
+  .from-box {
+    background: hsla(0, 0%, 94.9%, 0.8);
+    padding: 10px;
   }
 }
 .element::-webkit-scrollbar {

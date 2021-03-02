@@ -1,7 +1,7 @@
 <template>
   <div class="head">
     <div class="head-header">
-      <Button style=" margin: 0 10px;" :size="form.size" @click="form.enshrine=!form.enshrine" >
+      <Button style=" margin: 0 10px;" :size="form.size" @click="isShwo" >
           <transition  name="fade" mode="out-in" >
             <Icon v-if="form.enshrine" style="font-size: 30px;transition: 0.5s;" type="md-arrow-dropleft" />
             <Icon v-else style="font-size: 30px;transition: 0.5s;" type="md-arrow-dropright" />
@@ -56,7 +56,7 @@
           </div>
         </div>
       </transition>
-      <div class="main-form-bo ">
+      <div class="main-form-bo " > 
         <!--  group="Decoration" -->
         <draggable
           :options="{ group: { name: isName, pull: 'clone' }, sort: true }"
@@ -67,10 +67,10 @@
           :style="`width:${form.genreType=='pc'?'100%':'375px'};`"
           v-model="list"
           @end="End"
-          @choose="choose"
+          @choose="choose" 
           @change="handleDragChange"
         >
-          <transition-group>
+          <transition-group >
             <component
               v-for="(item, index) in list"
               :key="index"
@@ -78,6 +78,7 @@
               :is="item.componentPack"
               :objList="item.objList"
               :isWindowsOpen="isWindowsOpen"
+              
             >
               <!--  :is="item.componentPack"  动态渲染组件 -->
             </component>
@@ -184,6 +185,9 @@ export default {
   
   },
   methods: {
+    isShwo(){
+      this.form.enshrine=!this.form.enshrine
+    },
     onChange() {
       this.list = [];
       this.$refs.popups.setOpen(false);
@@ -408,14 +412,14 @@ $heide: calc(100vh - 84px);
     box-sizing: border-box;
     padding: 5px;
     display: block;
-      background: #f5f5f5;
+      // background: #f5f5f5;
     margin: auto;
     .mian-form {
       // width: 100%;
       box-sizing: border-box;
       margin: auto;
       cursor: move;
-      background: #fff;
+      // background: #fff;
       margin-bottom: 2px;
       // border: 2px solid #fff;
       // border-bottom:1px solid  rgb(252, 239, 239) ;
