@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import {projectName} from '../../utils/keyName.js'
+import {projectName} from '@/utils/keyName.js'
 import {
   toRefs,
   reactive,

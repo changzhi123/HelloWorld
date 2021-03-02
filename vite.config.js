@@ -1,4 +1,4 @@
-//vite.config.js vite2.0
+//vite.config.js
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'

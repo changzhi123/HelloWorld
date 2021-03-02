@@ -1,10 +1,10 @@
 
-import { logIn, Info, getMenus, logouts } from '../../api/user.js'
-import { setCookies, getCookies, delCookies } from '../../utils/index.js'
-import addRoutes from '../../router/addRoutes.js'
-import fixRouters from '../../router/fixRouters.js'
-import { tokenName } from '../../utils/keyName.js'
-import router from '../../router/index.js'
+import { logIn, Info, getMenus, logouts } from '@/api/user.js'
+import { setCookies, getCookies, delCookies } from '@/utils/index.js'
+import addRoutes from '@/router/addRoutes.js'
+import fixRouters from '@/router/fixRouters.js'
+import { tokenName } from '@/utils/keyName.js'
+import router from '@/router/index.js'
 const state = {
     token:getCookies(tokenName),//确保token实时最新的
     fixRouters: fixRouters,//固定路由

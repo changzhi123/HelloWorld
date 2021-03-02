@@ -64,7 +64,7 @@ import {
   reactive
 } from "vue";
 import { useStore } from "vuex";
-import {projectName} from '../../utils/keyName.js'
+import {projectName} from '@/utils/keyName.js'
 export default {
   components: { UserOutlined, LockOutlined },
   setup() {

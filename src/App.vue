@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import AppHeader from "./components/AppHeader/index.vue";
+import AppHeader from "@/components/AppHeader/index.vue";
 import {
   // ref,
   toRefs,
