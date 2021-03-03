@@ -305,7 +305,7 @@ const move=[
                 componentPack: 'IfIcation',
                 objList: {
                     width: '100%',
-                    height: '100px',
+                    height: '80px',
                     backgroundColor:'#f2f2f2',
                     backgroundImg:"",
                     maxData:5,
@@ -335,6 +335,53 @@ const move=[
                         tourl:'',
                         name:""
                     }]
+                }
+            },
+            {
+                title: '搜索框',
+                maxNum: 10,
+                parent: '1',
+                nowNum: 0,
+                icon: 'ios-search-outline',
+                componentPack: 'searchBox',
+                objList: {
+                    width: '100%',
+                    height: '32px',
+                    backgroundColor:'#f2f2f2',
+                    backgroundImg:"",
+                    padding:0,
+                    borderRadius:16,
+                   
+                }
+            },
+            {
+                title: '纵向商品组件',
+                maxNum: 10,
+                parent: '1',
+                nowNum: 0,
+                icon: 'ios-apps',
+                componentPack: 'Longitudinalgoods',
+                objList: {
+                    width: '100%',
+                    height: '100px',
+                    backgroundColor:'#f2f2f2',
+                    backgroundImg:"",
+                    // padding:0,
+                    // borderRadius:0,
+                    maxData:1000,
+                    data:[
+                        // {
+                        //     imgurl:
+                        //       "https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1603365312,3218205429&fm=26&gp=0.jpg",
+                        //     text:
+                        //       "商品标题，可以结合具体业务活动商品数据商品标题，可以结合具体业务活动商品数据",
+                        //     price: "69.8 ",
+                        //     soldOut: "128",
+                        //     tourl: "",
+                        //   },
+                        {}
+                    ]
+                   
                 }
             }
         ]

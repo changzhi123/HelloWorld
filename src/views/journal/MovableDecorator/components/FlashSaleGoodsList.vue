@@ -1,11 +1,8 @@
 <template>
   <!-- 秒杀商品 -->
-  <div
-    class="FlashSaleGoodsList"
-    :style="style"
-  >
-      <div 
-      class="tab tab-img" 
+  <div class="FlashSaleGoodsList" :style="style">
+    <div
+      class="tab tab-img"
       :style="`background-image:url(${objList.list[0].imgurl});`"
     >
       <div class="seckill">{{ objList.name }}</div>
@@ -24,40 +21,55 @@
         :trigger="setting.trigger"
         :arrow="setting.arrow"
       >
-        <CarouselItem  v-for="(item, index) in arrLength" :key="index">
+        <CarouselItem v-for="(item, index) in arrLength" :key="index">
           <div class="text-box">
-            <div v-for="(v, idx) in objList.data" :key="idx"  v-if="type(index,idx)">
-                <img class="imgs"  @click="skipOpen(v.tourl)"  v-if="v.imgurl" :src="v.imgurl" alt="" />
-              <div class="imgs" v-else>
-                <!-- <i class="el-icon-goods skeleton-goods-img-icon"></i> -->
-                <Icon type="ios-basket" class="skeleton-goods-img-icon" />
+            <template v-for="(v, idx) in objList.data">
+              <div :key="idx" v-if="type(index, idx)">
+                <img
+                  class="imgs"
+                  @click="skipOpen(v.tourl)"
+                  v-if="v.imgurl"
+                  :src="v.imgurl"
+                  alt=""
+                />
+                <div class="imgs" v-else>
+                  <Icon type="ios-basket" class="skeleton-goods-img-icon" />
+                </div>
+                <div class="View_goods" v-if="v.text">{{ v.text }}</div>
+                <div
+                  class="View_goods"
+                  v-else
+                  style="background: #f2f2f2"
+                ></div>
+                <div class="View_goodsPrice_Eg2v8" v-if="v.price">
+                  <span class="View_priceMiaosha_3j8Fj"
+                    ><i>¥</i><span>{{ v.price }}</span></span
+                  >
+                  <span class="View_priceOrigin_1CCY2"
+                    ><i>¥</i><span>{{ v.toprice }}</span></span
+                  >
+                </div>
+                <div
+                  v-else
+                  class="View_goodsPrice_Eg2v8"
+                  style="background: #f2f2f2; border: none"
+                ></div>
               </div>
-              <div class="View_goods" v-if="v.text">{{ v.text }}</div>
-              <div class="View_goods" v-else style="background: #f2f2f2"></div>
-              <div class="View_goodsPrice_Eg2v8" v-if="v.price">
-                <span class="View_priceMiaosha_3j8Fj"
-                  ><i>¥</i><span>{{ v.price }}</span></span
-                >
-                <span class="View_priceOrigin_1CCY2"
-                  ><i>¥</i><span>{{ v.toprice }}</span></span
-                >
-              </div>
-              <div
-                v-else
-                class="View_goodsPrice_Eg2v8"
-                style="background: #f2f2f2; border: none"
-              ></div>
-            
-            </div>
+            </template>
           </div>
         </CarouselItem>
       </Carousel>
     </div>
     <div class="tab">
-      <img class="imags" @click="skipOpen(objList.list[1].tourl)" :src="objList.list[1].imgurl" v-if="objList.list[1].imgurl" alt="" />
+      <img
+        class="imags"
+        @click="skipOpen(objList.list[1].tourl)"
+        :src="objList.list[1].imgurl"
+        v-if="objList.list[1].imgurl"
+        alt=""
+      />
       <div class="isimags imags" v-else>
         <div>
-          <!-- <i class="el-icon-picture "></i> -->
           <Icon type="md-image" />
         </div>
       </div>
@@ -80,51 +92,54 @@ export default {
       },
     };
   },
-  computed:{ 
+  computed: {
     style() {
-       let imgurl=`url('${this.objList.backgroundImg}') 100% 100% no-repeat`
-     return{
-       maxWidth:this.objList.width||'100%',
-       height: this.objList.height || "200px",
-       background:this.objList.backgroundImg?imgurl:this.objList.backgroundColor
-     }
+      let imgurl = `url('${this.objList.backgroundImg}') 100% 100% no-repeat`;
+      return {
+        maxWidth: this.objList.width || "100%",
+        height: this.objList.height || "200px",
+        background: this.objList.backgroundImg
+          ? imgurl
+          : this.objList.backgroundColor,
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
+      };
     },
-     arrLength(){
-      return this.objList.data.length>4?2:1
-     }
+    arrLength() {
+      return this.objList.data.length > 4 ? 2 : 1;
+    },
   },
   props: {
-   
-    objList:{
-        type: Object,
-      default:()=>({}),
+    objList: {
+      type: Object,
+      default: () => ({}),
     },
-     isWindowsOpen:{
-      type:Boolean,
-      defaule:true
-    }
+    isWindowsOpen: {
+      type: Boolean,
+      defaule: true,
+    },
   },
   methods: {
-    skipOpen(tourl){
-       if(this.isWindowsOpen&&tourl)window.open(tourl)
-     },
-    type(index,idx){
-      let isIndex=(index+1)*4+1,
-      isType=false,
-      isIdx=index*4,
-      numidx=idx+1
-      if(numidx<isIndex){
-        if(index==0){
-          isType=true
-        }else{
-           if(numidx>isIdx){
-             isType=true 
-           }  
+    skipOpen(tourl) {
+      if (this.isWindowsOpen && tourl) window.open(tourl);
+    },
+    type(index, idx) {
+      let isIndex = (index + 1) * 4 + 1,
+        isType = false,
+        isIdx = index * 4,
+        numidx = idx + 1;
+      if (numidx < isIndex) {
+        if (index == 0) {
+          isType = true;
+        } else {
+          if (numidx > isIdx) {
+            isType = true;
+          }
         }
       }
       // console.log(index,idx,'key',isIndex,isType,isIdx)
-      return isType
-    }
+      return isType;
+    },
   },
 };
 </script>
@@ -132,8 +147,8 @@ export default {
 <style lang="scss" scoped>
 .FlashSaleGoodsList {
   // height: 100px;
-  width: 100%; 
-  
+  width: 100%;
+
   display: flex;
   background: #fff;
 
@@ -149,7 +164,8 @@ export default {
   background-position: 50%;
   position: relative;
   background-repeat: no-repeat;
-  background-color: #e83632;cursor:pointer;
+  background-color: #e83632;
+  cursor: pointer;
 
   .seckill {
     width: 100%;
@@ -173,11 +189,12 @@ export default {
 
   .imags {
     width: 100%;
-    height: 100%;cursor:pointer;
+    height: 100%;
+    cursor: pointer;
   }
   .isimags {
     box-sizing: border-box;
-    padding: 15px  0 15px 0;
+    padding: 15px 0 15px 0;
     > div {
       color: rgba(97, 165, 255, 0.7);
       font-size: 50px;
@@ -214,7 +231,8 @@ export default {
       text-align: center;
 
       .imgs {
-        width: 100%;cursor:pointer;
+        width: 100%;
+        cursor: pointer;
         height: 100px;
         background: #f2f2f2;
         display: flex;

@@ -25,7 +25,9 @@ computed: {
      return{
        maxWidth:this.objList.width||'100%',
         height: this.objList.height || "200px",
-       background:this.objList.backgroundImg?imgurl:this.objList.backgroundColor
+       background:this.objList.backgroundImg?imgurl:this.objList.backgroundColor,
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
      }
     },
   },

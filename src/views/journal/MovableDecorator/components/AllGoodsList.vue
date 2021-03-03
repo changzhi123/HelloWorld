@@ -40,7 +40,9 @@ export default {
       let imgurl=`url('${this.objList.backgroundImg}') 100% 100% no-repeat`
      return{
        maxWidth:this.objList.width||'100%',
-       background:this.objList.backgroundImg?imgurl:this.objList.backgroundColor
+       background:this.objList.backgroundImg?imgurl:this.objList.backgroundColor,
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
      }
      
    }

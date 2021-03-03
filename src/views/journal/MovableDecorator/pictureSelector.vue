@@ -43,7 +43,9 @@ export default {
             "https://dss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg",
           text: "商品标题，可以结合具体业务活动商品数据",
           price: "69.8 ",
-          tourl:'12'
+          tourl:'12',
+          soldOut:'128',
+          name:'疯猫'
         },
         {
           id: "1",
@@ -51,14 +53,15 @@ export default {
             "https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1603365312,3218205429&fm=26&gp=0.jpg",
           text: "商品标题，可以结合具体业务活动商品数据",
           price: "69.8 ",
-           tourl:''
+           tourl:'',
+           soldOut:'128',
         },
         {
           id: "2",
           imgurl:
             "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1963304009,2816364381&fm=26&gp=0.jpg",
           text: "商品标题，可以结合具体业务活动商品数据",
-          price: "69.8 ",
+          price: "69.8 ", soldOut:'128',
            tourl:''
         },
         {
@@ -66,7 +69,7 @@ export default {
           imgurl:
             "https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1089874897,1268118658&fm=26&gp=0.jpg",
           text: "商品标题，可以结合具体业务活动商品数据",
-          price: "69.8 ",
+          price: "69.8 ", soldOut:'128',
            tourl:''
         },
         {
@@ -74,7 +77,7 @@ export default {
           imgurl:
             "https://gw.alicdn.com/bao/uploaded/i1/2105113961/O1CN01C6b1kj1f8BJxju0i4_!!0-item_pic.jpg",
           text: "商品标题，可以结合具体业务活动商品数据",
-          price: "69.8 ",
+          price: "69.8 ", soldOut:'128',
            tourl:''
         },
         {
@@ -82,7 +85,7 @@ export default {
           imgurl:
             "https://gw.alicdn.com/bao/uploaded/i1/2105113961/O1CN01C6b1kj1f8BJxju0i4_!!0-item_pic.jpg",
           text: "商品标题，可以结合具体业务活动商品数据",
-          price: "69.8 ",
+          price: "69.8 ", soldOut:'128',
            tourl:''
         },
       ],

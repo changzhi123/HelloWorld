@@ -20,6 +20,9 @@
           >{{ item.label }}</Option
         >
       </Select>
+       <Button style=" margin: 0 10px;" :size="form.size" @click="$refs.fullScreenModals.setOpen()"  >
+         预览
+      </Button>
     </div>
     <div class="head-main-box">
       <transition name="fade" mode="out-in" translate >
@@ -96,15 +99,19 @@
       @delList="delList"
       @setRank="setRank"
     ></popup>
+    <fullScreenModal ref="fullScreenModals" :type='form.genreType' :list='list'></fullScreenModal>
   </div>
 </template>
 <script>
 import draggable from "vuedraggable";
 import tools from "./tools";
 import { deepCopy } from "@/utils/method";
+import fullScreenModal from './fullScreenModal'
+import popup from './popup'
 // import  './index.js'//全局祖册
 //局部注册
-const requireComponents = require.context('./components/', false, /\.vue$/) //读取当前文件夹下components文件夹下.vue文件
+const requireComponents = require.context('./components/', false, /\.vue$/)
+ //读取当前文件夹下components文件夹下.vue文件
 const componentsObj = { }
 requireComponents.keys().forEach(filePath => {
   const componentName = filePath.split('/')[1].replace(/\.vue$/, '')//获取组件名字
@@ -113,12 +120,14 @@ requireComponents.keys().forEach(filePath => {
   console.log(componentName,'当前组件',filePath,componentConfig,requireComponents)
 })
 componentsObj['draggable']=draggable
+componentsObj['popup']=popup
+componentsObj['fullScreenModal']=fullScreenModal
 export default {
   components:componentsObj,// 局部注册
   data() {
     return {
       form: {
-        genreType: "pc",
+        genreType: "move",
         size: "large",
         enshrine:true,//是否展示选择框
       },

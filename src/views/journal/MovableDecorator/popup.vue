@@ -47,39 +47,58 @@
             />
           </FormItem>
           <FormItem label="设置背景图片" prop="backgroundImg">
-            <Input
-              v-model="objList.backgroundImg"
-              clearable
-              placeholder="背景图片会覆盖背景颜色"
-            />
+            <picturesOfTheRadio
+              :key="kesName.backgroundImg"
+              :imgList="objList.backgroundImg ? [objList.backgroundImg] : []"
+              ref="picturesOfTheRadios"
+              @present="
+                (e) => {
+                  objList.backgroundImg = e[0];
+                }
+              "
+              @delList="
+                () => {
+                  (objList.backgroundImg = ''), setkesName('backgroundImg');
+                }
+              "
+            ></picturesOfTheRadio>
           </FormItem>
         </template>
         <!-- 轮播图特区 -->
-        <template v-if="data.componentPack == 'CarouselImg'">
-          <FormItem
-            label="边框圆弧度"
-            prop="borderRadius"
-          >
+        <!-- <template v-if="data.componentPack == 'CarouselImg'">
+            <FormItem label="边框圆弧度"  prop="borderRadius">
             <Slider
-              :marks="{ '100': '100px' }"
+              :marks="marks"
               show-input
               v-model="objList.borderRadius"
             ></Slider>
           </FormItem>
-          <FormItem
-            label="图片镂空度"
-            prop="borderRadius"
-          >
+           <FormItem label="镂空度"  prop="padding">
             <Slider
-            v-model="objList.padding"
-              :marks="{ '100': '100px' }"
+              v-model="objList.padding"
+              :marks="marks"
               show-input
             ></Slider>
           </FormItem>
-        </template>
+         
+        </template> -->
 
         <!-- 公共 -->
         <template>
+          <FormItem label="边框圆弧度" v-if="objList.borderRadius==0||objList.borderRadius" prop="borderRadius">
+            <Slider
+              :marks="marks"
+              show-input
+              v-model="objList.borderRadius"
+            ></Slider>
+          </FormItem>
+           <FormItem label="镂空度" v-if="objList.padding==0||objList.padding" prop="padding">
+            <Slider
+              v-model="objList.padding"
+              :marks="marks"
+              show-input
+            ></Slider>
+          </FormItem>
           <FormItem label="标题" prop="name" v-if="objList.name">
             <Input v-model="objList.name" clearable placeholder="请输入标题" />
           </FormItem>
@@ -271,15 +290,18 @@
 <script>
 // cursor:not-allowed;鼠标不可点击时的样式
 import pictureSelector from "./pictureSelector";
+import picturesOfTheRadio from "./picturesOfTheRadio";
 export default {
   components: {
     pictureSelector,
+    picturesOfTheRadio,
   },
   data() {
     return {
+      marks: { 0: "0px", 100: "100px" },
       kesName: {
         //为了避免组件深层次嵌套不会自动更新，手动刷新
-        // borderRadius:new Date().getTime(),
+        backgroundImg: new Date().getTime(),
         backgroundColor: new Date().getTime(),
         color: new Date().getTime(),
       },
@@ -324,8 +346,11 @@ export default {
     isOpen(val) {
       if (!val) {
         this.$refs.pictureSelectors.isOpen = false;
+        this.$refs.picturesOfTheRadios.noOpen()
       }
     },
+  },
+  mounted(){
   },
   methods: {
     setkesName(name) {
@@ -402,7 +427,9 @@ export default {
     },
     setOpen(type) {
       if (type) {
-        console.log(this.data, "this.data");
+        this.$refs.pictureSelectors.isOpen = false;
+        this.$refs.picturesOfTheRadios.noOpen()
+        // console.log(this.data, "this.data");
         this.list = JSON.parse(JSON.stringify(this.data)); //this.data
         // this.objList = JSON.parse(JSON.stringify(this.data.objList));
         this.objList = {};

@@ -18,7 +18,7 @@
           :style="height"
         >
           <img
-            class="imags"
+            class="imags-carousel"
             @click="skipOpen(item.tourl)"
             v-if="item.imgurl"
             :src="item.imgurl"
@@ -44,6 +44,8 @@ export default {
           ? imgurl
           : this.objList.backgroundColor,
         padding: this.objList.padding + "px",
+         backgroundSize: "cover",
+        backgroundAttachment: "fixed",
       };
     },
     style2() {
@@ -115,7 +117,7 @@ export default {
   }
 }
 
-.imags {
+.imags-carousel {
   height: 100%;
   width: 100%;
   box-sizing: border-box;

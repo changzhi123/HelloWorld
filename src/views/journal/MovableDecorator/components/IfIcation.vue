@@ -1,5 +1,5 @@
 <template>
-    <div class="IfIcation">
+    <div class="IfIcation" :style="style">
          <div class="img-list" v-for="(item,index) in objList.data" :key="index">
       <img
         class="imgurl"
@@ -27,7 +27,9 @@ export default {
      return{
        maxWidth:this.objList.width||'100%',
        height: this.objList.height || "200px",
-       background:this.objList.backgroundImg?imgurl:this.objList.backgroundColor
+       background:this.objList.backgroundImg?imgurl:this.objList.backgroundColor,
+        backgroundSize: "cover",
+        backgroundAttachment: "fixed",
      }
     },
   },
