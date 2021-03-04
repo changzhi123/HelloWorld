@@ -23,13 +23,13 @@ import {
 } from "vue";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
-import {projectName} from '@/utils/keyName.js'
+import { projectName } from "@/utils/keyName.js";
 export default {
   name: "App",
   components: {
     AppHeader,
   },
-  setup(props,ctx) {
+  setup(props, ctx) {
     const router = useRouter();
     const route = useRoute();
     const store = useStore();
@@ -57,7 +57,7 @@ export default {
     padding-top: 64px;
     height: 100vh;
     box-sizing: border-box;
-    >div{
+    > div {
       width: 100%;
       height: 100%;
       box-sizing: border-box;
