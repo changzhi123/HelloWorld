@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import AppHeader from "@/components/AppHeader/index.vue";
+import AppHeader from '@/components/AppHeader/index.vue'
 import {
   // ref,
   toRefs,
@@ -20,31 +20,38 @@ import {
   // onRenderTracked,
   // onRenderTriggered,
   // defineComponent
-} from "vue";
-import { useStore } from "vuex";
-import { useRouter, useRoute } from "vue-router";
-import { projectName } from "@/utils/keyName.js";
+} from 'vue'
+import { useStore } from 'vuex'
+import { useRouter, useRoute } from 'vue-router'
+import { projectName } from '@/utils/keyName.js'
 export default {
-  name: "App",
+  name: 'App',
   components: {
     AppHeader,
   },
   setup(props, ctx) {
-    const router = useRouter();
-    const route = useRoute();
-    const store = useStore();
-    const state = reactive({});
+    const router = useRouter()
+    const route = useRoute()
+    const store = useStore()
+    const state = reactive({})
     onMounted(() => {
       // console.log(  store.state.user,ctx,projectName,"当前环境",process.env);
-    });
+      const modules = import.meta.glob('./assets/images/*.jpg')
+      const modulesaa = import.meta.globEager('./assets/images/*.jpg')
+      console.log(modules, 'modules',modulesaa)
+      
+      Object.keys(modules).filter((key) => {
+        console.log(modules[key]) // 获取到属性对应的值，做一些处理
+      })
+    })
     return {
       ...toRefs(state),
       // count: computed(() => store.state.count),
       // increment: () => store.commit('increment'),
       // asyncIncrement: () => store.dispatch('asyncIncrement')
-    };
+    }
   },
-};
+}
 </script>
 <style lang="less" scoped>
 .rootBody {
