@@ -36,6 +36,82 @@ Page({
       url: '../module/index'
     })
   },
+  tag(){
+    wx.navigateTo({
+      url:'/moduleA/pages/rabbit/index'
+    })
+  },
+  set(){
+    //存储token
+    wx.setStorage({
+      key:"token",
+      data:"changzhi123"
+    })
+    wx.setStorage({
+      key:"key",
+      data:"value"
+    })
+  },
+  get(){
+    //读取 token
+   const token=wx.getStorageSync('token')
+   const value = wx.getStorageSync('key')
+   console.log(token,'token',value)
+  },
+  photo(){
+    //调用相册或者相机
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['album', 'camera'],
+      success (res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        const tempFilePaths = res.tempFilePaths
+        console.log(tempFilePaths)
+      }
+    })
+  },
+  phototo(){
+    wx.chooseVideo({
+      sourceType: ['album','camera'],
+      maxDuration: 60,
+      camera: 'back',
+      success(res) {
+        console.log(res.tempFilePath)
+      }
+    })
+  },
+  phototsso(){
+    wx.chooseMedia({
+      count: 9,
+      mediaType: ['image','video'],
+      sourceType: ['album', 'camera'],
+      maxDuration: 30,
+      camera: 'back',
+      success(res) {
+        console.log(res.tempFiles.tempFilePath)
+        console.log(res.tempFiles.size)
+      }
+    })
+  },
+  login(){
+    wx.login({
+      success (res) {
+        if (res.code) {
+          //发起网络请求
+          console.log(res.code,'code')
+          wx.request({
+            url: 'https://test.com/onLogin',
+            data: {
+              code: res.code
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+  },
  getElement(){//获取界面上的节点信息
     const query = wx.createSelectorQuery()
     console.log('获取界面上的节点信息',query.select('#the-id'))

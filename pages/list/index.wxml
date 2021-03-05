@@ -25,3 +25,11 @@
 
 
 <button bindtap="cartoon">动画</button>
+
+<button bindtap="tag">分包</button>
+<button bindtap="set">存储token</button>
+<button bindtap="get">读取token</button>
+<button bindtap="photo">相册</button>
+<button bindtap="phototo">视频</button>
+<button bindtap="phototsso">视频或者相册</button>
+<button bindtap="login">login</button>

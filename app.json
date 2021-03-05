@@ -9,6 +9,15 @@
     "pages/demos/index",
     "pages/data/index/index"
   ],
+  "subpackages": [
+    {
+      "root": "moduleA",
+      "pages": [
+        "pages/rabbit/index",
+        "pages/squirrel/index"
+      ]
+    }
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#58bc58",
