@@ -25,6 +25,7 @@ const service = axios.create({
   service.interceptors.response.use(
     response => {
       const res = response.data;
+      console.log(res, 'respone拦截器')
       if(res.code!=0){
         if (res.code == 404 || res.code == 401) {
           removeToken() //清除Cookies token

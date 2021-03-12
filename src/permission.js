@@ -48,6 +48,8 @@ router.beforeEach(async(to, from, next) =>{
                     })
                   } catch (error) {
                     //  删除令牌，进入登录页面重新登录
+
+                    console.log('进入了 ')
                     await store.dispatch('user/resetToken')
                     Message.error(error || 'Has Error')
                     next(`/login`)

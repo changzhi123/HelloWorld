@@ -8,19 +8,16 @@ export function getInfo(data) {//获取用户信息
   });
 }
 export function login(data) {//登录
+
+  
   return request({
     url: '/login',
     method: 'post',
     data: data
   });
 }
-export function logouts(data) {//退出登录
-  return request({
-    url: '/users/logouts',
-    method: 'get',
-    params: data
-  });
-}
+
+
 export function getMenus(data) {//获取菜单
   return request({
     url: '/users/getMenus',
