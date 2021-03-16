@@ -1,3 +1,4 @@
+import Layout from '@/components/Layout/index.vue';
 
 const addRoutes=[
     {
@@ -35,5 +36,19 @@ const addRoutes=[
         component: () => import('@/views/toDoList/index.vue'),
         meta: { }
     },
+    //Layout路由
+    {
+        path: '/',
+        component: Layout,
+        redirect: '/dashboard',
+        children: [
+          {
+            path: 'dashboard',
+            component: () => import('@/views/dashboard/index.vue'),
+            name: 'Dashboard',
+            meta: { title: '首页',  affix: true }
+          }
+        ]
+      },
 ];
 export default addRoutes

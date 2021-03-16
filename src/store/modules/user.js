@@ -80,6 +80,7 @@ const actions = {
         return new Promise(resolve => {
             commit('stateUpdate', { key: 'userInfo', value: null })//删除userInfo
             commit('stateUpdate', { key: 'addRoutes', value: [] })//删除addRoutes
+            commit('stateUpdate', { key: 'token', value: null })//删除userInfo
             delCookies(tokenName)//删除token
             resolve()
         })

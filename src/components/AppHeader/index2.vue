@@ -2,38 +2,42 @@
   <!-- AppHeader 头部组件-->
   <div class="AppHeader">
     <!-- breadthWidth 为true时，header宽度为100% -->
-    <div class="headerContent" :class="{'breadthWidth':isRouter.includes(state.routeName)}">
-      <headerPrefix class='frontAndBack' />
-      <headeRsubject class="headeRsubject" />
-      <headerSuffix class='frontAndBack' />
+    <div class="headerContent" :class="{'breadthWidth':false}">
+      <headerPrefix />
+      <headeRsubject />
+      <headerSuffix />
     </div>
   </div>
 </template>
 
-
-<script setup>
+<script>
 import headerPrefix from './headerPrefix.vue'
 import headeRsubject from './headeRsubject.vue'
 import headerSuffix from './headerSuffix.vue'
-import { useRouter, useRoute } from 'vue-router'
 import {
   toRefs,
   reactive,
   onMounted,
-  computed
 } from "vue";
-
-const isRouter=['/apply']//需要调整header宽度的路由
-const route = useRoute()
-const state = reactive({
-   routeName:computed(()=>route.path)
-});
+export default {
+  components:{
+    headerPrefix,headerSuffix,headeRsubject
+  },
+  setup(props, ctx) {
+    const state = reactive({});
+    onMounted(() => {});
+    return {
+      ...toRefs(state),
+    };
+  },
+};
 </script>
+
 
 <style lang="less" scoped>
 .AppHeader {
   width: 100%;
-  height: 50px;
+  height: 64px;
   position: fixed;
   top: 0;
   background: #fff;
@@ -48,10 +52,10 @@ const state = reactive({
     >div{
       height: 100%;
     }
-    .headeRsubject{
+    >div:nth-child(2){
       flex: 1;
     }
-    .frontAndBack{
+    >div:nth-child(2n-1){
       min-width: 100px;
     }
   }

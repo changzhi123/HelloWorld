@@ -51,6 +51,7 @@ const state = reactive({
 <style lang="less" scoped>
 .headeRsubject {
   display: flex;
+  height: 100%;
   justify-content: flex-end;
   padding: 0 10px;
   .RsubjectTag {

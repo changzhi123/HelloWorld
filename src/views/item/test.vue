@@ -3,6 +3,7 @@
     <h1>{{ state.count }}</h1>
     <h3>{{state.text}}</h3>
     <h3>{{msg}}</h3>
+    <h3>{{res}}</h3>
   </div>
 </template>
 
@@ -19,7 +20,10 @@ defineProps({
 const state = reactive({
   count: 0,
   text: "新写法",
+  res:'res'
 });
+let {res}=state
+res+='123'
 console.log(state.count,'state.count',store.getters.userInfo)
 </script>
 

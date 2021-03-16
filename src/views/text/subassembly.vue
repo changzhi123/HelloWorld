@@ -11,8 +11,6 @@
         computed
     } from 'vue'
     export default {
-
-
         setup(props,ctx) {
             console.log({...props},'和组件传值',{...ctx.attrs})
             const state = reactive({})
