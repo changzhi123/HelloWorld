@@ -1,17 +1,10 @@
 <template>
   <div class="rootBody">
-    <!-- <AppHeader></AppHeader>
-    <div class="AppMain">
-      <router-view></router-view>
-    </div> -->
-    <!-- <Layout/> -->
     <router-view/>
   </div>
 </template>
 
 <script setup>
-import AppHeader from '@/components/AppHeader/index.vue'
-import Layout from '@/components/Layout/index.vue';
 // import {
 //   // ref,
 //   toRefs,
@@ -59,21 +52,5 @@ import Layout from '@/components/Layout/index.vue';
 // }
 </script>
 <style lang="less" scoped>
-.rootBody {
-  width: 100%;
-  height: 100vh;
-  box-sizing: border-box;
-  background: #f5f5f5;
-  .AppMain {
-    width: 100%;
-    padding-top: 50px;
-    height: 100vh;
-    box-sizing: border-box;
-    > div {
-      width: 100%;
-      height: 100%;
-      box-sizing: border-box;
-    }
-  }
-}
+
 </style>
