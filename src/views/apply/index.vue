@@ -2,10 +2,8 @@
   <div class="apply">apply</div>
 </template>
 
-<script>
-export default {
+<script setup>
 
-}
 </script>
 
 <style lang="less" scoped>

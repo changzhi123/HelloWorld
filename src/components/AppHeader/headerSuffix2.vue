@@ -2,16 +2,16 @@
   <!-- 后缀 -->
   <div class="headerSuffix">
     <!-- 没有登陆 -->
-    <div v-if="!state.userInfo" class="noLoign">
+    <div v-if="!userInfo" class="noLoign">
       <router-link to="/login" class="a-text"> 注册</router-link>
       <router-link to="/login" class="a-text a-text-to">登陆</router-link>
     </div>
     <!-- 已登录 -->
     <div v-else class="yeLogin">
-      <img class="yeLogin-imgs" :src="state.userInfo.avatar" href="javascript:;" alt="" />
-      <a-dropdown>
+      <img class="yeLogin-imgs" :src="userInfo.avatar"  href="javascript:;"  alt="" />
+      <a-dropdown >
         <a class="ant-dropdown-link" @click.prevent>
-          {{ state.userInfo.nickname }}
+          {{ userInfo.nickname }}
           <DownOutlined />
         </a>
         <template #overlay>
@@ -26,24 +26,32 @@
   </div>
 </template>
 
-<script setup>
-import { toRefs, reactive, computed } from 'vue'
-import { useStore } from 'vuex'
-import { DownOutlined } from '@ant-design/icons-vue'
-import { useRouter } from 'vue-router'
-const router = useRouter()
-const store = useStore()
-const state = reactive({
-   userInfo: computed(() => store.getters.userInfo)
-})
-
-//退出登陆
-function logout() {
-  store.dispatch('user/logout').then(() => {
-    router.push('/login')
-  })
-}
-
+<script>
+import { toRefs, reactive, computed } from "vue";
+import { useStore } from "vuex";
+import { DownOutlined } from "@ant-design/icons-vue";
+import { useRouter } from "vue-router";
+export default {
+  components: {
+    DownOutlined,
+  },
+  setup(props, ctx) {
+    const router = useRouter();
+    const store = useStore();
+    const state = reactive({});
+    //退出登陆
+    function logout() {
+      store.dispatch("user/logout").then(() => {
+        router.push("/login");
+      });
+    }
+    return {
+      userInfo: computed(() => store.getters.userInfo),
+      ...toRefs(state),
+      logout,
+    };
+  },
+};
 </script>
 
 <style lang="less" scoped>
@@ -71,8 +79,8 @@ function logout() {
     color: #333;
 
     .yeLogin-imgs {
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       margin: 0 10px;
     }

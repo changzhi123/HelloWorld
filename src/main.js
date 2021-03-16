@@ -10,7 +10,6 @@ import store from './store'//vuex
 import Antd from 'ant-design-vue';//ui组件
 import 'ant-design-vue/dist/antd.css';//ui组件样式
 
-// console.log(app,'app')
 
 createApp(App)
     .use(router)

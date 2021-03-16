@@ -8,6 +8,8 @@ const baseURLs = {
     production: '/api',
 };
 
+console.log(import.meta.env.MODE,'获取环境变量',process.env.NODE_ENV)
+
 const service = axios.create({
     baseURL: baseURLs[process.env.NODE_ENV],
     timeout: 5000, // 请求超时时间

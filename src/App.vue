@@ -7,51 +7,53 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import AppHeader from '@/components/AppHeader/index.vue'
-import {
-  // ref,
-  toRefs,
-  reactive,
-  // computed,
-  onMounted,
-  // onUpdated,
-  // onUnmounted,
-  // onRenderTracked,
-  // onRenderTriggered,
-  // defineComponent
-} from 'vue'
-import { useStore } from 'vuex'
-import { useRouter, useRoute } from 'vue-router'
-import { projectName } from '@/utils/keyName.js'
-export default {
-  name: 'App',
-  components: {
-    AppHeader,
-  },
-  setup(props, ctx) {
-    const router = useRouter()
-    const route = useRoute()
-    const store = useStore()
-    const state = reactive({})
-    onMounted(() => {
-      // console.log(  store.state.user,ctx,projectName,"当前环境",process.env);
-      const modules = import.meta.glob('./assets/images/*.jpg')
-      const modulesaa = import.meta.globEager('./assets/images/*.jpg')
-      console.log(modules, 'modules',modulesaa)
+// import {
+//   // ref,
+//   toRefs,
+//   reactive,
+//   // computed,
+//   onMounted,
+//   // onUpdated,
+//   // onUnmounted,
+//   // onRenderTracked,
+//   // onRenderTriggered,
+//   // defineComponent
+// } from 'vue'
+// import { useStore } from 'vuex'
+// import { useRouter, useRoute } from 'vue-router'
+// import { projectName } from '@/utils/keyName.js'
+// import { getCurrentInstance,toRaw } from 'vue'
+// export default {
+//   name: 'App',
+//   components: {
+//     AppHeader,
+//   },
+//   setup(props, res) {
+//       const { ctx } = getCurrentInstance()
+//     const router = useRouter()
+//     const route = useRoute()
+//     const store = useStore()
+//     const state = reactive({})
+//     console.log(router,route,'路由信息',ctx.$router.currentRoute.value,route.path,)
+//     onMounted(() => {
+//       const modules = import.meta.glob('./assets/images/*.jpg')
+//       const modulesaa = import.meta.globEager('./assets/images/*.jpg')
+//       console.log(modules, 'modules',modulesaa)
       
-      Object.keys(modules).filter((key) => {
-        console.log(modules[key]) // 获取到属性对应的值，做一些处理
-      })
-    })
-    return {
-      ...toRefs(state),
-      // count: computed(() => store.state.count),
-      // increment: () => store.commit('increment'),
-      // asyncIncrement: () => store.dispatch('asyncIncrement')
-    }
-  },
-}
+//       Object.keys(modules).filter((key) => {
+//         console.log(modules[key]) // 获取到属性对应的值，做一些处理
+//       })
+//     })
+//     return {
+//       ...toRefs(state),
+//       // count: computed(() => store.state.count),
+//       // increment: () => store.commit('increment'),
+//       // asyncIncrement: () => store.dispatch('asyncIncrement')
+//     }
+//   },
+// }
 </script>
 <style lang="less" scoped>
 .rootBody {
@@ -61,7 +63,7 @@ export default {
   background: #f5f5f5;
   .AppMain {
     width: 100%;
-    padding-top: 64px;
+    padding-top: 50px;
     height: 100vh;
     box-sizing: border-box;
     > div {
