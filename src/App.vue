@@ -1,10 +1,18 @@
 <template>
-  <div class="rootBody">
-    <router-view/>
-  </div>
+  <!-- <div class="rootBody"> -->
+    <a-config-provider :locale="state.locale">
+      <router-view />
+    </a-config-provider>
+  <!-- </div> -->
 </template>
 
 <script setup>
+import {reactive} from 'vue'
+import zhCN from 'ant-design-vue/es/locale/zh_CN'
+import enUS from 'ant-design-vue/es/locale/en_US';
+const state = reactive({
+  locale: zhCN,
+})
 // import {
 //   // ref,
 //   toRefs,
@@ -37,7 +45,7 @@
 //       const modules = import.meta.glob('./assets/images/*.jpg')
 //       const modulesaa = import.meta.globEager('./assets/images/*.jpg')
 //       console.log(modules, 'modules',modulesaa)
-      
+
 //       Object.keys(modules).filter((key) => {
 //         console.log(modules[key]) // 获取到属性对应的值，做一些处理
 //       })
@@ -52,5 +60,4 @@
 // }
 </script>
 <style lang="less" scoped>
-
 </style>

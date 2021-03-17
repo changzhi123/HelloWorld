@@ -22,20 +22,21 @@ const fixRouters = [//固定的路由
         component: () => import('@/views/404.vue'),
         meta: {}
     },
-    //Layout路由
     // {
     //     path: '/',
     //     component: Layout,
     //     redirect: '/dashboard',
+    //     name: 'Layout',
     //     children: [
-    //       {
-    //         path: 'dashboard',
-    //         component: () => import('@/views/dashboard/index.vue'),
-    //         name: 'Dashboard',
-    //         meta: { title: '首页',  affix: true }
-    //       }
+    //         {
+    //             path: '/dashboard',
+    //             component: () => import('@/views/dashboard/index.vue'),
+    //             name: 'Dashboard',
+    //             display: true,//是否显示在菜单栏
+    //             meta: { title: '首页'}
+    //         }
     //     ]
-    //   },
+    // },
    
 ];
 

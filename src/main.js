@@ -11,8 +11,10 @@ import Antd from 'ant-design-vue';//ui组件
 import 'ant-design-vue/dist/antd.css';//ui组件样式
 
 
+
 createApp(App)
     .use(router)
     .use(store)
     .use(Antd)
     .mount('#app')
+

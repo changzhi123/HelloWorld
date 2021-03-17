@@ -6,8 +6,8 @@
 </template>
 
 <script setup>
-import headeRsubject from './headeRsubject.vue';
-import headerSuffix from './headerSuffix.vue'
+import headeRsubject from './components/headeRsubject.vue';
+import headerSuffix from './components/headerSuffix.vue'
 </script>
 <style lang="less" scoped>
 .AppHeader{
