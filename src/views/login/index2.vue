@@ -58,7 +58,6 @@
 </template>
 
 <script>
-import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
 import {
   toRefs,
   reactive

@@ -1,6 +1,6 @@
 <template>
   <!-- 主体 -->
-  <div class="headeRsubject">
+  <div class="headerRsubject">
     <div class="RsubjectTag" :class="{ highlight: state.isRouter == item.path }" v-for="(item, index) in state.navigation" :key="index">
       <router-link :to="item.path" :style="`color:${state.isRouter == item.path ? '#2d8cf0' : '#000'};`">
         {{ item.name }}
@@ -49,7 +49,7 @@ const state = reactive({
 </script>
 
 <style lang="less" scoped>
-.headeRsubject {
+.headerRsubject {
   display: flex;
   height: 100%;
   justify-content: flex-end;

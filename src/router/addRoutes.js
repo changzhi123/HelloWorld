@@ -47,7 +47,7 @@ const addRoutes = [
                 component: () => import('@/views/dashboard/index.vue'),
                 name: 'Dashboard',
                 display: true,//是否显示在菜单栏
-                meta: { title: '首页'}
+                meta: { title: '首页',icon:'HomeOutlined'}
             }
         ]
     },
@@ -61,7 +61,7 @@ const addRoutes = [
                 component: () => import('@/views/test/index.vue'),
                 name: 'test',
                 display: true,//是否显示在菜单栏
-                meta: { title: '测试' },
+                meta: { title: '测试' ,icon:'DashboardOutlined'},
                 children:[
                     {
                         path: '/test-table',

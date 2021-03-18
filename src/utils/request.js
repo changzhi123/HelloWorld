@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { setCookies, getCookies, delCookies } from '@/utils/index.js'
-import { message } from 'ant-design-vue';
+import { setCookies, getCookies, delCookies ,reminder} from '@/utils/index.js'
 import {tokenName} from '@/utils/keyName.js'
 import store from '@/store/index.js'
 const baseURLs = {
@@ -33,14 +32,13 @@ service.interceptors.request.use(config => {
 service.interceptors.response.use(
     response => {
         const res = response.data;
-        console.log( 'respone拦截器:',res)
+        // console.log( 'respone拦截器:',res)
 
         if (res.code != 0) {
             if (res.code == 404 || res.code == 401) {
                 store.dispatch('user/delDatas')
             }
-
-            message.error(res.msg || '系统繁忙！')
+            reminder(res.msg || '系统繁忙！',{type:'error'})
 
             return Promise.reject(new Error(res.msg || 'Error'))
         } else {

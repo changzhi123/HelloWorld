@@ -13,6 +13,11 @@ import enUS from 'ant-design-vue/es/locale/en_US';
 const state = reactive({
   locale: zhCN,
 })
+import {reminder,formatDate}from '@/utils/index.js'
+// formatDate(new Date().getTime(),'YYYY-MM-DD HH:mm')
+// reminder('错误',{type:'error',duration:2,onClose:()=>{
+//   console.log(123456)
+// }})
 // import {
 //   // ref,
 //   toRefs,

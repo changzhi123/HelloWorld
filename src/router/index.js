@@ -1,12 +1,11 @@
 
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-import { message } from 'ant-design-vue';
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css' // 进度条样式
 
 import fixRouters from './fixRouters.js'
 import { tokenName,whiteList } from '@/utils/keyName.js'
-import { setCookies, getCookies, delCookies } from '@/utils/index.js'
+import { setCookies, getCookies, delCookies,reminder } from '@/utils/index.js'
 import store from '@/store/index.js'//vuex
 
 
@@ -23,7 +22,7 @@ router.beforeEach((to, from, next) => {
     const hasToken = getCookies(tokenName)
     const hasGetUserInfo = store.getters.userInfo
 
-    console.log('路由拦截', hasGetUserInfo, hasToken, to)
+    // console.log('路由拦截', hasGetUserInfo, hasToken, to)
 
     if (hasToken) {//判断是否已经登陆
         if (to.path == '/login') {
@@ -36,7 +35,7 @@ router.beforeEach((to, from, next) => {
                 store.dispatch('user/getInfo').then(() => {//再次获取用户权限
                     next({ ...to, replace: true })
                 }, error => {
-                    message.error('验证失败，请重新登陆！')
+                    reminder('验证失败，请重新登陆！',{type:'error'})
                     store.dispatch("user/resetToken")//清楚所有数据
                     next('/login')
                     NProgress.done()

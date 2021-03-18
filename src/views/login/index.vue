@@ -38,7 +38,6 @@
 </template>
 
 <script setup>
-import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
 import { toRefs, reactive } from 'vue'
 import { useStore } from 'vuex'
 import { projectName } from '@/utils/keyName.js'

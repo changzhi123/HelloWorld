@@ -1,7 +1,6 @@
 <template>
   <!-- 后缀 -->
   <div class="headerSuffix">
-    <Screenfull class="full-screen"/>
     <!-- 没有登陆 -->
     <div v-if="!state.userInfo" class="noLoign">
       <router-link to="/login" class="a-text"> 注册</router-link>
@@ -28,37 +27,26 @@
 </template>
 
 <script setup>
-import Screenfull from './Screenfull.vue'
-import { toRefs, reactive, computed ,} from 'vue'
+import { toRefs, reactive, computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const store = useStore()
 const state = reactive({
-   userInfo: computed(() => store.getters.userInfo),
+   userInfo: computed(() => store.getters.userInfo)
 })
+
 //退出登陆
 function logout() {
   store.dispatch('user/logout').then(() => {
     router.push('/login')
   })
 }
+
 </script>
 
 <style lang="less" scoped>
 .headerSuffix {
-  display: flex;
-  align-items: center;
-  .full-screen{
-    font-size: 18px;
-    line-height: 64px;
-    padding: 0 10px;
-    cursor: pointer;
-    transition: color 0.3s;
-  }
-  .full-screen:hover {
-            color: #1890ff;
-        }
   > div {
     height: 100%;
     display: flex;

@@ -1,45 +1,43 @@
 <template>
-  <a-menu theme="dark" mode="inline" v-model:selectedKeys="state.selectedKeys">
+  <a-menu theme="dark" mode="inline" v-model:selectedKeys="state.selectedKeys"   @click='selectGoto'>
 
     <template v-for="item in state.menusList" :key="item.name">
       <template v-if="item.children">
         <a-sub-menu :key="item.path">
           <template #title>
             <span>
-              <user-outlined />
+               <itemIcon :icon='item.meta.icon' />
               <span>{{item.meta.title}}</span>
             </span>
           </template>
           <a-menu-item :key="v.path" v-for="v in item.children">
-            <video-camera-outlined />
+             <itemIcon :icon='v.meta.icon' />
             <span> {{v.meta.title}}</span>
           </a-menu-item>
         </a-sub-menu>
       </template>
+
       <template v-else>
         <a-menu-item :key="item.path">
-          <upload-outlined />
+          <itemIcon :icon='item.meta.icon' />
           <span>{{item.meta.title}}</span>
         </a-menu-item>
       </template>
     </template>
+
   </a-menu>
 </template>
 
 <script setup>
-import {
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from '@ant-design/icons-vue'
+import itemIcon from './components/itemIcon.vue'
 import { reactive, computed } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter, useRoute } from 'vue-router'
 const store = useStore()
-
+const router = useRouter()
+const route = useRoute()
 const state = reactive({
-  selectedKeys: '/dashboard',
+  selectedKeys: computed(() => [route.path]),//'/dashboard',
   menusList: computed(() => {
     const arr = []
     store.getters.addRoutes.filter((item) => {
@@ -57,6 +55,10 @@ function fliterRouter(data) {
     arr.push(obj)
   })
   return arr
+}
+function selectGoto(e) {
+    router.push(e.key)
+//   console.log(e, 'e')
 }
 </script>
 
