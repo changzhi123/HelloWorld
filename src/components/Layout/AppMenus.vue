@@ -4,7 +4,7 @@
     mode="inline"
     v-model:selectedKeys="state.selectedKeys"
     v-model:openKeys="state.openKeys"
-    @select="selectGoto"
+    @select="selectGoto" 
   >
     <!-- 二级菜单 -->
     <template v-for="item in state.menusList" :key="item.name">
@@ -12,21 +12,18 @@
         <a-sub-menu :key="item.path">
           <template #title>
             <span>
-              <itemIcon :icon="item.meta.icon" />
-              <span>{{ item.meta.title }}</span>
+              <titleIcon :icon="item.meta.icon" :title='item.meta.title'  />
             </span>
           </template>
           <a-menu-item :key="v.path" v-for="v in item.children">
-            <itemIcon :icon="v.meta.icon" />
-            <span> {{ v.meta.title }}</span>
+            <titleIcon :icon="v.meta.icon"  :title='v.meta.title'/>
           </a-menu-item>
         </a-sub-menu>
       </template>
      <!-- 一级菜单 -->
       <template v-else>
         <a-menu-item :key="item.path">
-          <itemIcon :icon="item.meta.icon" />
-          <span>{{ item.meta.title }}</span>
+          <titleIcon :icon="item.meta.icon"  :title='item.meta.title'/>
         </a-menu-item>
       </template>
     </template>
@@ -34,31 +31,37 @@
 </template>
 
 <script setup>
-import itemIcon from "./components/itemIcon.vue";
-import { reactive, computed, onMounted } from "vue";
+import titleIcon from "./components/titleIcon.vue";
+import { reactive, computed, onMounted,useContext,watchEffect } from "vue";
 import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 const store = useStore();
 const router = useRouter();
 const route = useRoute();
 const state = reactive({
-  selectedKeys: [], //设置默认选中菜单
+  selectedKeys: computed(()=> [route.path]), //设置默认选中菜单
   menusList: computed(() => {
-    const arr = [];
-    store.getters.addRoutes.filter((item) => {
+    const arr = [],addRoutes=store.getters.addRoutes||[]
+    addRoutes.filter((item) => {
       if (item.children) arr.push(...fliterRouter(item.children));
     });
     return arr;
   }),
-  openKeys: [], //设置默认展开子菜单
+  openKeys:[], //设置默认展开子菜单
 });
-onMounted(() => {
-  selected();
-});
+watchEffect(()=>{
+  state.selectedKeys;
+   selected()
+})
+const ctx=useContext()
+ctx.expose({//暴露给父组件
+  setMap(){
+    selected();
+  }
+})
 function selected() {//设置默认展开菜单和默认选择菜单
   const path = route.path,
     matched = route.matched;
-  state.selectedKeys = [path];
   matched.filter((item, index) => {
     if (item.path == path) state.openKeys = [matched[index - 1].path];
   });
@@ -75,9 +78,10 @@ function fliterRouter(data) {
 }
 function selectGoto(e) {
   //菜单切换
-  router.push(e.key);
   // console.log(e, 'e')
+  router.push(e.key);
 }
+
 </script>
 
 <style>

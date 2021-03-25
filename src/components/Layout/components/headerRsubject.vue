@@ -19,7 +19,7 @@ const state = reactive({
   List: [
     {
       name: '首页',
-      path: '/dashboard',
+      path: '/',
     },
     {
       name: '应用中心',

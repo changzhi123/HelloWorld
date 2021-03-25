@@ -2,7 +2,7 @@
   <div class="headerPrefix">
     <a-breadcrumb>
       <a-breadcrumb-item v-for="item in state.routeArr" :key="item.name">
-        <router-link :to="item.children&&item.children.length?'':item.path">
+        <router-link :to="item.children&&item.children.length&&item.name!='Layout'?'':item.path">
           <a href="javascript:;" id="more">{{ item.meta.title }}</a>
         </router-link>
       </a-breadcrumb-item>

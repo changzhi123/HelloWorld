@@ -6,13 +6,18 @@
         </a-layout-sider>
         <a-layout class="subject-Box">
             <a-layout-header class="header-Box">
-                <menu-unfold-outlined v-if="state.collapsed" class="trigger"
-                    @click="switchoverMenu(false)" />
+                <menu-unfold-outlined v-if="state.collapsed" class="trigger" @click="switchoverMenu(false)" />
                 <menu-fold-outlined v-else class="trigger" @click="switchoverMenu(true)" />
                 <AppHeader class="AppHeader"/>
             </a-layout-header>
             <a-layout-content class="content-Box"  :class="{'overflow':state.overflow}">
-                <router-view />
+                <!-- <router-view /> -->
+                <!-- 添加过度动画 -->
+                <router-view v-slot="{ Component }"> 
+                    <transition name="fade-transfrom" mode="out-in"> 
+                       <component :is="Component" />
+                    </transition>
+                </router-view>
             </a-layout-content>
         </a-layout>
     </a-layout>
@@ -29,13 +34,11 @@
     const state = reactive({
         collapsed: false,
         overflow:computed(()=>overflow),
-        
     })
     function switchoverMenu(type){//是否收起菜单
        state.collapsed=type
-       AppMenusRef.selected()
+       AppMenusRef.value.setMap()//调用菜单组件打的方法，避免释放菜单的时一选择的子菜单没有打开
     }
-    console.log(AppMenusRef,'AppMenusRef')
 </script>
 
 <style lang="less" scoped>

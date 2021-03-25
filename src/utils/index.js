@@ -32,7 +32,7 @@ export function formatDate(date, format = 'YYYY-MM-DD HH:mm:ss') {
     }
     Object.keys(time).filter(key => {
         let reqItem=time[key]*1
-        if(reqItem<10)reqItem=`0${reqItem}`
+        if(reqItem<10)reqItem=`0${reqItem}`//当月日时分秒不足10时补零
         format = format.replace(key, reqItem)
     })
     return format
