@@ -11,11 +11,13 @@ export function getCookies(keyName) {//读取
 export function delCookies(keyName) {//删除
     VueCookies.remove(keyName)
 };
+
 //##消息提示
 export function reminder(content, { type = 'success', duration = 3, onClose } = {}) {
     //content：提示文字 type：提示类型 duration：提示时间 onClose：提示结束回调
     message[type](content, [duration], onClose)
 }
+
 //##格式化时间
 export function formatDate(date, format = 'YYYY-MM-DD HH:mm:ss') {
     const type = Object.prototype.toString.call(date)
@@ -29,7 +31,9 @@ export function formatDate(date, format = 'YYYY-MM-DD HH:mm:ss') {
         ss: date.getSeconds(), //秒
     }
     Object.keys(time).filter(key => {
-        format = format.replace(key, time[key])
+        let reqItem=time[key]*1
+        if(reqItem<10)reqItem=`0${reqItem}`
+        format = format.replace(key, reqItem)
     })
     return format
 }

@@ -39,23 +39,18 @@ const addRoutes = [
     //Layout路由
     {
         path: '/',
+        name:'Layout',
         component: Layout,
-        redirect: '/dashboard',
+        redirect: '/Dashboard',
+        meta: { title: '系统'},
         children: [
             {
-                path: '/dashboard',
+                path: '/Dashboard',
                 component: () => import('@/views/dashboard/index.vue'),
                 name: 'Dashboard',
                 display: true,//是否显示在菜单栏
                 meta: { title: '首页',icon:'HomeOutlined'}
-            }
-        ]
-    },
-    {
-        path: '/tests',
-        component: Layout,
-        redirect: '/test',
-        children: [
+            },
             {
                 path: '/test',
                 component: () => import('@/views/test/index.vue'),
@@ -81,5 +76,35 @@ const addRoutes = [
             }
         ]
     },
+    // {
+    //     path: '/tests',
+    //     component: Layout,
+    //     redirect: '/test',
+    //     children: [
+    //         {
+    //             path: '/test',
+    //             component: () => import('@/views/test/index.vue'),
+    //             name: 'test',
+    //             display: true,//是否显示在菜单栏
+    //             meta: { title: '测试' ,icon:'DashboardOutlined'},
+    //             children:[
+    //                 {
+    //                     path: '/test-table',
+    //                     component: () => import('@/views/test/test-table.vue'),
+    //                     name: 'test-table',
+    //                     display: true,//是否显示在菜单栏
+    //                     meta: { title: '表格' }, 
+    //                 },
+    //                 {
+    //                     path: '/test-chart',
+    //                     component: () => import('@/views/test/test-chart.vue'),
+    //                     name: 'test-chart',
+    //                     display: true,//是否显示在菜单栏
+    //                     meta: { title: '图表' }, 
+    //                 }
+    //             ]
+    //         }
+    //     ]
+    // },
 ];
 export default addRoutes

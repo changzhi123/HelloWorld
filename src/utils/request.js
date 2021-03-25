@@ -1,13 +1,11 @@
 import axios from 'axios'
-import { setCookies, getCookies, delCookies ,reminder} from '@/utils/index.js'
-import {tokenName} from '@/utils/keyName.js'
+import { setCookies, getCookies, delCookies, reminder } from '@/utils/index.js'
+import { tokenName } from '@/utils/keyName.js'
 import store from '@/store/index.js'
-const baseURLs = {
-    development: '/api',
-    production: '/api',
-};
+import { baseURLs } from './config.js'
 
-console.log(import.meta.env.MODE,import.meta.env,'获取环境变量',process.env.NODE_ENV)
+
+console.log(import.meta.env.MODE, import.meta.env, '获取环境变量', process.env.NODE_ENV)
 
 const service = axios.create({
     baseURL: baseURLs[import.meta.env.MODE],
@@ -16,11 +14,10 @@ const service = axios.create({
 
 // request拦截器
 service.interceptors.request.use(config => {
-    const token = getCookies(tokenName)
     
-    if (token) {
-        config.headers['vue_Token'] = token // 让每个请求携带
-    }
+    const token = getCookies(tokenName)
+    if (token) config.headers['vue_Token'] = token // 让每个请求携带
+
     return config
 }, error => {
     // console.log(error)
@@ -38,7 +35,7 @@ service.interceptors.response.use(
             if (res.code == 404 || res.code == 401) {
                 store.dispatch('user/delDatas')
             }
-            reminder(res.msg || '系统繁忙！',{type:'error'})
+            reminder(res.msg || '系统繁忙！', { type: 'error' })
 
             return Promise.reject(new Error(res.msg || 'Error'))
         } else {

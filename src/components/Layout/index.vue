@@ -2,13 +2,13 @@
     <a-layout>
         <a-layout-sider class="sider-Box" v-model:collapsed="state.collapsed" :trigger="null" collapsible>
             <div class="sider-logo" ></div>
-            <AppMenus />
+            <AppMenus  ref="AppMenusRef" />
         </a-layout-sider>
         <a-layout class="subject-Box">
             <a-layout-header class="header-Box">
                 <menu-unfold-outlined v-if="state.collapsed" class="trigger"
-                    @click="() => (state.collapsed = !state.collapsed)" />
-                <menu-fold-outlined v-else class="trigger" @click="() => (state.collapsed = !state.collapsed)" />
+                    @click="switchoverMenu(false)" />
+                <menu-fold-outlined v-else class="trigger" @click="switchoverMenu(true)" />
                 <AppHeader class="AppHeader"/>
             </a-layout-header>
             <a-layout-content class="content-Box"  :class="{'overflow':state.overflow}">
@@ -23,13 +23,19 @@
     import AppMenus from './AppMenus.vue'
     import{overflow}from '@/utils/keyName.js'
     import {
-        reactive,computed
+        reactive,computed,ref 
     } from "vue";
+    const AppMenusRef=ref(null)
     const state = reactive({
         collapsed: false,
         overflow:computed(()=>overflow),
         
     })
+    function switchoverMenu(type){//是否收起菜单
+       state.collapsed=type
+       AppMenusRef.selected()
+    }
+    console.log(AppMenusRef,'AppMenusRef')
 </script>
 
 <style lang="less" scoped>
