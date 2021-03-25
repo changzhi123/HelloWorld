@@ -1,0 +1,22 @@
+
+name:打包应用并上传阿里云
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    # runs-on 指定job任务运行所需要的的虚拟机环境（必填字段）
+    runs-on: ubuntu-latest
+    steps:
+      # 获取源码
+      - name: 迁出代码
+        #使用action库 actions/checkout获取源码
+        uses: actions/checkout@master
+      # 安装node10
+
+      - name: 安装node.js    
+        # 使用action库 actions/setup-node安装node
+        user: actions/setup-node@v1
+        with:   
